@@ -1,0 +1,60 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.github.wanniwa.EditorJumper</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>EditorJumper</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="734933034@qq.com" url="https://github.com/wanniwa">wanniwa</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+        <h3>1.0.0</h3>
+        <p>EditorJumper</p>
+        <p>EditorJumper is a plugin that allows you to quickly jump between different editors:</p>
+        <ul>
+            <li>Jump from IntelliJ IDEA to VSCode</li>
+            <li>Jump from IntelliJ IDEA to Trae</li>
+            <li>Jump from IntelliJ IDEA to Cursor</li>
+        </ul>
+        <p>Simply use the shortcut (Shift+Alt+P by default) to open the file in your preferred editor.</p>
+        ]]>
+    </description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.github.wanniwa.editorjumper.settings.EditorJumperSettings"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
+                                 id="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
+                                 displayName="Editor Jumper"/>
+        <statusBarWidgetFactory implementation="com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidgetFactory"
+                                id="EditorJumper.StatusBarWidgetFactory"/>
+    </extensions>
+    <actions>
+        <action id="EditorJumper.OpenInExternalEditor"
+                class="com.github.wanniwa.editorjumper.actions.OpenInExternalEditorAction"
+                text="Open in External Editor" description="Open in configured external editor">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift alt P"/>
+        </action>
+
+        <action id="EditorJumper.Settings"
+                class="com.github.wanniwa.editorjumper.actions.EditorJumperSettingsAction"
+                text="EditorJumper Settings" description="Configure EditorJumper settings">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
