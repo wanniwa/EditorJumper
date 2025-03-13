@@ -38,15 +38,17 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
             filePath != null && lineNumber != null && columnNumber != null -> {
                 // 如果有文件路径和光标位置，则打开项目并定位到文件的具体行列
                 val fileWithPosition = "$filePath:$lineNumber:$columnNumber"
-                if (SystemInfo.isWindows && customPath == null) {
+                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
                     arrayOf("cmd", "/c", getPath(), projectPath, "--goto", fileWithPosition)
                 } else {
                     arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
                 }
             }
+
             filePath != null -> {
                 arrayOf(getPath(), projectPath, "--goto", filePath)
             }
+
             else -> {
                 arrayOf(getPath(), projectPath)
             }

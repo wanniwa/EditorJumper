@@ -21,10 +21,10 @@ class OpenInExternalEditorAction : BaseAction() {
         // 获取编辑器处理器
         val handler = getEditorHandler()
         
-        // 检查编辑器路径是否存在
-        if (!checkEditorPathExists(project, handler)) {
-            return
-        }
+//        // 检查编辑器路径是否存在
+//        if (!checkEditorPathExists(project, handler)) {
+//            return
+//        }
 
         val selectedFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
         val editor = e.getData(CommonDataKeys.EDITOR)
