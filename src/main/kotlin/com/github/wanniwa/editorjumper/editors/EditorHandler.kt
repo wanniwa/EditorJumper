@@ -1,5 +1,7 @@
 package com.github.wanniwa.editorjumper.editors
 
+import com.intellij.openapi.util.SystemInfo
+
 interface EditorHandler {
     fun getName(): String
     fun getPath(): String
@@ -21,9 +23,9 @@ interface EditorHandler {
     ): Array<String>
 }
 
-abstract class BaseEditorHandler(private val customPath: String) : EditorHandler {
+abstract class BaseEditorHandler(private val customPath: String?) : EditorHandler {
     override fun getPath(): String {
-        return customPath.ifEmpty { getDefaultPath() }
+        return if (customPath.isNullOrEmpty()) getDefaultPath() else customPath
     }
 
     override fun getOpenCommand(
@@ -36,23 +38,28 @@ abstract class BaseEditorHandler(private val customPath: String) : EditorHandler
             filePath != null && lineNumber != null && columnNumber != null -> {
                 // 如果有文件路径和光标位置，则打开项目并定位到文件的具体行列
                 val fileWithPosition = "$filePath:$lineNumber:$columnNumber"
-                arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
-            }
-
-            filePath != null && lineNumber != null -> {
-                // 如果有文件路径和行号，则打开项目并定位到文件的具体行
-                val fileWithLine = "$filePath:$lineNumber"
-                arrayOf(getPath(), projectPath, "--goto", fileWithLine)
+                if (SystemInfo.isWindows && customPath == null) {
+                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", fileWithPosition)
+                } else {
+                    arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
+                }
             }
 
             filePath != null -> {
                 // 如果只有文件路径，则打开项目和文件
-                arrayOf(getPath(), projectPath, "--goto", filePath)
+                if (SystemInfo.isWindows && customPath == null) {
+                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", filePath)
+                } else {
+                    arrayOf(getPath(), projectPath, "--goto", filePath)
+                }
             }
 
             else -> {
-                // 如果只有项目路径，则只打开项目
-                arrayOf(getPath(), projectPath)
+                if (SystemInfo.isWindows && customPath == null) {
+                    arrayOf("cmd", "/c", getPath(), projectPath)
+                } else {
+                    arrayOf(getPath(), projectPath)
+                }
             }
         }
     }
