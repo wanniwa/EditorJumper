@@ -44,22 +44,11 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
                     arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
                 }
             }
-
             filePath != null -> {
-                // 如果只有文件路径，则打开项目和文件
-                if (SystemInfo.isWindows && customPath == null) {
-                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", filePath)
-                } else {
-                    arrayOf(getPath(), projectPath, "--goto", filePath)
-                }
+                arrayOf(getPath(), projectPath, "--goto", filePath)
             }
-
             else -> {
-                if (SystemInfo.isWindows && customPath == null) {
-                    arrayOf("cmd", "/c", getPath(), projectPath)
-                } else {
-                    arrayOf(getPath(), projectPath)
-                }
+                arrayOf(getPath(), projectPath)
             }
         }
     }
