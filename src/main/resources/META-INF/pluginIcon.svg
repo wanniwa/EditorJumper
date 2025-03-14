@@ -1,12 +1,83 @@
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M32.0845 7.94025V4H24.0203V7.9896H16.029V4H7.91553V7.94025H4V36H16.0044V32.0045C16.0058 30.9457 16.4274 29.9308 17.1766 29.1826C17.9258 28.4345 18.9412 28.0143 20 28.0143C21.0588 28.0143 22.0743 28.4345 22.8234 29.1826C23.5726 29.9308 23.9942 30.9457 23.9956 32.0045V36H36V7.94025H32.0845Z"
-          fill="url(#paint0_linear)"/>
-    <defs>
-        <linearGradient id="paint0_linear" x1="2.94192" y1="4.89955" x2="37.7772" y2="39.7345"
-                        gradientUnits="userSpaceOnUse">
-            <stop offset="0.15937" stop-color="#3BEA62"/>
-            <stop offset="0.5404" stop-color="#3C99CC"/>
-            <stop offset="0.93739" stop-color="#6B57FF"/>
-        </linearGradient>
-    </defs>
+  <!-- 定义渐变 -->
+  <defs>
+    <linearGradient id="bgGradient" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0.15" stop-color="#3BEA62"/>
+      <stop offset="0.54" stop-color="#3C99CC"/>
+      <stop offset="0.94" stop-color="#6B57FF"/>
+    </linearGradient>
+    
+    <filter id="shadow" x="-1" y="-1" width="42" height="42" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="1" stdDeviation="0.5" flood-opacity="0.2"/>
+    </filter>
+    
+    <filter id="arrowGlow" x="-1" y="-1" width="42" height="42" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="0.3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- 背景圆角矩形 -->
+  <rect width="40" height="40" rx="8" fill="#1E1E1E" fill-opacity="0.1"/>
+  
+  <!-- 左上角编辑器 - IDEA风格 -->
+  <rect x="2" y="2" width="16" height="18" rx="1" fill="#2B2B2B"/>
+  <!-- 简洁的IDEA风格标题栏 -->
+  <rect x="2" y="2" width="16" height="2" fill="#3C3F41"/>
+  <!-- 简化的IDEA标志 -->
+  <rect x="3" y="2.5" width="1" height="1" rx="0.2" fill="#FC801D"/>
+  
+  <!-- 右下角编辑器 - VSCode/Cursor风格 -->
+  <rect x="20" y="18" width="16" height="18" rx="1" fill="#1E1E1E"/>
+  <!-- VSCode风格标题栏 -->
+  <rect x="20" y="18" width="16" height="2" rx="0" fill="#2D2D2D"/>
+  <circle cx="22" cy="19" r="0.5" fill="#FF5F56"/>
+  <circle cx="24" cy="19" r="0.5" fill="#FFBD2E"/>
+  <circle cx="26" cy="19" r="0.5" fill="#27C93F"/>
+  
+  <!-- 左上角编辑器行号区域 - IDEA风格 -->
+  <rect x="2" y="4" width="1.5" height="16" fill="#313335"/>
+  <text x="2.5" y="7.5" font-family="monospace" font-size="1.8" fill="#787878">1</text>
+  <text x="2.5" y="10.5" font-family="monospace" font-size="1.8" fill="#787878">2</text>
+  <text x="2.5" y="13.5" font-family="monospace" font-size="1.8" fill="#787878">3</text>
+  <text x="2.5" y="16.5" font-family="monospace" font-size="1.8" fill="#787878">4</text>
+  
+  <!-- 右下角编辑器行号区域 - VSCode风格 -->
+  <rect x="20" y="20" width="1.5" height="16" fill="#1E1E1E"/>
+  <text x="20.5" y="23.5" font-family="monospace" font-size="1.8" fill="#6D6D6D">1</text>
+  <text x="20.5" y="26.5" font-family="monospace" font-size="1.8" fill="#6D6D6D">2</text>
+  <text x="20.5" y="29.5" font-family="monospace" font-size="1.8" fill="#6D6D6D">3</text>
+  <text x="20.5" y="32.5" font-family="monospace" font-size="1.8" fill="#6D6D6D">4</text>
+  
+  <!-- 左上角编辑器代码内容 - IDEA风格 -->
+  <line x1="4" y1="7.5" x2="16" y2="7.5" stroke="#A9B7C6" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="4" y1="10.5" x2="14" y2="10.5" stroke="#CC7832" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="5" y1="13.5" x2="15" y2="13.5" stroke="#6A8759" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="4" y1="16.5" x2="13" y2="16.5" stroke="#9876AA" stroke-width="0.7" stroke-linecap="round"/>
+  
+  <!-- 右下角编辑器代码内容 - VSCode风格 -->
+  <line x1="22" y1="23.5" x2="34" y2="23.5" stroke="#D4D4D4" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="22" y1="26.5" x2="32" y2="26.5" stroke="#569CD6" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="23" y1="29.5" x2="33" y2="29.5" stroke="#CE9178" stroke-width="0.7" stroke-linecap="round"/>
+  <line x1="22" y1="32.5" x2="31" y2="32.5" stroke="#4EC9B0" stroke-width="0.7" stroke-linecap="round"/>
+  
+  <!-- 左上角光标 - IDEA风格 -->
+  <line x1="7" y1="9.5" x2="7" y2="14.5" stroke="#A9B7C6" stroke-width="0.8" stroke-linecap="round"/>
+  
+  <!-- 右下角光标 - VSCode风格 -->
+  <line x1="25" y1="25.5" x2="25" y2="30.5" stroke="url(#bgGradient)" stroke-width="0.8" stroke-linecap="round"/>
+  
+  <!-- 左下角弯折箭头 - 圆滑的设计 -->
+  <path d="M10 24C10 27 10 29 13 29C16 29 16 29 16 29" stroke="url(#bgGradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15 28L16 29L15 30" stroke="url(#bgGradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- 右上角弯折箭头 - 圆滑的设计 -->
+  <path d="M28 14C28 11 28 9 25 9C22 9 22 9 22 9" stroke="url(#bgGradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M23 10L22 9L23 8" stroke="url(#bgGradient)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- 左上角编辑器底部状态栏 - IDEA风格 -->
+  <rect x="2" y="20" width="16" height="0.8" fill="#4E5254"/>
+
+  <!-- 右下角编辑器底部状态栏 - VSCode风格 -->
+  <rect x="20" y="36" width="16" height="0.8" fill="#007ACC"/>
 </svg>

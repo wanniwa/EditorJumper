@@ -11,7 +11,7 @@ import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
-import java.io.File
+import com.intellij.openapi.util.SystemInfo
 
 /**
  * 基础动作类，提供通用方法
@@ -45,23 +45,39 @@ abstract class BaseAction : AnAction() {
     
     /**
      * 检查编辑器路径是否存在
-     * @return 如果路径存在且可执行，则返回true；否则返回false
+     * @return 如果路径有效，则返回true；否则返回false
      */
     protected open fun checkEditorPathExists(project: Project, handler: EditorHandler): Boolean {
         val settings = EditorJumperSettings.getInstance()
         val editorType = settings.selectedEditorType
-        val editorPath = handler.getPath()
-        val editorFile = File(editorPath)
+        val customPath = when (editorType) {
+            "VSCode" -> settings.vsCodePath
+            "Cursor" -> settings.cursorPath
+            "Trae" -> settings.traePath
+            "Windsurf" -> settings.windsurfPath
+            else -> ""
+        }
         
-        if (!editorFile.exists() || !editorFile.canExecute()) {
-            // 路径不存在或不可执行，提示用户配置
+        // macOS: 不需要检查路径，所有编辑器都自动检测
+        if (SystemInfo.isMac) {
+            return true
+        }
+        
+        // Windows: 只检查非 Cursor 编辑器的路径
+        if (SystemInfo.isWindows && editorType == "Cursor") {
+            return true
+        }
+        
+        // 其他情况: 只检查用户自定义的路径是否为空
+        if (customPath.isBlank()) {
+            // 路径为空，提示用户配置
             val result = Messages.showYesNoDialog(
                 project,
-                "The path to $editorType does not exist or is not executable: $editorPath\nWould you like to configure it now?",
-                "Editor Path Not Found",
+                "The path to $editorType is not configured. Would you like to configure it now?",
+                "Editor Path Not Configured",
                 "Open Settings",
                 "Cancel",
-                Messages.getErrorIcon()
+                Messages.getWarningIcon()
             )
             
             if (result == Messages.YES) {

@@ -16,13 +16,108 @@
     <description><![CDATA[
         <h3>1.0.0</h3>
         <p>EditorJumper</p>
-        <p>EditorJumper is a plugin that allows you to quickly jump between different editors:</p>
+        <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
-            <li>Jump from IntelliJ IDEA to VSCode</li>
-            <li>Jump from IntelliJ IDEA to Trae</li>
-            <li>Jump from IntelliJ IDEA to Cursor</li>
+            <li>Jump from JetBrains IDE to VSCode</li>
+            <li>Jump from JetBrains IDE to Trae</li>
+            <li>Jump from JetBrains IDE to Cursor</li>
+            <li>Jump from JetBrains IDE to Windsurf</li>
         </ul>
-        <p>Simply use the shortcut (Shift+Alt+P by default) to open the file in your preferred editor.</p>
+        <p>Smart Jump Behavior:</p>
+        <ul>
+            <li>With file open: Opens the same project and file, preserving cursor position</li>
+            <li>Without file open: Opens the project directly in target editor</li>
+        </ul>
+        <p>Multiple ways to trigger jump:</p>
+        <ul>
+            <li>Right-click in editor - select "Open in [Editor Name]" (name updates based on selected editor)</li>
+            <li>Tools menu - select "Open in [Editor Name]" (name updates based on selected editor)</li>
+            <li>Keyboard shortcut - use Alt+Shift+O (Windows) or Option+Shift+O (macOS)</li>
+        </ul>
+        <p>Easy target editor selection:</p>
+        <ul>
+            <li>Status bar widget - click the editor icon to select which editor to jump to</li>
+        </ul>
+        <p>Configuration Notes:</p>
+        <ul>
+            <li>macOS: No additional configuration needed for any editor</li>
+            <li>Windows:
+                <ul>
+                    <li>Cursor: No configuration needed (uses system PATH)</li>
+                    <li>Other editors: Configure the .exe file path in Settings</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Configuration Interface:</p>
+        <ul>
+            <li>Default Editor: Select which editor to use when using keyboard shortcuts</li>
+            <li>Editor Paths:
+                <ul>
+                    <li>macOS: All paths are auto-detected, no manual configuration needed</li>
+                    <li>Windows:
+                        <ul>
+                            <li>Cursor: Auto-detected through system PATH</li>
+                            <li>VS Code/Trae/Windsurf: Browse and select the .exe file location</li>
+                            <li>Example: <code>C:\Users\username\AppData\Local\Programs\VSCode\Code.exe</code></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>System Requirements:</p>
+        <ul>
+            <li>Works with any JetBrains IDE (IntelliJ IDEA, WebStorm, PyCharm, etc.)</li>
+            <li>Requires IDE version 2022.3 or newer</li>
+        </ul>
+        <p>Recommended Plugin:</p>
+        <ul>
+            <li>Recommended to use with <a href="https://github.com/qczone/switch2idea">Switch2IDEA</a> for quick return to JetBrains IDE from other editors</li>
+        </ul>
+
+        <hr/>
+        
+        <h3>中文说明</h3>
+        <p>EditorJumper 是一个能够在不同编辑器之间无缝切换的插件，自动打开相同的项目和文件，同时保持光标位置。这使得在编辑器之间的上下文感知转换变得即时且高效：</p>
+        <ul>
+            <li>从 JetBrains IDE 跳转到 VSCode</li>
+            <li>从 JetBrains IDE 跳转到 Trae</li>
+            <li>从 JetBrains IDE 跳转到 Cursor</li>
+            <li>从 JetBrains IDE 跳转到 Windsurf</li>
+        </ul>
+        <p>智能跳转行为：</p>
+        <ul>
+            <li>有文件打开时：打开相同的项目和文件，保持光标位置</li>
+            <li>无文件打开时：直接在目标编辑器中打开项目</li>
+        </ul>
+        <p>多种触发跳转方式：</p>
+        <ul>
+            <li>在编辑器中右击 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）</li>
+            <li>工具菜单 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）</li>
+            <li>快捷键 - 使用 Alt+Shift+O (Windows) 或 Option+Shift+O (macOS)</li>
+        </ul>
+        <p>便捷的目标编辑器选择：</p>
+        <ul>
+            <li>状态栏小部件 - 点击编辑器图标选择要跳转到哪个编辑器</li>
+        </ul>
+        <p>配置说明：</p>
+        <ul>
+            <li>macOS：所有编辑器无需额外配置</li>
+            <li>Windows：
+                <ul>
+                    <li>Cursor：无需配置（使用系统 PATH）</li>
+                    <li>其他编辑器：需在设置中配置 .exe 文件路径</li>
+                </ul>
+            </li>
+        </ul>
+        <p>系统要求：</p>
+        <ul>
+            <li>适用于任何 JetBrains IDE（IntelliJ IDEA、WebStorm、PyCharm 等）</li>
+            <li>需要 IDE 版本 2022.3 或更新版本</li>
+        </ul>
+        <p>推荐插件：</p>
+        <ul>
+            <li>建议与 <a href="https://github.com/qczone/switch2idea">Switch2IDEA</a> 配合使用，以便从其他编辑器快速返回 JetBrains IDE</li>
+        </ul>
         ]]>
     </description>
 
@@ -30,7 +125,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension points defined by the plugin.
+    <!-- Extension podescriptiond by the plugin.descriptiondescription
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.wanniwa.editorjumper.settings.EditorJumperSettings"/>
@@ -48,7 +143,7 @@
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="shift alt P"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift O"/>
         </action>
 
         <action id="EditorJumper.Settings"

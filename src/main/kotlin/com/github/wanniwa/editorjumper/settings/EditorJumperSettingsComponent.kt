@@ -24,8 +24,16 @@ class EditorJumperSettingsComponent {
         traePathField.addBrowseFolderListener("Select Trae Executable", null, null, descriptor)
         windsurfPathField.addBrowseFolderListener("Select Windsurf Executable", null, null, descriptor)
 
+        val macHintLabel = JBLabel("<html><em>macOS: All paths are auto-detected, no manual configuration needed</em></html>")
+        val windowsHintLabel = JBLabel("<html><em>Windows: Cursor is auto-detected, other editors need .exe file path</em></html>")
+        val exampleLabel = JBLabel("<html><em>Example: C:\\Users\\username\\AppData\\Local\\Programs\\VSCode\\Code.exe</em></html>")
+
         myMainPanel = FormBuilder.createFormBuilder()
                 .addLabeledComponent(JBLabel("Default editor:"), editorTypeComboBox, 1, false)
+                .addSeparator()
+                .addComponent(macHintLabel)
+                .addComponent(windowsHintLabel)
+                .addComponent(exampleLabel)
                 .addSeparator()
                 .addLabeledComponent(JBLabel("VSCode path:"), vsCodePathField, 1, false)
                 .addLabeledComponent(JBLabel("Cursor path:"), cursorPathField, 1, false)

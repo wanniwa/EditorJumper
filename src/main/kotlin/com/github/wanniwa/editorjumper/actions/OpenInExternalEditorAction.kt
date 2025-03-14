@@ -21,10 +21,10 @@ class OpenInExternalEditorAction : BaseAction() {
         // 获取编辑器处理器
         val handler = getEditorHandler()
         
-//        // 检查编辑器路径是否存在
-//        if (!checkEditorPathExists(project, handler)) {
-//            return
-//        }
+        // 检查编辑器路径是否存在
+        if (!checkEditorPathExists(project, handler)) {
+            return
+        }
 
         val selectedFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
         val editor = e.getData(CommonDataKeys.EDITOR)
@@ -106,18 +106,7 @@ class OpenInExternalEditorAction : BaseAction() {
             // 使用列表构造函数
             val processBuilder = ProcessBuilder(command.toList())
             processBuilder.directory(File(projectPath))
-            val process = processBuilder.start()
-
-            // 检查进程是否成功启动
-            val exitCode = process.waitFor()
-            if (exitCode != 0) {
-                val errorStream = process.errorStream.bufferedReader().readText()
-                Messages.showErrorDialog(
-                    project,
-                    "Failed to open editor. Error: $errorStream",
-                    "Editor Launch Failed"
-                )
-            }
+            processBuilder.start()
         } catch (ex: IOException) {
             Messages.showErrorDialog(
                 project,

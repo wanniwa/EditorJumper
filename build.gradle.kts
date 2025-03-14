@@ -17,6 +17,7 @@ intellij {
     version.set("2023.2.6")
     type.set("IC") // Target IDE Platform
     updateSinceUntilBuild.set(false)
+    sameSinceUntilBuild.set(false)
     plugins.set(listOf(/* Plugin Dependencies */))
 
 }
