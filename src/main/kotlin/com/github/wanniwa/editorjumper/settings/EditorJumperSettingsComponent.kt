@@ -1,7 +1,8 @@
 package com.github.wanniwa.editorjumper.settings
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptor
-import com.intellij.openapi.ui.ComboBox
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.ui.TextBrowseFolderListener
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.FormBuilder
@@ -14,23 +15,31 @@ class EditorJumperSettingsComponent {
     private val cursorPathField = TextFieldWithBrowseButton()
     private val traePathField = TextFieldWithBrowseButton()
     private val windsurfPathField = TextFieldWithBrowseButton()
-    private val editorTypeComboBox = ComboBox(arrayOf("VSCode", "Cursor", "Trae", "Windsurf"))
 
     init {
-        val descriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        // 为每个编辑器创建单独的描述符
+        val vsCodeDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        vsCodeDescriptor.title = "Select VSCode Executable"
         
-        vsCodePathField.addBrowseFolderListener("Select VSCode Executable", null, null, descriptor)
-        cursorPathField.addBrowseFolderListener("Select Cursor Executable", null, null, descriptor)
-        traePathField.addBrowseFolderListener("Select Trae Executable", null, null, descriptor)
-        windsurfPathField.addBrowseFolderListener("Select Windsurf Executable", null, null, descriptor)
+        val cursorDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        cursorDescriptor.title = "Select Cursor Executable"
+        
+        val traeDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        traeDescriptor.title = "Select Trae Executable"
+        
+        val windsurfDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        windsurfDescriptor.title = "Select Windsurf Executable"
+        
+        vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
+        cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
+        traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
+        windsurfPathField.addBrowseFolderListener(TextBrowseFolderListener(windsurfDescriptor))
 
         val macHintLabel = JBLabel("<html><em>macOS: All paths are auto-detected, no manual configuration needed</em></html>")
         val windowsHintLabel = JBLabel("<html><em>Windows: Cursor is auto-detected, other editors need .exe file path</em></html>")
         val exampleLabel = JBLabel("<html><em>Example: C:\\Users\\username\\AppData\\Local\\Programs\\VSCode\\Code.exe</em></html>")
 
         myMainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(JBLabel("Default editor:"), editorTypeComboBox, 1, false)
-                .addSeparator()
                 .addComponent(macHintLabel)
                 .addComponent(windowsHintLabel)
                 .addComponent(exampleLabel)
@@ -48,7 +57,7 @@ class EditorJumperSettingsComponent {
     }
 
     fun getPreferredFocusedComponent(): JComponent {
-        return editorTypeComboBox
+        return vsCodePathField
     }
 
     fun getVSCodePath(): String {
@@ -81,13 +90,5 @@ class EditorJumperSettingsComponent {
 
     fun setWindsurfPath(path: String) {
         windsurfPathField.text = path
-    }
-    
-    fun getSelectedEditorType(): String {
-        return editorTypeComboBox.selectedItem as String
-    }
-    
-    fun setSelectedEditorType(editorType: String) {
-        editorTypeComboBox.selectedItem = editorType
     }
 } 
