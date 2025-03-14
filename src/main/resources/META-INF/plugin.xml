@@ -140,8 +140,8 @@
         <action id="EditorJumper.OpenInExternalEditor"
                 class="com.github.wanniwa.editorjumper.actions.OpenInExternalEditorAction"
                 text="Open in External Editor" description="Open in configured external editor">
-            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt shift O"/>
         </action>
@@ -149,7 +149,7 @@
         <action id="EditorJumper.Settings"
                 class="com.github.wanniwa.editorjumper.actions.EditorJumperSettingsAction"
                 text="EditorJumper Settings" description="Configure EditorJumper settings">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
