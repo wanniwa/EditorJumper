@@ -3,6 +3,7 @@
 <div >
   <img src="https://img.shields.io/badge/JetBrains-Plugin-orange" alt="JetBrains Plugin"/>
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License"/>
+  <a href="README_CN.md"><img src="https://img.shields.io/badge/文档-中文版-red.svg" alt="Chinese Doc"/></a>
 </div>
 
 ## 🔍 Introduction
