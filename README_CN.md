@@ -1,5 +1,9 @@
 # Editor Jumper
 
+<div align="center">
+  <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Editor Jumper图标" width="128" height="128"/>
+</div>
+
 <div >
   <img src="https://img.shields.io/badge/JetBrains-Plugin-orange" alt="JetBrains Plugin"/>
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License"/>
@@ -102,4 +106,4 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 
 ## 📄 许可证
 
-本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件 
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件

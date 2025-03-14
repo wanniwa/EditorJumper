@@ -1,5 +1,9 @@
 # Editor Jumper
 
+<div align="center">
+  <img src="src/main/resources/META-INF/pluginIcon.svg" alt="Editor Jumper Icon" width="128" height="128"/>
+</div>
+
 <div >
   <img src="https://img.shields.io/badge/JetBrains-Plugin-orange" alt="JetBrains Plugin"/>
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License"/>
