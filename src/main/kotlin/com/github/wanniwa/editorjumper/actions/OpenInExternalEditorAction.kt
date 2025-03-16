@@ -108,15 +108,15 @@ class OpenInExternalEditorAction : BaseAction() {
             processBuilder.directory(File(projectPath))
             val process = processBuilder.start()
             // 检查进程是否成功启动
-            val exitCode = process.waitFor()
-            if (exitCode != 0) {
-                val errorStream = process.errorStream.bufferedReader().readText()
-                Messages.showErrorDialog(
-                    project,
-                    "Failed to open editor. Error: $errorStream",
-                    "Editor Launch Failed"
-                )
-            }
+//            val exitCode = process.waitFor()
+//            if (exitCode != 0) {
+//                val errorStream = process.errorStream.bufferedReader().readText()
+//                Messages.showErrorDialog(
+//                    project,
+//                    "Failed to open editor. Error: $errorStream",
+//                    "Editor Launch Failed"
+//                )
+//            }
         } catch (ex: IOException) {
             Messages.showErrorDialog(
                 project,
