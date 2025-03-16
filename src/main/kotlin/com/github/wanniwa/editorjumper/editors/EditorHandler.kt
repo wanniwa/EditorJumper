@@ -46,11 +46,20 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
             }
 
             filePath != null -> {
-                arrayOf(getPath(), projectPath, "--goto", filePath)
+                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
+                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", filePath)
+                } else {
+                    arrayOf(getPath(), projectPath, "--goto", filePath)
+                }
             }
 
             else -> {
-                arrayOf(getPath(), projectPath)
+
+                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
+                    arrayOf("cmd", "/c", getPath(), projectPath)
+                } else {
+                   arrayOf(getPath(), projectPath)
+                }
             }
         }
     }
