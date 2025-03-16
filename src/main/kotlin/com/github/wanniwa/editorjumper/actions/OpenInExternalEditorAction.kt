@@ -48,7 +48,7 @@ class OpenInExternalEditorAction : BaseAction() {
                 val tabsBeforeCaret = lineText.substring(0, caretOffsetInLine).count { it == '\t' }
                 var offset = 0
                 if (tabsBeforeCaret != 0) {
-                    offset = (tabsBeforeCaret * 3) + 1
+                    offset = (tabsBeforeCaret * 3)
                 }
                 // 调整列位置，每个制表符减去3（假设制表符宽度为4）
                 val column = editor.caretModel.visualPosition.column.plus(1) - offset
