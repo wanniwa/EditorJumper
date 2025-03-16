@@ -7,7 +7,7 @@ class WindsurfHandler(customPath: String) : BaseEditorHandler(customPath) {
     
     override fun getDefaultPath(): String {
         return when {
-            SystemInfo.isMac -> "/Applications/Windsurf.app/Contents/MacOS/Electron"
+            SystemInfo.isMac -> "/Applications/Windsurf.app/Contents/Resources/app/bin/windsurf"
             SystemInfo.isWindows -> "Windsurf"
             else -> "Windsurf" // 其他平台不支持
         }

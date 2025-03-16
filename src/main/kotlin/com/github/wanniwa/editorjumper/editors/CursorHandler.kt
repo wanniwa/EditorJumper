@@ -7,7 +7,7 @@ class CursorHandler(customPath: String) : BaseEditorHandler(customPath) {
     
     override fun getDefaultPath(): String {
         return when {
-            SystemInfo.isMac -> "/Applications/Cursor.app/Contents/MacOS/Cursor"
+            SystemInfo.isMac -> "/Applications/Cursor.app/Contents/Resources/app/bin/code"
             SystemInfo.isWindows -> "Cursor"
             else -> "Cursor" // 其他平台不支持
         }
