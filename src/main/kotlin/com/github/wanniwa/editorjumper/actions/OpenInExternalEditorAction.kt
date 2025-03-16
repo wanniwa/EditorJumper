@@ -51,7 +51,7 @@ class OpenInExternalEditorAction : BaseAction() {
                     offset = (tabsBeforeCaret * 3)
                 }
                 // 调整列位置，每个制表符减去3（假设制表符宽度为4）
-                val column = editor.caretModel.visualPosition.column.plus(1) - offset
+				val column = editor.caretModel.visualPosition.column.plus(1) - offset
 
                 openInExternalEditor(project, handler, file, line, column)
             } else {
