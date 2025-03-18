@@ -116,7 +116,7 @@
         </ul>
         <p>推荐插件：</p>
         <ul>
-            <li>建议与 <a href="https://github.com/qczone/switch2idea">Switch2IDEA</a> 配合使用，以便从其他编辑器快速返回 JetBrains IDE</li>
+            <li>建议与 <a href="https://github.com/wanniwa/EditorJumper-V">EditorJumper-V</a> 配合使用，以便从其他编辑器快速返回 JetBrains IDE</li>
         </ul>
         ]]>
     </description>

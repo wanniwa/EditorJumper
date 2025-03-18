@@ -98,7 +98,7 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 
 ## 🔄 配套使用
 
-> 推荐与 [Switch2IDEA](https://github.com/qczone/switch2idea) 配合使用，以便从 Cursor、VS Code、Trae、Windsurf 快速返回 JetBrains IDE
+> 推荐与 [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) 配合使用，以便从 Cursor、VS Code、Trae、Windsurf 快速返回 JetBrains IDE
 
 ## 🤝 贡献
 

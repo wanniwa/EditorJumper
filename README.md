@@ -98,7 +98,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 
 ## 🔄 Complementary Use
 
-> Recommended to use with [Switch2IDEA](https://github.com/qczone/switch2idea) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf
+> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf
 
 ## 🤝 Contribution
 
