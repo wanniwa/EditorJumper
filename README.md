@@ -107,3 +107,8 @@ Pull Requests and Issues are welcome to help improve this plugin!
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wanniwa/EditorJumper&type=Date)](https://www.star-history.com/#wanniwa/EditorJumper&Date)
