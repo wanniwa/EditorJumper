@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.0.2</h3>
+        <h3>1.0.4</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -71,7 +71,7 @@
         </ul>
         <p>Recommended Plugin:</p>
         <ul>
-            <li>Recommended to use with <a href="https://github.com/qczone/switch2idea">Switch2IDEA</a> for quick return to JetBrains IDE from other editors</li>
+            <li>Recommended to use with <a href="https://github.com/wanniwa/EditorJumper-V">EditorJumper-V</a> for quick return to JetBrains IDE from other editors</li>
         </ul>
 
         <hr/>
