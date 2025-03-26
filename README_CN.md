@@ -14,16 +14,24 @@
 
 Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其他流行的代码编辑器（如 VS Code、Cursor、Trae 和 Windsurf）之间无缝跳转。它能够保持光标位置和编辑上下文，大大提高了多编辑器环境中的开发效率。
 
+<div align="center">
+  <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
+</div>
+<div align="center">
+  <img src="image/ConfigurationPanel.png" alt="Configuration Panel" width="600"/>
+</div>
 ## 🌟 功能特点
 
 - 🚀 **无缝编辑器切换**
   - 快速在 JetBrains IDE 和 VS Code、Cursor、Trae、Windsurf 之间跳转
   - 自动定位到相同的光标位置（行和列）
   - 完美保持编辑上下文，不中断工作流
+  - VS Code 工作空间支持 - 打开已配置的工作空间文件 (.code-workspace)
 
 - 🎯 **智能跳转行为**
   - 有文件打开时：打开相同的项目和文件，保持光标位置
   - 无文件打开时：直接在目标编辑器中打开项目
+  - VS Code：支持多根项目的工作空间文件 (.code-workspace)
 
 - ⚡ **多种触发方式**
   - 在编辑器中右击 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）

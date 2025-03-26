@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.0.4</h3>
+        <h3>1.0.5</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -27,6 +27,7 @@
         <ul>
             <li>With file open: Opens the same project and file, preserving cursor position</li>
             <li>Without file open: Opens the project directly in target editor</li>
+            <li>VSCode: Supports workspace files (.code-workspace) for multi-root projects</li>
         </ul>
         <p>Multiple ways to trigger jump:</p>
         <ul>
@@ -63,6 +64,11 @@
                     </li>
                 </ul>
             </li>
+            <li>Project Settings:
+                <ul>
+                    <li>VSCode Workspace: Configure project-specific VSCode workspace file (.code-workspace)</li>
+                </ul>
+            </li>
         </ul>
         <p>System Requirements:</p>
         <ul>
@@ -88,6 +94,7 @@
         <ul>
             <li>有文件打开时：打开相同的项目和文件，保持光标位置</li>
             <li>无文件打开时：直接在目标编辑器中打开项目</li>
+            <li>VSCode：支持多根项目的工作空间文件 (.code-workspace)</li>
         </ul>
         <p>多种触发跳转方式：</p>
         <ul>
@@ -125,7 +132,7 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <!-- Extension podescriptiond by the plugin.descriptiondescription
+    <!-- Extension points declared by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.wanniwa.editorjumper.settings.EditorJumperSettings"/>
@@ -133,6 +140,11 @@
                                  instance="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
                                  id="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
                                  displayName="Editor Jumper"/>
+        <projectService serviceImplementation="com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings"/>
+        <projectConfigurable parentId="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
+                            instance="com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettingsConfigurable"
+                            id="com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettingsConfigurable"
+                            displayName="Project Settings"/>
         <statusBarWidgetFactory implementation="com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidgetFactory"
                                 id="EditorJumper.StatusBarWidgetFactory"/>
     </extensions>
@@ -152,4 +164,13 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
+
+    <change-notes><![CDATA[
+    <h3>1.0.5</h3>
+    <ul>
+        <li>Add VSCode workspace file support in settings and UI</li>
+        <li>Add project-specific VSCode workspace configuration</li>
+    </ul>
+    ]]></change-notes>
+
 </idea-plugin>

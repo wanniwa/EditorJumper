@@ -37,10 +37,10 @@ abstract class BaseAction : AnAction() {
     /**
      * 获取编辑器处理器
      */
-    protected open fun getEditorHandler(): EditorHandler {
+    protected open fun getEditorHandler(project: Project?): EditorHandler {
         val settings = EditorJumperSettings.getInstance()
         val editorType = settings.selectedEditorType
-        return EditorHandlerFactory.getHandler(editorType)
+        return EditorHandlerFactory.getHandler(editorType, project)
     }
     
     /**

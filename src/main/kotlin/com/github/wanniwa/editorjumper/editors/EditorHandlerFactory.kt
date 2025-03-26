@@ -1,12 +1,13 @@
 package com.github.wanniwa.editorjumper.editors
 
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
+import com.intellij.openapi.project.Project
 
 class EditorHandlerFactory {
     companion object {
-        fun getHandler(editorType: String, customPath: String): EditorHandler {
+        fun getHandler(editorType: String, customPath: String, project: Project?): EditorHandler {
             return when (editorType) {
-                "VSCode" -> VSCodeHandler(customPath)
+                "VSCode" -> VSCodeHandler(customPath, project)
                 "Cursor" -> CursorHandler(customPath)
                 "Trae" -> TraeHandler(customPath)
                 "Windsurf" -> WindsurfHandler(customPath)
@@ -17,7 +18,7 @@ class EditorHandlerFactory {
         /**
          * 从设置中获取自定义路径并创建对应的编辑器处理器
          */
-        fun getHandler(editorType: String): EditorHandler {
+        fun getHandler(editorType: String, project: Project?): EditorHandler {
             val settings = EditorJumperSettings.getInstance()
             val customPath = when (editorType) {
                 "VSCode" -> settings.vsCodePath
@@ -26,7 +27,7 @@ class EditorHandlerFactory {
                 "Windsurf" -> settings.windsurfPath
                 else -> ""
             }
-            return getHandler(editorType, customPath)
+            return getHandler(editorType, customPath, project)
         }
     }
 } 

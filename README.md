@@ -14,16 +14,24 @@
 
 Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, and Windsurf). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
 
+<div align="center">
+  <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
+</div>
+<div align="center">
+  <img src="image/ConfigurationPanel.png" alt="Configuration Panel" width="600"/>
+</div>
 ## 🌟 Features
 
 - 🚀 **Seamless Editor Switching**
   - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf
   - Automatically positions to the same cursor location (line and column)
   - Perfectly maintains editing context without interrupting workflow
+  - VS Code workspace support - opens the configured workspace file (.code-workspace)
 
 - 🎯 **Smart Jump Behavior**
   - With file open: Opens the same project and file, preserving cursor position
   - Without file open: Opens the project directly in target editor
+  - VS Code: Supports workspace files (.code-workspace) for multi-root projects
 
 - ⚡ **Multiple Trigger Methods**
   - Right-click in editor - select "Open in [Editor Name]" (name updates based on selected editor)
@@ -77,7 +85,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 
 ### Via Keyboard Shortcut
 
-- Use `Option+Shift+P` (macOS) or `Alt+Shift+P` (Windows) to open the current project in the default editor
+- Use `Option+Shift+O` (macOS) or `Alt+Shift+O` (Windows) to open the current project in the default editor
 
 ### Via Context Menu
 
@@ -107,7 +115,6 @@ Pull Requests and Issues are welcome to help improve this plugin!
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
 
 ## Star History
 

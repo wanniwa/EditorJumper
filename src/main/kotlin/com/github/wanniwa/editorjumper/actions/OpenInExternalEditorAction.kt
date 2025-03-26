@@ -19,7 +19,7 @@ class OpenInExternalEditorAction : BaseAction() {
         val project = e.project ?: return
 
         // 获取编辑器处理器
-        val handler = getEditorHandler()
+        val handler = getEditorHandler(project)
         
         // 检查编辑器路径是否存在
         if (!checkEditorPathExists(project, handler)) {
@@ -29,42 +29,12 @@ class OpenInExternalEditorAction : BaseAction() {
         val selectedFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
         val editor = e.getData(CommonDataKeys.EDITOR)
 
-        if (editor != null) {
-            // 处理从编辑器中选择的文件
-            if (selectedFile != null) {
-                val file = selectedFile
-                val line = editor.caretModel.logicalPosition.line.plus(1)
+        // 获取光标位置
+        val lineNumber = editor?.caretModel?.currentCaret?.logicalPosition?.line?.plus(1)
+        val columnNumber = editor?.caretModel?.currentCaret?.logicalPosition?.column?.plus(1)
 
-                // 获取当前行的文本
-                val document = editor.document
-                val lineStartOffset = document.getLineStartOffset(editor.caretModel.logicalPosition.line)
-                val lineEndOffset = document.getLineEndOffset(editor.caretModel.logicalPosition.line)
-                val lineText = document.getText(com.intellij.openapi.util.TextRange(lineStartOffset, lineEndOffset))
-
-                // 获取光标在当前行的偏移量
-                val caretOffsetInLine = editor.caretModel.offset - lineStartOffset
-
-                // 计算光标前的制表符数量
-                val tabsBeforeCaret = lineText.substring(0, caretOffsetInLine).count { it == '\t' }
-                var offset = 0
-                if (tabsBeforeCaret != 0) {
-                    offset = (tabsBeforeCaret * 3)
-                }
-                // 调整列位置，每个制表符减去3（假设制表符宽度为4）
-				val column = editor.caretModel.visualPosition.column.plus(1) - offset
-
-                openInExternalEditor(project, handler, file, line, column)
-            } else {
-                // 没有选择文件，打开项目目录
-                openInExternalEditor(project, handler, null)
-            }
-        } else if (selectedFile != null && !selectedFile.isDirectory) {
-            // 处理从项目视图选择的文件（不是文件夹）
-            openInExternalEditor(project, handler, selectedFile)
-        } else {
-            // 没有选择文件或选择的是文件夹，打开项目目录
-            openInExternalEditor(project, handler, null)
-        }
+        // 在外部编辑器中打开
+        openInExternalEditor(project, handler, selectedFile, lineNumber, columnNumber)
     }
 
     /**
@@ -105,7 +75,7 @@ class OpenInExternalEditorAction : BaseAction() {
         try {
             // 使用列表构造函数
             val processBuilder = ProcessBuilder(command.toList())
-            processBuilder.directory(File(projectPath))
+            
             val process = processBuilder.start()
             // 检查进程是否成功启动
 //            val exitCode = process.waitFor()
@@ -117,20 +87,12 @@ class OpenInExternalEditorAction : BaseAction() {
 //                    "Editor Launch Failed"
 //                )
 //            }
-        } catch (ex: IOException) {
+        } catch (e: IOException) {
             Messages.showErrorDialog(
                 project,
-                "Failed to open editor. Error: ${ex.message}",
+                "Failed to open editor. Error: ${e.message}",
                 "Editor Launch Failed"
             )
-            ex.printStackTrace()
-        } catch (ex: Exception) {
-            Messages.showErrorDialog(
-                project,
-                "Failed to open editor. Error: ${ex.message}",
-                "Editor Launch Failed"
-            )
-            ex.printStackTrace()
         }
     }
 } 

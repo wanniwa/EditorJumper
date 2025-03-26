@@ -1,6 +1,9 @@
 package com.github.wanniwa.editorjumper.statusbar
 
+import com.github.wanniwa.editorjumper.messaging.EditorSettingsChangedListener
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.ListPopup
@@ -14,7 +17,9 @@ import java.awt.Point
 import java.awt.event.MouseEvent
 
 class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidget, 
-                                                                  StatusBarWidget.MultipleTextValuesPresentation {
+                                                                  StatusBarWidget.MultipleTextValuesPresentation,
+                                                                  EditorSettingsChangedListener,
+                                                                  Disposable {
     companion object {
         const val ID = "EditorJumperWidget"
     }
@@ -22,6 +27,12 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     private var statusBar: StatusBar? = null
     private val settings = EditorJumperSettings.getInstance()
     private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf")
+    private val messageBusConnection = ApplicationManager.getApplication().messageBus.connect(this)
+
+    init {
+        // 注册监听设置变更的消息
+        messageBusConnection.subscribe(EditorSettingsChangedListener.TOPIC, this)
+    }
 
     override fun ID(): String = ID
 
@@ -33,13 +44,19 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         return this
     }
 
+    // 实现 EditorSettingsChangedListener 接口
+    override fun editorTypeChanged(newEditorType: String) {
+        // 当编辑器类型变更时，更新状态栏
+        statusBar?.updateWidget(ID())
+    }
+
     override fun getPopup(): ListPopup {
         val factory = JBPopupFactory.getInstance()
         
         val step = object : BaseListPopupStep<String>("Select Target Editor", supportedEditors.toList()) {
             override fun onChosen(selectedValue: String, finalChoice: Boolean): PopupStep<*>? {
                 settings.selectedEditorType = selectedValue
-                statusBar?.updateWidget(ID())
+                // 不需要在这里调用 updateWidget，因为设置更改会通过消息总线触发更新
                 return PopupStep.FINAL_CHOICE
             }
         }
@@ -63,6 +80,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     override fun dispose() {
+        messageBusConnection.disconnect()
         statusBar = null
     }
 } 
