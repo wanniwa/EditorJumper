@@ -50,7 +50,7 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 
 1. 在 JetBrains IDE 中打开设置/首选项
 2. 导航到插件 > 市场
-3. 搜索 "Editor Jumper"
+3. 搜索 "EditorJumper"
 4. 点击安装按钮
 5. 重启 IDE 以激活插件
 

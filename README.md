@@ -50,7 +50,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 
 1. Open Settings/Preferences in JetBrains IDE
 2. Navigate to Plugins > Marketplace
-3. Search for "Editor Jumper"
+3. Search for "EditorJumper"
 4. Click the Install button
 5. Restart the IDE to activate the plugin
 
