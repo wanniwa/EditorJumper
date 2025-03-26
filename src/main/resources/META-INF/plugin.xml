@@ -169,7 +169,6 @@
     <h3>1.0.5</h3>
     <ul>
         <li>Add VSCode workspace file support in settings and UI</li>
-        <li>Add project-specific VSCode workspace configuration</li>
     </ul>
     ]]></change-notes>
 
