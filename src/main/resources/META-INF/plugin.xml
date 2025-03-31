@@ -166,6 +166,13 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>1.1.0</h3>
+    <ul>
+        <li>Support for project-level target editor configuration</li>
+        <li>Added dynamic plugin support</li>
+        <li>Add "Settings" option to supported editors and show settings dialog</li>
+    </ul>
+
     <h3>1.0.5</h3>
     <ul>
         <li>Add VSCode workspace file support in settings and UI</li>
