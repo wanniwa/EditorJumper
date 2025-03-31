@@ -1,10 +1,9 @@
 package com.github.wanniwa.editorjumper.statusbar
 
-import com.github.wanniwa.editorjumper.messaging.EditorSettingsChangedListener
+import com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable
 import com.intellij.openapi.Disposable
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
@@ -20,36 +19,30 @@ import java.awt.event.MouseEvent
 
 class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidget, 
                                                                   StatusBarWidget.MultipleTextValuesPresentation,
-                                                                  EditorSettingsChangedListener,
                                                                   Disposable {
     companion object {
         const val ID = "EditorJumperWidget"
     }
 
     private var statusBar: StatusBar? = null
-    private val settings = EditorJumperSettings.getInstance()
     private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Settings")
-    private val messageBusConnection = ApplicationManager.getApplication().messageBus.connect(this)
-
-    init {
-        // 注册监听设置变更的消息
-        messageBusConnection.subscribe(EditorSettingsChangedListener.TOPIC, this)
-    }
 
     override fun ID(): String = ID
 
     override fun getTooltipText(): String = "Click to switch target editor"
 
-    override fun getSelectedValue(): String = "Jump to: ${settings.selectedEditorType}"
+    override fun getSelectedValue(): String {
+        val projectSettings = EditorJumperProjectSettings.getInstance(project)
+        val editorType = if (projectSettings.projectEditorType.isBlank()) {
+            EditorJumperSettings.getInstance().selectedEditorType
+        } else {
+            projectSettings.projectEditorType
+        }
+        return "Jump to: $editorType"
+    }
 
     override fun getPresentation(): StatusBarWidget.WidgetPresentation {
         return this
-    }
-
-    // 实现 EditorSettingsChangedListener 接口
-    override fun editorTypeChanged(newEditorType: String) {
-        // 当编辑器类型变更时，更新状态栏
-        statusBar?.updateWidget(ID())
     }
 
     override fun getPopup(): ListPopup {
@@ -62,7 +55,11 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
                 if (value == "Settings") {
                     return PopupStep.FINAL_CHOICE
                 } else {
-                    settings.selectedEditorType = value
+                    // 只更新项目级设置
+                    val projectSettings = EditorJumperProjectSettings.getInstance(project)
+                    projectSettings.projectEditorType = value
+                    // 更新状态栏显示
+                    statusBar?.updateWidget(ID())
                 }
                 return PopupStep.FINAL_CHOICE
             }
@@ -98,11 +95,6 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     override fun dispose() {
-        try {
-            messageBusConnection.disconnect()
-            statusBar = null
-        } catch (e: Exception) {
-            // 忽略清理过程中的异常
-        }
+        statusBar = null
     }
 } 

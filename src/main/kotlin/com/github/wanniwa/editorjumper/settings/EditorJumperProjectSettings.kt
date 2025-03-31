@@ -14,6 +14,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 )
 class EditorJumperProjectSettings : PersistentStateComponent<EditorJumperProjectSettings> {
     var vsCodeWorkspacePath: String = ""
+    var projectEditorType: String = "" // 删除默认值，完全继承全局设置
 
     companion object {
         fun getInstance(project: Project): EditorJumperProjectSettings {

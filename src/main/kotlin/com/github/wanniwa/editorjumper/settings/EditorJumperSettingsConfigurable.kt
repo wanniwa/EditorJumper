@@ -27,7 +27,8 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         return mySettingsComponent!!.getVSCodePath() != settings.vsCodePath ||
                mySettingsComponent!!.getCursorPath() != settings.cursorPath ||
                mySettingsComponent!!.getTraePath() != settings.traePath ||
-               mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath
+               mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath ||
+               mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
     }
 
     override fun apply() {
@@ -36,6 +37,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.cursorPath = mySettingsComponent!!.getCursorPath()
         settings.traePath = mySettingsComponent!!.getTraePath()
         settings.windsurfPath = mySettingsComponent!!.getWindsurfPath()
+        settings.selectedEditorType = mySettingsComponent!!.getSelectedEditorType()
     }
 
     override fun reset() {
@@ -44,6 +46,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setCursorPath(settings.cursorPath)
         mySettingsComponent!!.setTraePath(settings.traePath)
         mySettingsComponent!!.setWindsurfPath(settings.windsurfPath)
+        mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
     }
 
     override fun disposeUIResources() {

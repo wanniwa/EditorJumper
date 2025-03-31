@@ -12,6 +12,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.util.SystemInfo
+import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
 
 /**
  * 基础动作类，提供通用方法
@@ -38,8 +39,7 @@ abstract class BaseAction : AnAction() {
      * 获取编辑器处理器
      */
     protected open fun getEditorHandler(project: Project?): EditorHandler {
-        val settings = EditorJumperSettings.getInstance()
-        val editorType = settings.selectedEditorType
+        val editorType = EditorTargetUtils.getTargetEditor(project)
         return EditorHandlerFactory.getHandler(editorType, project)
     }
     
@@ -47,7 +47,7 @@ abstract class BaseAction : AnAction() {
      * 检查编辑器路径是否存在
      * @return 如果路径有效，则返回true；否则返回false
      */
-    protected open fun checkEditorPathExists(project: Project, handler: EditorHandler): Boolean {
+    protected fun checkEditorPathExists(project: Project, handler: EditorHandler): Boolean {
         val settings = EditorJumperSettings.getInstance()
         val editorType = settings.selectedEditorType
         val customPath = when (editorType) {

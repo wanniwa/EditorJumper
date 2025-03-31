@@ -7,7 +7,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
-import java.io.File
+import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
 import java.io.IOException
 
 /**
@@ -44,8 +44,8 @@ class OpenInExternalEditorAction : BaseAction() {
         super.update(e)
 
         // 更新菜单项文本
-        val settings = EditorJumperSettings.getInstance()
-        val editorType = settings.selectedEditorType
+        val project = e.project
+        val editorType = EditorTargetUtils.getTargetEditor(project)
         e.presentation.text = "Open in $editorType"
     }
 
