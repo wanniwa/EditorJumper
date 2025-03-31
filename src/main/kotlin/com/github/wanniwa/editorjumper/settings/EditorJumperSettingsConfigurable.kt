@@ -1,9 +1,12 @@
 package com.github.wanniwa.editorjumper.settings
 
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.options.Configurable.WithEpDependencies
+import com.intellij.openapi.extensions.BaseExtensionPointName
 import javax.swing.JComponent
+import java.util.ArrayList
 
-class EditorJumperSettingsConfigurable : Configurable {
+class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
     private var mySettingsComponent: EditorJumperSettingsComponent? = null
 
     override fun getDisplayName(): String {
@@ -45,5 +48,9 @@ class EditorJumperSettingsConfigurable : Configurable {
 
     override fun disposeUIResources() {
         mySettingsComponent = null
+    }
+
+    override fun getDependencies(): Collection<BaseExtensionPointName<*>> {
+        return ArrayList()
     }
 } 

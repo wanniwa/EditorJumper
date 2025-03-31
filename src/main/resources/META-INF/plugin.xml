@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin require-restart="true">
+<idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.github.wanniwa.EditorJumper</id>
 
@@ -147,6 +147,7 @@
                             displayName="Project Settings"/>
         <statusBarWidgetFactory implementation="com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidgetFactory"
                                 id="EditorJumper.StatusBarWidgetFactory"/>
+        <postStartupActivity implementation="com.github.wanniwa.editorjumper.startup.EditorJumperStartupActivity"/>
     </extensions>
     <actions>
         <action id="EditorJumper.OpenInExternalEditor"

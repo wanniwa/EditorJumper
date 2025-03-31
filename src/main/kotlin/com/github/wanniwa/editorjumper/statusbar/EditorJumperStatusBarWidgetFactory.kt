@@ -4,8 +4,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.StatusBar
 import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.openapi.wm.StatusBarWidgetFactory
+import com.intellij.openapi.Disposable
 
-class EditorJumperStatusBarWidgetFactory : StatusBarWidgetFactory {
+class EditorJumperStatusBarWidgetFactory : StatusBarWidgetFactory, Disposable {
     override fun getId(): String = "EditorJumperWidget"
 
     override fun getDisplayName(): String = "Editor Jumper"
@@ -17,8 +18,14 @@ class EditorJumperStatusBarWidgetFactory : StatusBarWidgetFactory {
     }
 
     override fun disposeWidget(widget: StatusBarWidget) {
-        // 不需要特殊处理
+        if (widget is Disposable) {
+            widget.dispose()
+        }
     }
 
     override fun canBeEnabledOn(statusBar: StatusBar): Boolean = true
+
+    override fun dispose() {
+        // 清理工厂类资源
+    }
 } 

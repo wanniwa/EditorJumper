@@ -98,7 +98,11 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     override fun dispose() {
-        messageBusConnection.disconnect()
-        statusBar = null
+        try {
+            messageBusConnection.disconnect()
+            statusBar = null
+        } catch (e: Exception) {
+            // 忽略清理过程中的异常
+        }
     }
 } 

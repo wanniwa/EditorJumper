@@ -1,6 +1,8 @@
 package com.github.wanniwa.editorjumper.settings
 
 import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.options.Configurable.WithEpDependencies
+import com.intellij.openapi.extensions.BaseExtensionPointName
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.TextBrowseFolderListener
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
@@ -11,8 +13,9 @@ import com.intellij.openapi.options.ConfigurableBase
 import com.intellij.openapi.options.ConfigurableUi
 import javax.swing.JComponent
 import javax.swing.JPanel
+import java.util.ArrayList
 
-class EditorJumperProjectSettingsConfigurable(private val project: Project) : Configurable {
+class EditorJumperProjectSettingsConfigurable(private val project: Project) : Configurable, WithEpDependencies {
     private var mySettingsComponent: EditorJumperProjectSettingsComponent? = null
 
     override fun getDisplayName(): String {
@@ -45,6 +48,10 @@ class EditorJumperProjectSettingsConfigurable(private val project: Project) : Co
 
     override fun disposeUIResources() {
         mySettingsComponent = null
+    }
+
+    override fun getDependencies(): Collection<BaseExtensionPointName<*>> {
+        return ArrayList()
     }
 }
 
