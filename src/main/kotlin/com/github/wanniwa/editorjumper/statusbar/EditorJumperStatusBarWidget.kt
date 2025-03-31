@@ -2,8 +2,10 @@ package com.github.wanniwa.editorjumper.statusbar
 
 import com.github.wanniwa.editorjumper.messaging.EditorSettingsChangedListener
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
+import com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.ListPopup
@@ -26,7 +28,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
 
     private var statusBar: StatusBar? = null
     private val settings = EditorJumperSettings.getInstance()
-    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf")
+    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Settings")
     private val messageBusConnection = ApplicationManager.getApplication().messageBus.connect(this)
 
     init {
@@ -52,12 +54,28 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
 
     override fun getPopup(): ListPopup {
         val factory = JBPopupFactory.getInstance()
+        var selectedValue: String? = null
         
         val step = object : BaseListPopupStep<String>("Select Target Editor", supportedEditors.toList()) {
-            override fun onChosen(selectedValue: String, finalChoice: Boolean): PopupStep<*>? {
-                settings.selectedEditorType = selectedValue
-                // 不需要在这里调用 updateWidget，因为设置更改会通过消息总线触发更新
+            override fun onChosen(value: String, finalChoice: Boolean): PopupStep<*>? {
+                selectedValue = value
+                if (value == "Settings") {
+                    return PopupStep.FINAL_CHOICE
+                } else {
+                    settings.selectedEditorType = value
+                }
                 return PopupStep.FINAL_CHOICE
+            }
+
+            override fun getFinalRunnable(): Runnable? {
+                return if (selectedValue == "Settings") {
+                    Runnable {
+                        ShowSettingsUtil.getInstance().showSettingsDialog(
+                            project,
+                            EditorJumperSettingsConfigurable::class.java
+                        )
+                    }
+                } else null
             }
         }
         
