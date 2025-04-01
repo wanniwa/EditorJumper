@@ -21,16 +21,16 @@ class EditorJumperSettingsComponent {
 
     init {
         // 为每个编辑器创建单独的描述符
-        val vsCodeDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        val vsCodeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         vsCodeDescriptor.title = "Select VSCode Executable"
         
-        val cursorDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        val cursorDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         cursorDescriptor.title = "Select Cursor Executable"
         
-        val traeDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        val traeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         traeDescriptor.title = "Select Trae Executable"
         
-        val windsurfDescriptor = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        val windsurfDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         windsurfDescriptor.title = "Select Windsurf Executable"
         
         vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))

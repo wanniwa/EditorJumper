@@ -4,8 +4,6 @@ import com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
-import com.intellij.openapi.wm.WindowManager
-import com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidget
 
 class EditorJumperStartupActivity : ProjectActivity {
     override suspend fun execute(project: Project) {
@@ -17,9 +15,5 @@ class EditorJumperStartupActivity : ProjectActivity {
         if (projectSettings.projectEditorType.isBlank()) {
             projectSettings.projectEditorType = globalSettings.selectedEditorType
         }
-
-        // 更新状态栏显示
-        val statusBar = WindowManager.getInstance().getStatusBar(project)
-        statusBar?.updateWidget(EditorJumperStatusBarWidget.ID)
     }
 } 
