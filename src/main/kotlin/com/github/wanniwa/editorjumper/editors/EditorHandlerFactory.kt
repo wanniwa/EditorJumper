@@ -11,6 +11,7 @@ class EditorHandlerFactory {
                 "Cursor" -> CursorHandler(customPath)
                 "Trae" -> TraeHandler(customPath)
                 "Windsurf" -> WindsurfHandler(customPath)
+                "Void" -> VoidHandler(customPath)
                 else -> CursorHandler(customPath)
             }
         }
@@ -25,6 +26,7 @@ class EditorHandlerFactory {
                 "Cursor" -> settings.cursorPath
                 "Trae" -> settings.traePath
                 "Windsurf" -> settings.windsurfPath
+                "Void" -> settings.voidPath
                 else -> ""
             }
             return getHandler(editorType, customPath, project)

@@ -17,6 +17,7 @@ class EditorJumperSettingsComponent {
     private val vsCodePathField = TextFieldWithBrowseButton()
     private val cursorPathField = TextFieldWithBrowseButton()
     private val traePathField = TextFieldWithBrowseButton()
+    private val voidPathField = TextFieldWithBrowseButton()
     private val windsurfPathField = TextFieldWithBrowseButton()
 
     init {
@@ -32,20 +33,24 @@ class EditorJumperSettingsComponent {
         
         val windsurfDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         windsurfDescriptor.title = "Select Windsurf Executable"
-        
+
+        val voidDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        voidDescriptor.title = "Select Void Executable"
+
         vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
         traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
         windsurfPathField.addBrowseFolderListener(TextBrowseFolderListener(windsurfDescriptor))
+        voidPathField.addBrowseFolderListener(TextBrowseFolderListener(voidDescriptor))
 
         // 添加编辑器类型选项
-        val editorTypes = arrayOf("VSCode", "Cursor", "Trae", "Windsurf")
+        val editorTypes = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
         val macHintLabel = JBLabel("<html><em>macOS: All paths are auto-detected, no manual configuration needed</em></html>")
         val windowsHintLabel = JBLabel("<html><em>Windows: Cursor is auto-detected, other editors need .exe file path</em></html>")
         val exampleLabel = JBLabel("<html><em>Example: C:\\Users\\username\\AppData\\Local\\Programs\\VSCode\\Code.exe</em></html>")
-        val defaultEditorHintLabel = JBLabel("<html><em>Default Editor: The default target editor for newly opened projects</em></html>")
+        val defaultEditorHintLabel = JBLabel("<html><em>Default Editor: Only for newly opened projects,<br><font color='red'>To change the target IDE for current project, please select from the status bar at the bottom</font></em></html>")
 
         myMainPanel = FormBuilder.createFormBuilder()
                 .addComponent(macHintLabel)
@@ -59,6 +64,7 @@ class EditorJumperSettingsComponent {
                 .addLabeledComponent(JBLabel("Cursor path:"), cursorPathField, 1, false)
                 .addLabeledComponent(JBLabel("Trae path:"), traePathField, 1, false)
                 .addLabeledComponent(JBLabel("Windsurf path:"), windsurfPathField, 1, false)
+                .addLabeledComponent(JBLabel("Void path:"), voidPathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
@@ -103,6 +109,14 @@ class EditorJumperSettingsComponent {
         windsurfPathField.text = path
     }
 
+      fun getVoidPath(): String {
+        return voidPathField.text
+    }
+
+    fun setVoidPath(path: String) {
+        voidPathField.text = path
+    }
+
     fun getSelectedEditorType(): String {
         return editorTypeComboBox.selectedItem as String
     }
@@ -110,4 +124,5 @@ class EditorJumperSettingsComponent {
     fun setSelectedEditorType(editorType: String) {
         editorTypeComboBox.selectedItem = editorType
     }
+
 } 

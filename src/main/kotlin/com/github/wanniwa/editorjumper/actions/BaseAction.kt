@@ -55,6 +55,7 @@ abstract class BaseAction : AnAction() {
             "Cursor" -> settings.cursorPath
             "Trae" -> settings.traePath
             "Windsurf" -> settings.windsurfPath
+            "Void" -> settings.voidPath
             else -> ""
         }
         
