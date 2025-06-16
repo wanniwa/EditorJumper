@@ -58,13 +58,13 @@ class EditorJumperProjectSettingsComponent {
 
     init {
         val workspaceDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        workspaceDescriptor.title = "Select VSCode Workspace File"
+        workspaceDescriptor.title = "Select Workspace File"
         workspaceDescriptor.withFileFilter { file -> file.name.endsWith(".code-workspace") }
         
         vsCodeWorkspacePathField.addBrowseFolderListener(TextBrowseFolderListener(workspaceDescriptor))
 
         myMainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(JBLabel("VSCode Workspace File Path:"), vsCodeWorkspacePathField, 1, false)
+                .addLabeledComponent(JBLabel("Workspace File Path:"), vsCodeWorkspacePathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }

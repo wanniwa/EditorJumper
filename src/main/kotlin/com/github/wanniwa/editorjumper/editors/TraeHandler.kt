@@ -1,10 +1,12 @@
 package com.github.wanniwa.editorjumper.editors
 
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 
-class TraeHandler(customPath: String) : BaseEditorHandler(customPath) {
+class TraeHandler(customPath: String, project: Project?) : BaseVscodeEditorHandler(customPath, project) {
+
     override fun getName(): String = "Trae"
-    
+
     override fun getDefaultPath(): String {
         return when {
             SystemInfo.isMac -> "/Applications/Trae.app/Contents/MacOS/Electron"
@@ -12,4 +14,5 @@ class TraeHandler(customPath: String) : BaseEditorHandler(customPath) {
             else -> "" // 其他平台不支持
         }
     }
+
 } 

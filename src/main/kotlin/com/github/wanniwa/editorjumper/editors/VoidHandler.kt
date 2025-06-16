@@ -1,8 +1,9 @@
 package com.github.wanniwa.editorjumper.editors
 
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 
-class VoidHandler(customPath: String?) : BaseEditorHandler(customPath) {
+class VoidHandler(customPath: String, project: Project?) : BaseVscodeEditorHandler(customPath,project) {
     override fun getName(): String = "Void"
 
     override fun getDefaultPath(): String {

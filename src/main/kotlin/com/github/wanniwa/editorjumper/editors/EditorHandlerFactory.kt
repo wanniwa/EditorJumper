@@ -8,14 +8,14 @@ class EditorHandlerFactory {
         fun getHandler(editorType: String, customPath: String, project: Project?): EditorHandler {
             return when (editorType) {
                 "VSCode" -> VSCodeHandler(customPath, project)
-                "Cursor" -> CursorHandler(customPath)
-                "Trae" -> TraeHandler(customPath)
-                "Windsurf" -> WindsurfHandler(customPath)
-                "Void" -> VoidHandler(customPath)
-                else -> CursorHandler(customPath)
+                "Cursor" -> CursorHandler(customPath, project)
+                "Trae" -> TraeHandler(customPath, project)
+                "Windsurf" -> WindsurfHandler(customPath, project)
+                "Void" -> VoidHandler(customPath, project)
+                else -> CursorHandler(customPath, project)
             }
         }
-        
+
         /**
          * 从设置中获取自定义路径并创建对应的编辑器处理器
          */

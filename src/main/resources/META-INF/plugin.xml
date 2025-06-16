@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.1.1</h3>
+        <h3>1.2.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -28,7 +28,7 @@
         <ul>
             <li>With file open: Opens the same project and file, preserving cursor position</li>
             <li>Without file open: Opens the project directly in target editor</li>
-            <li>VSCode: Supports workspace files (.code-workspace) for multi-root projects</li>
+            <li>Supports workspace files (.code-workspace) for multi-root projects</li>
         </ul>
         <p>Multiple ways to trigger jump:</p>
         <ul>
@@ -168,11 +168,18 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>1.2.0</h3>
+    <ul>
+        <li>Support custom workspace file (.code-workspace) for Cursor, Trae, Windsurf, and Void editors. The plugin will prioritize the configured workspace file if it exists.</li>
+        <li>UI: The workspace file path label is now "Workspace File Path" instead of "VSCode Workspace File Path".</li>
+        <li>Compatibility: Updated to support (build 252.*).</li>
+    </ul>
+    
     <h3>1.1.1</h3>
     <ul>
         <li>Support Void https://github.com/voideditor/void</li>
     </ul>
-    <h3>1.1.1</h3>
+    <h3>1.1.0</h3>
     <ul>
         <li>Support for project-level target editor configuration</li>
         <li>Add "Settings" option to supported editors and show settings dialog</li>
