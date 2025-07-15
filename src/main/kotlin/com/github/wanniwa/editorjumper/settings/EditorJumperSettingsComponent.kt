@@ -19,6 +19,7 @@ class EditorJumperSettingsComponent {
     private val traePathField = TextFieldWithBrowseButton()
     private val voidPathField = TextFieldWithBrowseButton()
     private val windsurfPathField = TextFieldWithBrowseButton()
+    private val kiroPathField = TextFieldWithBrowseButton()
 
     init {
         // 为每个编辑器创建单独的描述符
@@ -37,14 +38,18 @@ class EditorJumperSettingsComponent {
         val voidDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         voidDescriptor.title = "Select Void Executable"
 
+        val kiroDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        kiroDescriptor.title = "Select Kiro Executable"
+
         vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
         traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
         windsurfPathField.addBrowseFolderListener(TextBrowseFolderListener(windsurfDescriptor))
         voidPathField.addBrowseFolderListener(TextBrowseFolderListener(voidDescriptor))
+        kiroPathField.addBrowseFolderListener(TextBrowseFolderListener(kiroDescriptor))
 
         // 添加编辑器类型选项
-        val editorTypes = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void")
+        val editorTypes = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
         val macHintLabel = JBLabel("<html><em>macOS: All paths are auto-detected, no manual configuration needed</em></html>")
@@ -65,6 +70,7 @@ class EditorJumperSettingsComponent {
                 .addLabeledComponent(JBLabel("Trae path:"), traePathField, 1, false)
                 .addLabeledComponent(JBLabel("Windsurf path:"), windsurfPathField, 1, false)
                 .addLabeledComponent(JBLabel("Void path:"), voidPathField, 1, false)
+                .addLabeledComponent(JBLabel("Kiro path:"), kiroPathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
@@ -115,6 +121,14 @@ class EditorJumperSettingsComponent {
 
     fun setVoidPath(path: String) {
         voidPathField.text = path
+    }
+
+    fun getKiroPath(): String {
+        return kiroPathField.text
+    }
+
+    fun setKiroPath(path: String) {
+        kiroPathField.text = path
     }
 
     fun getSelectedEditorType(): String {
