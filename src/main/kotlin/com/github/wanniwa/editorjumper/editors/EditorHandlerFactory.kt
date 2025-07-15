@@ -12,6 +12,7 @@ class EditorHandlerFactory {
                 "Trae" -> TraeHandler(customPath, project)
                 "Windsurf" -> WindsurfHandler(customPath, project)
                 "Void" -> VoidHandler(customPath, project)
+                "Kiro" -> KiroHandler(customPath, project)
                 else -> CursorHandler(customPath, project)
             }
         }
@@ -27,6 +28,7 @@ class EditorHandlerFactory {
                 "Trae" -> settings.traePath
                 "Windsurf" -> settings.windsurfPath
                 "Void" -> settings.voidPath
+                "Kiro" -> settings.kiroPath
                 else -> ""
             }
             return getHandler(editorType, customPath, project)

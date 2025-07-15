@@ -29,6 +29,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getTraePath() != settings.traePath ||
                mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath ||
                mySettingsComponent!!.getVoidPath() != settings.voidPath ||
+               mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
     }
 
@@ -39,6 +40,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.traePath = mySettingsComponent!!.getTraePath()
         settings.windsurfPath = mySettingsComponent!!.getWindsurfPath()
         settings.voidPath = mySettingsComponent!!.getVoidPath()
+        settings.kiroPath = mySettingsComponent!!.getKiroPath()
         settings.selectedEditorType = mySettingsComponent!!.getSelectedEditorType()
     }
 
@@ -49,6 +51,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setTraePath(settings.traePath)
         mySettingsComponent!!.setWindsurfPath(settings.windsurfPath)
         mySettingsComponent!!.setVoidPath(settings.voidPath)
+        mySettingsComponent!!.setKiroPath(settings.kiroPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
     }
 
