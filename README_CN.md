@@ -12,7 +12,7 @@
 
 ## 🔍 简介
 
-Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其他流行的代码编辑器（如 VS Code、Cursor、Trae 和 Windsurf）之间无缝跳转。它能够保持光标位置和编辑上下文，大大提高了多编辑器环境中的开发效率。
+Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其他流行的代码编辑器（如 VS Code、Cursor、Trae、Windsurf、Void 和 AWS Kiro）之间无缝跳转。它能够保持光标位置和编辑上下文，大大提高了多编辑器环境中的开发效率。
 
 <div align="center">
   <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
@@ -23,15 +23,15 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 ## 🌟 功能特点
 
 - 🚀 **无缝编辑器切换**
-  - 快速在 JetBrains IDE 和 VS Code、Cursor、Trae、Windsurf 之间跳转
+  - 快速在 JetBrains IDE 和 VS Code、Cursor、Trae、Windsurf、Void、AWS Kiro 之间跳转
   - 自动定位到相同的光标位置（行和列）
   - 完美保持编辑上下文，不中断工作流
-  - VS Code 工作空间支持 - 打开已配置的工作空间文件 (.code-workspace)
+  - 工作空间文件支持 - 为兼容的编辑器打开已配置的工作空间文件 (.code-workspace)
 
 - 🎯 **智能跳转行为**
   - 有文件打开时：打开相同的项目和文件，保持光标位置
   - 无文件打开时：直接在目标编辑器中打开项目
-  - VS Code：支持多根项目的工作空间文件 (.code-workspace)
+  - 兼容编辑器：支持多根项目的工作空间文件 (.code-workspace)
 
 - ⚡ **多种触发方式**
   - 在编辑器中右击 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）
@@ -60,6 +60,7 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 2. 导航到工具 > Editor Jumper 设置
 3. 配置每个编辑器的可执行文件路径：
    - VS Code 路径
+- Kiro 路径
    - Cursor 路径
    - Trae 路径
    - Windsurf 路径
@@ -78,7 +79,7 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 >   - macOS：所有路径都自动检测，无需手动配置
 >   - Windows：
 >     - Cursor：通过系统 PATH 自动检测
->     - VS Code/Trae/Windsurf：浏览并选择 .exe 文件位置
+>     - VS Code/Trae/Windsurf/Void/Kiro：浏览并选择 .exe 文件位置
 >     - 示例：`C:\Users\username\AppData\Local\Programs\VSCode\Code.exe`
 
 ## 🚀 使用方法
@@ -106,7 +107,7 @@ Editor Jumper 是一个 JetBrains IDE 插件，允许您在 JetBrains IDE 和其
 
 ## 🔄 配套使用
 
-> 推荐与 [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) 配合使用，以便从 Cursor、VS Code、Trae、Windsurf 快速返回 JetBrains IDE
+> 推荐与 [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) 配合使用，以便从 Cursor、VS Code、Trae、Windsurf、Void、Kiro 快速返回 JetBrains IDE
 
 ## 🤝 贡献
 

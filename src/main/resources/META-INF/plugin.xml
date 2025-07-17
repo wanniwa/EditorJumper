@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.2.0</h3>
+        <h3>1.3.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -23,6 +23,7 @@
             <li>Jump from JetBrains IDE to Cursor</li>
             <li>Jump from JetBrains IDE to Windsurf</li>
             <li>Jump from JetBrains IDE to Void</li>
+            <li>Jump from JetBrains IDE to Kiro</li>
         </ul>
         <p>Smart Jump Behavior:</p>
         <ul>
@@ -59,7 +60,7 @@
                     <li>Windows:
                         <ul>
                             <li>Cursor: Auto-detected through system PATH</li>
-                            <li>VS Code/Trae/Windsurf: Browse and select the .exe file location</li>
+                            <li>VS Code/Trae/Windsurf/Void/Kiro: Browse and select the .exe file location</li>
                             <li>Example: <code>C:\Users\username\AppData\Local\Programs\VSCode\Code.exe</code></li>
                         </ul>
                     </li>
@@ -90,6 +91,8 @@
             <li>从 JetBrains IDE 跳转到 Trae</li>
             <li>从 JetBrains IDE 跳转到 Cursor</li>
             <li>从 JetBrains IDE 跳转到 Windsurf</li>
+            <li>从 JetBrains IDE 跳转到 Void</li>
+            <li>从 JetBrains IDE 跳转到 AWS Kiro</li>
         </ul>
         <p>智能跳转行为：</p>
         <ul>
@@ -168,6 +171,18 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>1.3.0</h3>
+    <ul>
+        <li>Support for Kiro IDE</li>
+        <li>UI: The workspace file path label is now "Workspace File Path" instead of "VSCode Workspace File Path".</li>
+        <li>Enhanced: When changing default editor type in global settings, option to update current project's jump target.</li>
+    </ul>
+    <ul>
+        <li>支持 Kiro IDE</li>
+        <li>设置界面 "VSCode Workspace File Path" 统一为 "Workspace File Path"。</li>
+        <li>增强：在全局设置中修改默认编辑器类型时，可选择同时更新当前项目的跳转目标。</li>
+    </ul>
+
     <h3>1.2.0</h3>
     <ul>
         <li>Support custom workspace file (.code-workspace) for Cursor, Trae, Windsurf, and Void editors. The plugin will prioritize the configured workspace file if it exists.</li>

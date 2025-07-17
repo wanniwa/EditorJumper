@@ -12,7 +12,7 @@
 
 ## 🔍 Introduction
 
-Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, and Windsurf). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
+Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, Windsurf, Void, and AWS Kiro). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
 
 <div align="center">
   <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
@@ -23,15 +23,15 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 ## 🌟 Features
 
 - 🚀 **Seamless Editor Switching**
-  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf
+  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf, Void, Kiro
   - Automatically positions to the same cursor location (line and column)
   - Perfectly maintains editing context without interrupting workflow
-  - VS Code workspace support - opens the configured workspace file (.code-workspace)
+  - Workspace file support - opens the configured workspace file (.code-workspace) for compatible editors
 
 - 🎯 **Smart Jump Behavior**
   - With file open: Opens the same project and file, preserving cursor position
   - Without file open: Opens the project directly in target editor
-  - VS Code: Supports workspace files (.code-workspace) for multi-root projects
+  - Compatible editors: Support workspace files (.code-workspace) for multi-root projects
 
 - ⚡ **Multiple Trigger Methods**
   - Right-click in editor - select "Open in [Editor Name]" (name updates based on selected editor)
@@ -60,6 +60,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 2. Navigate to Tools > Editor Jumper Settings
 3. Configure the executable paths for each editor:
    - VS Code path
+- Kiro path
    - Cursor path
    - Trae path
    - Windsurf path
@@ -78,7 +79,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 >   - macOS: All paths are auto-detected, no manual configuration needed
 >   - Windows:
 >     - Cursor: Auto-detected through system PATH
->     - VS Code/Trae/Windsurf: Browse and select the .exe file location
+>     - VS Code/Trae/Windsurf/Void/Kiro: Browse and select the .exe file location
 >     - Example: `C:\Users\username\AppData\Local\Programs\VSCode\Code.exe`
 
 ## 🚀 Usage
@@ -106,7 +107,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 
 ## 🔄 Complementary Use
 
-> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf
+> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf, Kiro
 
 ## 🤝 Contribution
 
