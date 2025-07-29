@@ -49,7 +49,9 @@ abstract class BaseAction : AnAction() {
      */
     protected fun checkEditorPathExists(project: Project, handler: EditorHandler): Boolean {
         val settings = EditorJumperSettings.getInstance()
-        val editorType = EditorTargetUtils.getTargetEditor(project)  // 修改：使用项目级设置
+        // 获取目标编辑器类型，如果为空则使用默认设置s
+        val targetEditor = EditorTargetUtils.getTargetEditor(project)
+        val editorType = if (targetEditor.isNullOrBlank()) settings.selectedEditorType else targetEditor
         val customPath = when (editorType) {
             "VSCode" -> settings.vsCodePath
             "Cursor" -> settings.cursorPath
