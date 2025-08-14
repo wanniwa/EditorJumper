@@ -1,13 +1,12 @@
 package com.github.wanniwa.editorjumper.actions
 
 import com.github.wanniwa.editorjumper.editors.EditorHandler
-import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
+import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
-import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
 import java.io.IOException
 
 /**
@@ -20,7 +19,7 @@ class OpenInExternalEditorAction : BaseAction() {
 
         // 获取编辑器处理器
         val handler = getEditorHandler(project)
-        
+
         // 检查编辑器路径是否存在
         if (!checkEditorPathExists(project, handler)) {
             return
@@ -60,8 +59,8 @@ class OpenInExternalEditorAction : BaseAction() {
         columnNumber: Int? = null
     ) {
         val projectPath = getProjectPath(project) ?: return
-        val filePath = file?.let { 
-            if (it.isDirectory) null else getFilePath(it) ?: it.path 
+        val filePath = file?.let {
+            if (it.isDirectory) null else getFilePath(it) ?: it.path
         }
 
         // 使用 getOpenCommand 方法
@@ -73,20 +72,11 @@ class OpenInExternalEditorAction : BaseAction() {
         )
 
         try {
-            // 使用列表构造函数
-            val processBuilder = ProcessBuilder(command.toList())
-            
-            val process = processBuilder.start()
-            // 检查进程是否成功启动
-//            val exitCode = process.waitFor()
-//            if (exitCode != 0) {
-//                val errorStream = process.errorStream.bufferedReader().readText()
-//                Messages.showErrorDialog(
-//                    project,
-//                    "Failed to open editor. Error: $errorStream",
-//                    "Editor Launch Failed"
-//                )
-//            }
+            ProcessBuilder(command.toList())
+                .redirectOutput(ProcessBuilder.Redirect.DISCARD) // 丢弃 stdout
+                .redirectError(ProcessBuilder.Redirect.DISCARD)  // 丢弃 stderr
+                .start()
+                .outputStream.close() // 明确告诉子进程我不会输入任何数据
         } catch (e: IOException) {
             Messages.showErrorDialog(
                 project,
