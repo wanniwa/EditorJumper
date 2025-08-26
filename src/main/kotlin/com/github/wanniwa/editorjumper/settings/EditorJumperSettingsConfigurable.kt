@@ -31,6 +31,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath ||
                mySettingsComponent!!.getVoidPath() != settings.voidPath ||
                mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
+               mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
     }
 
@@ -45,6 +46,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.windsurfPath = mySettingsComponent!!.getWindsurfPath()
         settings.voidPath = mySettingsComponent!!.getVoidPath()
         settings.kiroPath = mySettingsComponent!!.getKiroPath()
+        settings.qoderPath = mySettingsComponent!!.getQoderPath()
         settings.selectedEditorType = newEditorType
         
         // 如果默认编辑器类型改变了，询问是否同时更新当前项目的编辑器类型设置
@@ -89,6 +91,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setWindsurfPath(settings.windsurfPath)
         mySettingsComponent!!.setVoidPath(settings.voidPath)
         mySettingsComponent!!.setKiroPath(settings.kiroPath)
+        mySettingsComponent!!.setQoderPath(settings.qoderPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
     }
 

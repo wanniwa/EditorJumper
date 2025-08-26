@@ -51,7 +51,7 @@ abstract class BaseAction : AnAction() {
         val settings = EditorJumperSettings.getInstance()
         // 获取目标编辑器类型，如果为空则使用默认设置s
         val targetEditor = EditorTargetUtils.getTargetEditor(project)
-        val editorType = if (targetEditor.isNullOrBlank()) settings.selectedEditorType else targetEditor
+        val editorType = targetEditor.ifBlank { settings.selectedEditorType }
         val customPath = when (editorType) {
             "VSCode" -> settings.vsCodePath
             "Cursor" -> settings.cursorPath
@@ -59,6 +59,7 @@ abstract class BaseAction : AnAction() {
             "Windsurf" -> settings.windsurfPath
             "Void" -> settings.voidPath
             "Kiro" -> settings.kiroPath
+            "Qoder" -> settings.qoderPath
             else -> ""
         }
         
@@ -68,7 +69,7 @@ abstract class BaseAction : AnAction() {
         }
         
         // Windows: 只检查非 Cursor 编辑器的路径
-        if (SystemInfo.isWindows && editorType == "Cursor") {
+        if (SystemInfo.isWindows && (editorType == "Cursor" || editorType == "Qoder")) {
             return true
         }
         

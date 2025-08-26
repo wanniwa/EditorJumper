@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.3.2</h3>
+        <h3>1.4.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -24,6 +24,7 @@
             <li>Jump from JetBrains IDE to Windsurf</li>
             <li>Jump from JetBrains IDE to Void</li>
             <li>Jump from JetBrains IDE to Kiro</li>
+            <li>Jump from JetBrains IDE to Qoder</li>
         </ul>
         <p>Smart Jump Behavior:</p>
         <ul>
@@ -46,7 +47,7 @@
             <li>macOS: No additional configuration needed for any editor</li>
             <li>Windows:
                 <ul>
-                    <li>Cursor: No configuration needed (uses system PATH)</li>
+                    <li>Cursor/Qoder: No configuration needed (uses system PATH)</li>
                     <li>Other editors: Configure the .exe file path in Settings</li>
                 </ul>
             </li>
@@ -59,7 +60,7 @@
                     <li>macOS: All paths are auto-detected, no manual configuration needed</li>
                     <li>Windows:
                         <ul>
-                            <li>Cursor: Auto-detected through system PATH</li>
+                            <li>Cursor/Qoder: Auto-detected through system PATH</li>
                             <li>VS Code/Trae/Windsurf/Void/Kiro: Browse and select the .exe file location</li>
                             <li>Example: <code>C:\Users\username\AppData\Local\Programs\VSCode\Code.exe</code></li>
                         </ul>
@@ -93,6 +94,7 @@
             <li>从 JetBrains IDE 跳转到 Windsurf</li>
             <li>从 JetBrains IDE 跳转到 Void</li>
             <li>从 JetBrains IDE 跳转到 AWS Kiro</li>
+            <li>从 JetBrains IDE 跳转到 Qoder</li>
         </ul>
         <p>智能跳转行为：</p>
         <ul>
@@ -115,7 +117,7 @@
             <li>macOS：所有编辑器无需额外配置</li>
             <li>Windows：
                 <ul>
-                    <li>Cursor：无需配置（使用系统 PATH）</li>
+                    <li>Cursor/Qoder：无需配置（使用系统 PATH）</li>
                     <li>其他编辑器：需在设置中配置 .exe 文件路径</li>
                 </ul>
             </li>
@@ -171,6 +173,17 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>1.4.0</h3>
+    <ul>
+        <li>Added support for Qoder IDE - seamlessly jump from JetBrains IDE to Qoder</li>
+        <li>Qoder integration supports the same features as other editors: workspace files, cursor position preservation, and cross-platform compatibility</li>
+        <li>macOS/Windows: Auto-detected Qoder installation path, no manual configuration needed</li>
+    </ul>
+    <ul>
+        <li>新增对 Qoder IDE 的支持 - 可从 JetBrains IDE 无缝跳转到 Qoder</li>
+        <li>Qoder 集成支持与其他编辑器相同的功能：工作空间文件、光标位置保持和跨平台兼容性</li>
+        <li>macOS/Windows：自动检测 Qoder 安装路径，无需手动配置</li>
+    </ul>
     <h3>1.3.2</h3>
     <ul>
         <li>Fixed EPIPE: broken pipe error on Windows when jumping to Trae or other IDEs.</li>

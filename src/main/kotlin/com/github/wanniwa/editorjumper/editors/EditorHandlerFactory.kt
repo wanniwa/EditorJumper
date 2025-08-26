@@ -13,6 +13,7 @@ class EditorHandlerFactory {
                 "Windsurf" -> WindsurfHandler(customPath, project)
                 "Void" -> VoidHandler(customPath, project)
                 "Kiro" -> KiroHandler(customPath, project)
+                "Qoder" -> QoderHandler(customPath, project)
                 else -> CursorHandler(customPath, project)
             }
         }
@@ -29,6 +30,7 @@ class EditorHandlerFactory {
                 "Windsurf" -> settings.windsurfPath
                 "Void" -> settings.voidPath
                 "Kiro" -> settings.kiroPath
+                "Qoder" -> settings.qoderPath
                 else -> ""
             }
             return getHandler(editorType, customPath, project)

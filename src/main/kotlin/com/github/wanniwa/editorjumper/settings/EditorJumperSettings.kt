@@ -17,6 +17,7 @@ class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
     var windsurfPath: String = ""
     var voidPath: String = ""
     var kiroPath: String = ""
+    var qoderPath: String = ""
     var selectedEditorType: String = "Cursor"
 
     companion object {

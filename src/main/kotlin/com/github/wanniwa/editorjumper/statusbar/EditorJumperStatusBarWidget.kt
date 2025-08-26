@@ -25,7 +25,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     private var statusBar: StatusBar? = null
-    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Settings")
+    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "Settings")
 
     override fun ID(): String = ID
 
