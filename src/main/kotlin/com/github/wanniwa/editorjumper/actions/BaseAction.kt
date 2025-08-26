@@ -13,6 +13,7 @@ import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.util.SystemInfo
 import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 
 /**
  * 基础动作类，提供通用方法
@@ -38,7 +39,7 @@ abstract class BaseAction : AnAction() {
     /**
      * 获取编辑器处理器
      */
-    protected open fun getEditorHandler(project: Project?): EditorHandler {
+    protected open fun getEditorHandler(project: Project): EditorHandler {
         val editorType = EditorTargetUtils.getTargetEditor(project)
         return EditorHandlerFactory.getHandler(editorType, project)
     }
@@ -78,10 +79,10 @@ abstract class BaseAction : AnAction() {
             // 路径为空，提示用户配置
             val result = Messages.showYesNoDialog(
                 project,
-                "The path to $editorType is not configured. Would you like to configure it now?",
-                "Editor Path Not Configured",
-                "Open Settings",
-                "Cancel",
+                I18nUtils.message("dialog.editorPathNotConfigured.message", editorType),
+                I18nUtils.message("dialog.editorPathNotConfigured.title"),
+                I18nUtils.message("dialog.editorPathNotConfigured.openSettings"),
+                I18nUtils.message("dialog.editorPathNotConfigured.cancel"),
                 Messages.getWarningIcon()
             )
             

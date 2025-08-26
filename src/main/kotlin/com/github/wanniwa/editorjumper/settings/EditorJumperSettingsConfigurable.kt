@@ -4,6 +4,7 @@ import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.Configurable.WithEpDependencies
 import com.intellij.openapi.extensions.BaseExtensionPointName
 import com.intellij.openapi.project.ProjectManager
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import javax.swing.JComponent
 import java.util.ArrayList
 
@@ -11,7 +12,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
     private var mySettingsComponent: EditorJumperSettingsComponent? = null
 
     override fun getDisplayName(): String {
-        return "EditorJumper Settings"
+        return I18nUtils.message("settings.displayName")
     }
 
     override fun getPreferredFocusedComponent(): JComponent {
@@ -66,10 +67,10 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         currentProject?.let { project ->
             val result = com.intellij.openapi.ui.Messages.showYesNoDialog(
                 project,
-                "Default editor has been changed to $newEditorType. Would you like to also update the current project's jump target to $newEditorType?",
-                "Update Current Project Target",
-                "Yes",
-                "No",
+                I18nUtils.message("dialog.updateCurrentProject.message", newEditorType, newEditorType),
+                I18nUtils.message("dialog.updateCurrentProject.title"),
+                I18nUtils.message("dialog.updateCurrentProject.yes"),
+                I18nUtils.message("dialog.updateCurrentProject.no"),
                 com.intellij.openapi.ui.Messages.getQuestionIcon()
             )
             

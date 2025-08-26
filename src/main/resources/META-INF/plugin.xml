@@ -158,7 +158,7 @@
     <actions>
         <action id="EditorJumper.OpenInExternalEditor"
                 class="com.github.wanniwa.editorjumper.actions.OpenInExternalEditorAction"
-                text="Open in External Editor" description="Open in configured external editor">
+        >
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
@@ -167,7 +167,7 @@
 
         <action id="EditorJumper.Settings"
                 class="com.github.wanniwa.editorjumper.actions.EditorJumperSettingsAction"
-                text="EditorJumper Settings" description="Configure EditorJumper settings">
+        >
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
@@ -178,11 +178,15 @@
         <li>Added support for Qoder IDE - seamlessly jump from JetBrains IDE to Qoder</li>
         <li>Qoder integration supports the same features as other editors: workspace files, cursor position preservation, and cross-platform compatibility</li>
         <li>macOS/Windows: Auto-detected Qoder installation path, no manual configuration needed</li>
+        <li>Added internationalization (i18n) support - automatically switches between Chinese and English based on IDEA language settings</li>
+        <li>UI elements including dialogs, settings, status bar, and menus now support multiple languages</li>
     </ul>
     <ul>
         <li>新增对 Qoder IDE 的支持 - 可从 JetBrains IDE 无缝跳转到 Qoder</li>
         <li>Qoder 集成支持与其他编辑器相同的功能：工作空间文件、光标位置保持和跨平台兼容性</li>
         <li>macOS/Windows：自动检测 Qoder 安装路径，无需手动配置</li>
+        <li>新增国际化（i18n）支持 - 根据 IDEA 语言设置自动在中文和英文之间切换</li>
+        <li>包括对话框、设置、状态栏和菜单在内的 UI 元素现在都支持多语言</li>
     </ul>
     <h3>1.3.2</h3>
     <ul>
@@ -228,5 +232,6 @@
         <li>Add VSCode workspace file support in settings and UI</li>
     </ul>
     ]]></change-notes>
+    <resource-bundle>bundle</resource-bundle>
 
 </idea-plugin>

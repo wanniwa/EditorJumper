@@ -2,6 +2,7 @@ package com.github.wanniwa.editorjumper.actions
 
 import com.github.wanniwa.editorjumper.editors.EditorHandler
 import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.project.Project
@@ -45,7 +46,7 @@ class OpenInExternalEditorAction : BaseAction() {
         // 更新菜单项文本
         val project = e.project
         val editorType = EditorTargetUtils.getTargetEditor(project)
-        e.presentation.text = "Open in $editorType"
+        e.presentation.text = I18nUtils.message("action.openInExternalEditor.text", editorType)
     }
 
     /**

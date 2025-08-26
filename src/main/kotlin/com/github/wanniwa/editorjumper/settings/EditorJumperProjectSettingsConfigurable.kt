@@ -9,6 +9,7 @@ import com.intellij.openapi.ui.TextBrowseFolderListener
 import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.FormBuilder
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import javax.swing.JComponent
 import javax.swing.JPanel
 
@@ -16,7 +17,7 @@ class EditorJumperProjectSettingsConfigurable(private val project: Project) : Co
     private var mySettingsComponent: EditorJumperProjectSettingsComponent? = null
 
     override fun getDisplayName(): String {
-        return "Project Settings"
+        return I18nUtils.message("settings.projectSettings.displayName")
     }
 
     override fun getPreferredFocusedComponent(): JComponent {
@@ -64,7 +65,7 @@ class EditorJumperProjectSettingsComponent {
         vsCodeWorkspacePathField.addBrowseFolderListener(TextBrowseFolderListener(workspaceDescriptor))
 
         myMainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(JBLabel("Workspace File Path:"), vsCodeWorkspacePathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.message("settings.projectSettings.workspacePath")), vsCodeWorkspacePathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }

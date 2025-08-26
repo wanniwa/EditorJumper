@@ -14,6 +14,7 @@ import com.intellij.openapi.wm.StatusBar
 import com.intellij.openapi.wm.StatusBarWidget
 import com.intellij.ui.awt.RelativePoint
 import com.intellij.util.Consumer
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import java.awt.Point
 import java.awt.event.MouseEvent
 
@@ -25,11 +26,11 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     private var statusBar: StatusBar? = null
-    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "Settings")
+    private val supportedEditors = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", I18nUtils.message("editor.settings"))
 
     override fun ID(): String = ID
 
-    override fun getTooltipText(): String = "Click to switch target editor"
+    override fun getTooltipText(): String = I18nUtils.message("statusbar.tooltip")
 
     override fun getSelectedValue(): String {
         val projectSettings = EditorJumperProjectSettings.getInstance(project)
@@ -38,7 +39,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         } else {
             projectSettings.projectEditorType
         }
-        return "Jump to: $editorType"
+        return I18nUtils.message("statusbar.jumpTo", editorType)
     }
 
     override fun getPresentation(): StatusBarWidget.WidgetPresentation {
@@ -49,10 +50,10 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         val factory = JBPopupFactory.getInstance()
         var selectedValue: String? = null
         
-        val step = object : BaseListPopupStep<String>("Select Target Editor", supportedEditors.toList()) {
+        val step = object : BaseListPopupStep<String>(I18nUtils.message("statusbar.popup.title"), supportedEditors.toList()) {
             override fun onChosen(value: String, finalChoice: Boolean): PopupStep<*>? {
                 selectedValue = value
-                if (value == "Settings") {
+                if (value == I18nUtils.message("editor.settings")) {
                     return PopupStep.FINAL_CHOICE
                 } else {
                     // 只更新项目级设置
@@ -65,7 +66,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
             }
 
             override fun getFinalRunnable(): Runnable? {
-                return if (selectedValue == "Settings") {
+                return if (selectedValue == I18nUtils.message("editor.settings")) {
                     Runnable {
                         ShowSettingsUtil.getInstance().showSettingsDialog(
                             project,

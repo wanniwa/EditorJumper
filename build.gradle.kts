@@ -27,9 +27,18 @@ tasks {
     withType<JavaCompile> {
         sourceCompatibility = "17"
         targetCompatibility = "17"
+        options.encoding = "UTF-8"
     }
     withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions.jvmTarget = "17"
+    }
+
+    // Configure processResources to handle UTF-8 encoding for properties files
+    processResources {
+        filteringCharset = "UTF-8"
+        filesMatching("**/*.properties") {
+            filteringCharset = "UTF-8"
+        }
     }
 
     patchPluginXml {

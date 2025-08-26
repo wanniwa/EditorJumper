@@ -13,7 +13,7 @@ object EditorTargetUtils {
         return if (projectSettings?.projectEditorType.isNullOrBlank()) {
             EditorJumperSettings.getInstance().selectedEditorType
         } else {
-            projectSettings.projectEditorType
+            projectSettings!!.projectEditorType
         }
     }
 } 

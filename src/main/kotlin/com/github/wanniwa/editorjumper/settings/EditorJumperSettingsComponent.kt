@@ -7,6 +7,7 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.FormBuilder
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import javax.swing.JComponent
 import javax.swing.JPanel
 import javax.swing.DefaultComboBoxModel
@@ -25,25 +26,25 @@ class EditorJumperSettingsComponent {
     init {
         // 为每个编辑器创建单独的描述符
         val vsCodeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        vsCodeDescriptor.title = "Select VSCode Executable"
+        vsCodeDescriptor.title = I18nUtils.getFileChooserTitle("VSCode")
         
         val cursorDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        cursorDescriptor.title = "Select Cursor Executable"
+        cursorDescriptor.title = I18nUtils.getFileChooserTitle("Cursor")
         
         val traeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        traeDescriptor.title = "Select Trae Executable"
+        traeDescriptor.title = I18nUtils.getFileChooserTitle("Trae")
         
         val windsurfDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        windsurfDescriptor.title = "Select Windsurf Executable"
+        windsurfDescriptor.title = I18nUtils.getFileChooserTitle("Windsurf")
 
         val voidDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        voidDescriptor.title = "Select Void Executable"
+        voidDescriptor.title = I18nUtils.getFileChooserTitle("Void")
 
         val kiroDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        kiroDescriptor.title = "Select Kiro Executable"
+        kiroDescriptor.title = I18nUtils.getFileChooserTitle("Kiro")
 
         val qoderDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        qoderDescriptor.title = "Select Qoder Executable"
+        qoderDescriptor.title = I18nUtils.getFileChooserTitle("Qoder")
 
         vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
@@ -57,10 +58,10 @@ class EditorJumperSettingsComponent {
         val editorTypes = arrayOf("VSCode", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
-        val macHintLabel = JBLabel("<html><em>macOS: All paths are auto-detected, no manual configuration needed</em></html>")
-        val windowsHintLabel = JBLabel("<html><em>Windows: Cursor is auto-detected, other editors need .exe file path</em></html>")
-        val exampleLabel = JBLabel("<html><em>Example: C:\\Users\\username\\AppData\\Local\\Programs\\VSCode\\Code.exe</em></html>")
-        val defaultEditorHintLabel = JBLabel("<html><em>Default Editor: Only for newly opened projects,<br><font color='red'>To change the target IDE for current project, please select from the status bar at the bottom</font></em></html>")
+        val macHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.macOS")}</em></html>")
+        val windowsHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.windows")}</em></html>")
+        val exampleLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.example")}</em></html>")
+        val defaultEditorHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.defaultEditor")}</em></html>")
 
         myMainPanel = FormBuilder.createFormBuilder()
                 .addComponent(macHintLabel)
@@ -68,15 +69,15 @@ class EditorJumperSettingsComponent {
                 .addComponent(exampleLabel)
                 .addSeparator()
                 .addComponent(defaultEditorHintLabel)
-                .addLabeledComponent(JBLabel("Default Editor:"), editorTypeComboBox, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.message("settings.defaultEditor.label")), editorTypeComboBox, 1, false)
                 .addSeparator()
-                .addLabeledComponent(JBLabel("VSCode path:"), vsCodePathField, 1, false)
-                .addLabeledComponent(JBLabel("Cursor path:"), cursorPathField, 1, false)
-                .addLabeledComponent(JBLabel("Trae path:"), traePathField, 1, false)
-                .addLabeledComponent(JBLabel("Windsurf path:"), windsurfPathField, 1, false)
-                .addLabeledComponent(JBLabel("Void path:"), voidPathField, 1, false)
-                .addLabeledComponent(JBLabel("Kiro path:"), kiroPathField, 1, false)
-                .addLabeledComponent(JBLabel("Qoder path:"), qoderPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("VSCode")), vsCodePathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Cursor")), cursorPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Trae")), traePathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Windsurf")), windsurfPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Void")), voidPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Kiro")), kiroPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Qoder")), qoderPathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
