@@ -24,6 +24,19 @@ interface EditorHandler {
         lineNumber: Int?,
         columnNumber: Int?
     ): Array<String>
+
+    fun getFastOpenCommand(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Array<String>
+
+    /**
+     * 获取Mac URL方案名称（如 "cursor", "vscode" 等）
+     * @return URL方案名称，如果不支持则返回null
+     */
+    fun getMacOpenName(): String? = null
 }
 
 abstract class BaseEditorHandler(private val customPath: String?) : EditorHandler {
@@ -37,38 +50,57 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         lineNumber: Int?,
         columnNumber: Int?
     ): Array<String> {
+        val macOpenName = getMacOpenName()
+        val macAppName = getName()
         return when {
-            filePath != null && lineNumber != null && columnNumber != null -> {
+            filePath != null -> {
+                val actualLineNumber = lineNumber ?: 1
+                val actualColumnNumber = columnNumber ?: 1
                 // 如果有文件路径和光标位置，则打开项目并定位到文件的具体行列
-                val fileWithPosition = "$filePath:$lineNumber:$columnNumber"
-                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
+                val fileWithPosition = "$filePath:$actualLineNumber:$actualColumnNumber"
+                if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
                     arrayOf("cmd", "/c", getPath(), projectPath, "--goto", fileWithPosition)
                 } else {
                     arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
                 }
             }
 
-            filePath != null -> {
-                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", filePath)
-                } else {
-                    arrayOf(getPath(), projectPath, "--goto", filePath)
-                }
-            }
-
             else -> {
-
-                if (SystemInfo.isWindows && customPath.isNullOrEmpty()) {
+                // 只打开项目
+                if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
                     arrayOf("cmd", "/c", getPath(), projectPath)
+                } else if (SystemInfo.isMac) {
+                    arrayOf("open", "-a", "$macAppName", projectPath)
                 } else {
                     arrayOf(getPath(), projectPath)
                 }
             }
         }
     }
+
+    override fun getFastOpenCommand(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Array<String> {
+        val macOpenName = getMacOpenName()
+        val macAppName = getName()
+        if (SystemInfo.isWindows) {
+            return getOpenCommand(projectPath, filePath, lineNumber, columnNumber)
+        }
+        return when {
+            filePath.isNullOrBlank() -> {
+                arrayOf("open", "-a", "$macAppName", projectPath)
+            }
+            else -> {
+                arrayOf("open", "-a", "$macAppName", "$macOpenName://file$filePath:$lineNumber:$columnNumber")
+            }
+        }
+    }
 }
 
-abstract class BaseVscodeEditorHandler(customPath: String, private val project: Project?) :
+abstract class BaseVscodeEditorHandler(customPath: String?, val project: Project?) :
     BaseEditorHandler(customPath) {
     override fun getOpenCommand(
         projectPath: String,
@@ -86,6 +118,24 @@ abstract class BaseVscodeEditorHandler(customPath: String, private val project: 
             return super.getOpenCommand(workspacePath, filePath, lineNumber, columnNumber)
         } else {
             return super.getOpenCommand(projectPath, filePath, lineNumber, columnNumber)
+        }
+    }
+
+    override fun getFastOpenCommand(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Array<String> {
+        // 如果配置了工作空间文件，优先使用工作空间文件
+        val projectSettings = project?.let { EditorJumperProjectSettings.getInstance(it) }
+        val workspacePath = projectSettings?.vsCodeWorkspacePath
+
+        // 如果配置了工作空间文件且文件存在，使用工作空间文件
+        if (!workspacePath.isNullOrBlank() && File(workspacePath).exists()) {
+            return super.getFastOpenCommand(workspacePath, filePath, lineNumber, columnNumber)
+        } else {
+            return super.getFastOpenCommand(projectPath, filePath, lineNumber, columnNumber)
         }
     }
 }

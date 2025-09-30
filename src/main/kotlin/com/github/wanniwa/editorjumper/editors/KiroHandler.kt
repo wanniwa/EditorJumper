@@ -14,38 +14,7 @@ class KiroHandler(customPath: String?, private val project: Project?) : BaseEdit
         }
     }
 
-    override fun getOpenCommand(
-        projectPath: String,
-        filePath: String?,
-        lineNumber: Int?,
-        columnNumber: Int?
-    ): Array<String> {
-        return when {
-            filePath != null && lineNumber != null && columnNumber != null -> {
-                // Kiro 支持 --goto 参数来定位到具体行列
-                val fileWithPosition = "$filePath:$lineNumber:$columnNumber"
-                if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", fileWithPosition)
-                } else {
-                    arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
-                }
-            }
-            filePath != null -> {
-                // 只有文件路径，没有行列信息
-                if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", filePath)
-                } else {
-                    arrayOf(getPath(), projectPath, "--goto", filePath)
-                }
-            }
-            else -> {
-                // 只打开项目
-                if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath)
-                } else {
-                    arrayOf(getPath(), projectPath)
-                }
-            }
-        }
+    override fun getMacOpenName(): String? {
+        return "kiro"
     }
 }

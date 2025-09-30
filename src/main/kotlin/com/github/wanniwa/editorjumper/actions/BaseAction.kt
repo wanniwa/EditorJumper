@@ -4,24 +4,24 @@ import com.github.wanniwa.editorjumper.editors.EditorHandler
 import com.github.wanniwa.editorjumper.editors.EditorHandlerFactory
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable
+import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
+import com.github.wanniwa.editorjumper.utils.I18nUtils
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.util.SystemInfo
-import com.github.wanniwa.editorjumper.utils.EditorTargetUtils
-import com.github.wanniwa.editorjumper.utils.I18nUtils
+import com.intellij.openapi.vfs.VirtualFile
 
 /**
  * 基础动作类，提供通用方法
  */
 abstract class BaseAction : AnAction() {
-    
+
     override fun getActionUpdateThread() = ActionUpdateThread.BGT
-    
+
     /**
      * 获取项目路径
      */
@@ -32,10 +32,13 @@ abstract class BaseAction : AnAction() {
     /**
      * 获取文件路径，子类可以覆盖此方法以提供不同的文件路径获取逻辑
      */
-    protected open fun getFilePath(virtualFile: VirtualFile): String? {
+    protected open fun getFilePath(virtualFile: VirtualFile?): String? {
+        if (virtualFile == null) {
+            return null
+        }
         return if (virtualFile.isDirectory) null else virtualFile.path
     }
-    
+
     /**
      * 获取编辑器处理器
      */
@@ -43,7 +46,7 @@ abstract class BaseAction : AnAction() {
         val editorType = EditorTargetUtils.getTargetEditor(project)
         return EditorHandlerFactory.getHandler(editorType, project)
     }
-    
+
     /**
      * 检查编辑器路径是否存在
      * @return 如果路径有效，则返回true；否则返回false
@@ -54,7 +57,7 @@ abstract class BaseAction : AnAction() {
         val targetEditor = EditorTargetUtils.getTargetEditor(project)
         val editorType = targetEditor.ifBlank { settings.selectedEditorType }
         val customPath = when (editorType) {
-            "VSCode" -> settings.vsCodePath
+            "Visual Studio Code" -> settings.vsCodePath
             "Cursor" -> settings.cursorPath
             "Trae" -> settings.traePath
             "Windsurf" -> settings.windsurfPath
@@ -63,17 +66,17 @@ abstract class BaseAction : AnAction() {
             "Qoder" -> settings.qoderPath
             else -> ""
         }
-        
+
         // macOS: 不需要检查路径，所有编辑器都自动检测
         if (SystemInfo.isMac) {
             return true
         }
-        
+
         // Windows: 只检查非 Cursor 编辑器的路径
         if (SystemInfo.isWindows && (editorType == "Cursor" || editorType == "Qoder")) {
             return true
         }
-        
+
         // 其他情况: 只检查用户自定义的路径是否为空
         if (customPath.isBlank()) {
             // 路径为空，提示用户配置
@@ -85,7 +88,7 @@ abstract class BaseAction : AnAction() {
                 I18nUtils.message("dialog.editorPathNotConfigured.cancel"),
                 Messages.getWarningIcon()
             )
-            
+
             if (result == Messages.YES) {
                 // 打开设置对话框
                 ShowSettingsUtil.getInstance().showSettingsDialog(
@@ -97,14 +100,47 @@ abstract class BaseAction : AnAction() {
         }
         return true
     }
-    
+
     /**
      * 更新动作的可见性
      */
     override fun update(e: AnActionEvent) {
         val project = e.project
-        
+
         // 只要有项目就启用该操作，不需要选择文件
         e.presentation.isEnabledAndVisible = project != null
+    }
+
+    protected open fun openInExternalEditor(
+        project: Project,
+        handler: EditorHandler,
+        file: VirtualFile?,
+        lineNumber: Int? = null,
+        columnNumber: Int? = null
+    ) {
+        val projectPath = getProjectPath(project) ?: return
+        val filePath = getFilePath(file)
+
+        // 使用 getOpenCommand 方法
+        val command = handler.getOpenCommand(
+            projectPath,
+            filePath,
+            lineNumber,
+            columnNumber
+        )
+
+        try {
+            ProcessBuilder(command.toList())
+                .redirectOutput(ProcessBuilder.Redirect.DISCARD) // 丢弃 stdout
+                .redirectError(ProcessBuilder.Redirect.DISCARD)  // 丢弃 stderr
+                .start()
+                .outputStream.close() // 明确告诉子进程我不会输入任何数据
+        } catch (e: Exception) {
+            Messages.showErrorDialog(
+                project,
+                "Failed to open editor. Error: ${e.message}",
+                "Editor Launch Failed"
+            )
+        }
     }
 } 

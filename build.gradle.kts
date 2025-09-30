@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "github.wanniwa"
-version = "1.4.1"
+version = "1.5.0"
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("231")
-        untilBuild.set("252.*")
+        untilBuild.set("253.*")
     }
 
     signPlugin {

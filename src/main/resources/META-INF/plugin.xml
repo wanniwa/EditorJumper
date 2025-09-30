@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.4.1</h3>
+        <h3>1.5.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -36,11 +36,36 @@
         <ul>
             <li>Right-click in editor - select "Open in [Editor Name]" (name updates based on selected editor)</li>
             <li>Tools menu - select "Open in [Editor Name]" (name updates based on selected editor)</li>
-            <li>Keyboard shortcut - use Alt+Shift+O (Windows) or Option+Shift+O (macOS)</li>
+            <li>Keyboard shortcut - use Alt+Shift+O / Option+Shift+O (macOS)</li>
+            <li>Ultra-fast jump - use Alt+Shift+P / Option+Shift+P (all platforms supported)</li>
+        </ul>
+        <p>Keyboard Shortcuts Comparison:</p>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color: #f0f0f0;">
+                <th style="padding: 8px; text-align: left;">Usage Scenario</th>
+                <th style="padding: 8px; text-align: left;">Alt+Shift+O / Option+Shift+O</th>
+                <th style="padding: 8px; text-align: left;">Alt+Shift+P / Option+Shift+P</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px;"><strong>On Project Folder</strong></td>
+                <td style="padding: 8px;">Ultra-fast project opening</td>
+                <td style="padding: 8px;">Ultra-fast project opening</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;"><strong>On Specific File</strong></td>
+                <td style="padding: 8px;">Automatically opens project + file</td>
+                <td style="padding: 8px;">Faster on Mac (requires project opened first, otherwise opens single file), no difference on Windows</td>
+            </tr>
+        </table>
+        
+        <p><strong>Recommendations:</strong></p>
+        <ul>
+            <li><strong>Windows users:</strong> Use Alt+Shift+O (sufficient for all needs)</li>
+            <li><strong>Mac users:</strong> Use Option+Shift+O, experienced users can use Option+Shift+P for faster experience</li>
         </ul>
         <p>Easy target editor selection:</p>
         <ul>
-            <li>Status bar widget - click the editor icon to select which editor to jump to</li>
+            <li>Status bar widget - click the jump icon to select which editor to jump to</li>
         </ul>
         <p>Configuration Notes:</p>
         <ul>
@@ -76,7 +101,7 @@
         <p>System Requirements:</p>
         <ul>
             <li>Works with any JetBrains IDE (IntelliJ IDEA, WebStorm, PyCharm, etc.)</li>
-            <li>Requires IDE version 2022.3 or newer</li>
+            <li>Requires IDE version 2023 or newer</li>
         </ul>
         <p>Recommended Plugin:</p>
         <ul>
@@ -106,11 +131,36 @@
         <ul>
             <li>在编辑器中右击 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）</li>
             <li>工具菜单 - 选择"在 [编辑器名称] 中打开"（名称会根据选择的编辑器更新）</li>
-            <li>快捷键 - 使用 Alt+Shift+O (Windows) 或 Option+Shift+O (macOS)</li>
+            <li>快捷键 - 使用 Alt+Shift+O / Option+Shift+O</li>
+            <li>极速跳转 - 使用 Alt+Shift+P / Option+Shift+P</li>
+        </ul>
+        <p>快捷键对比说明：</p>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color: #f0f0f0;">
+                <th style="padding: 8px; text-align: left;">使用场景</th>
+                <th style="padding: 8px; text-align: left;">Alt+Shift+O / Option+Shift+O</th>
+                <th style="padding: 8px; text-align: left;">Alt+Shift+P / Option+Shift+P</th>
+            </tr>
+            <tr>
+                <td style="padding: 8px;"><strong>在项目文件夹上</strong></td>
+                <td style="padding: 8px;">极速打开项目</td>
+                <td style="padding: 8px;">极速打开项目</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;"><strong>在具体文件上</strong></td>
+                <td style="padding: 8px;">自动打开项目+文件</td>
+                <td style="padding: 8px;">mac更快（但需要先打开项目，否则只会打开单个文件）,windows无差别</td>
+            </tr>
+        </table>
+        
+        <p><strong>使用建议：</strong></p>
+        <ul>
+            <li><strong>Windows 用户：</strong>使用 Alt+Shift+O 即可（满足所有需求）</li>
+            <li><strong>Mac 用户：</strong>使用 Option+Shift+O，熟悉之后想要更快速的体验用 Option+Shift+P</li>
         </ul>
         <p>便捷的目标编辑器选择：</p>
         <ul>
-            <li>状态栏小部件 - 点击编辑器图标选择要跳转到哪个编辑器</li>
+            <li>状态栏小部件 - 点击跳转图标选择要跳转到哪个编辑器</li>
         </ul>
         <p>配置说明：</p>
         <ul>
@@ -125,7 +175,7 @@
         <p>系统要求：</p>
         <ul>
             <li>适用于任何 JetBrains IDE（IntelliJ IDEA、WebStorm、PyCharm 等）</li>
-            <li>需要 IDE 版本 2022.3 或更新版本</li>
+            <li>需要 IDE 版本 2023 或更新版本</li>
         </ul>
         <p>推荐插件：</p>
         <ul>
@@ -145,11 +195,11 @@
         <applicationConfigurable parentId="tools"
                                  instance="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
                                  id="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
-                                 displayName="Editor Jumper"/>
+                                 displayName="EditorJumper"/>
         <projectConfigurable parentId="com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable"
                              instance="com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettingsConfigurable"
                              id="com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettingsConfigurable"
-                             displayName="Project Settings"/>
+                             displayName="ProjectSettings"/>
         <statusBarWidgetFactory
                 implementation="com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidgetFactory"
                 id="EditorJumper.StatusBarWidgetFactory"/>
@@ -163,9 +213,24 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt shift O"/>
         </action>
+        <action id="EditorJumper.OpenInExternalEditorUrlAction"
+                class="com.github.wanniwa.editorjumper.actions.FastOpenInExternalEditorAction">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift p"/>
+        </action>
     </actions>
 
     <change-notes><![CDATA[
+    <h3>1.5.0</h3>
+    <ul>
+        <li>Added Alt+Shift+P / Option+Shift+P shortcut - faster jumping on Mac, same as Alt+Shift+O on Windows</li>
+        <li>Mac exclusive: New Trae CN checkbox option</li>
+        <li>All editors now support workspace files (.code-workspace)</li>
+    </ul>
+    <ul>
+        <li>新增 Alt+Shift+P / Option+Shift+P 快捷键 - Mac 上更快速跳转，Windows 上与 Alt+Shift+O 相同</li>
+        <li>Mac：新增 Trae CN 勾选选项</li>
+        <li>所有编辑器现支持工作空间文件 (.code-workspace)</li>
+    </ul>
     <h3>1.4.1</h3>
     <ul>
         <li>Fixed Empty menu item text for EditorJumperSettingsAction</li>

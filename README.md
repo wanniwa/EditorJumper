@@ -12,7 +12,7 @@
 
 ## 🔍 Introduction
 
-Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, Windsurf, Void, and AWS Kiro). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
+EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, Windsurf, Void, Kiro, and Qoder). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
 
 <div align="center">
   <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
@@ -23,28 +23,29 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 ## 🌟 Features
 
 - 🚀 **Seamless Editor Switching**
-  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf, Void, Kiro
+  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf, Void, Kiro, Qoder
   - Automatically positions to the same cursor location (line and column)
   - Perfectly maintains editing context without interrupting workflow
-  - Workspace file support - opens the configured workspace file (.code-workspace) for compatible editors
+  - Workspace file support - all editors now support workspace files (.code-workspace) for multi-root projects
 
-- 🎯 **Smart Jump Behavior**
-  - With file open: Opens the same project and file, preserving cursor position
-  - Without file open: Opens the project directly in target editor
-  - Compatible editors: Support workspace files (.code-workspace) for multi-root projects
 
 - ⚡ **Multiple Trigger Methods**
   - Right-click in editor - select "Open in [Editor Name]" (name updates based on selected editor)
   - Tools menu - select "Open in [Editor Name]" (name updates based on selected editor)
-  - Keyboard shortcut - Alt+Shift+O (Windows) or Option+Shift+O (macOS)
+  - Standard mode jump- Alt+Shift+O / Option+Shift+O ()
+  - Ultra-fast jump（mac）- Alt+Shift+P / Option+Shift+P
 
 - 🎚️ **Easy Target Editor Selection**
   - Status bar widget - click the editor icon to select which editor to jump to
 
+- 🍎 **Mac Exclusive Features**
+  - Trae CN (国内版) checkbox option for Chinese users
+
+
 ## 💻 System Requirements
 
 - Works with any JetBrains IDE (IntelliJ IDEA, WebStorm, PyCharm, etc.)
-- Requires IDE version 2022.3 or newer
+- Requires IDE version 2023 or newer
 
 ## 📥 Installation
 
@@ -57,20 +58,23 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 ## ⚙️ Configuration
 
 1. Open Settings/Preferences in the IDE
-2. Navigate to Tools > Editor Jumper Settings
+2. Navigate to Tools > EditorJumper Settings
 3. Configure the executable paths for each editor:
    - VS Code path
-- Kiro path
    - Cursor path
-   - Trae path
+   - Trae path (with optional CN version checkbox on Mac)
    - Windsurf path
+   - Void path
+   - Kiro path
+   - Qoder path
 4. Select the default editor
 5. Click Apply to save settings
 
 > **Configuration Notes:**
 > - macOS: No additional configuration needed for any editor
+>   - Special: Trae CN checkbox option available for Chinese users
 > - Windows:
->   - Cursor: No configuration needed (uses system PATH)
+>   - Cursor/Qoder: No configuration needed (uses system PATH)
 >   - Other editors: Configure the .exe file path in Settings
 >
 > **Configuration Interface:**
@@ -78,7 +82,7 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 > - Editor Paths:
 >   - macOS: All paths are auto-detected, no manual configuration needed
 >   - Windows:
->     - Cursor: Auto-detected through system PATH
+>     - Cursor/Qoder: Auto-detected through system PATH
 >     - VS Code/Trae/Windsurf/Void/Kiro: Browse and select the .exe file location
 >     - Example: `C:\Users\username\AppData\Local\Programs\VSCode\Code.exe`
 
@@ -86,7 +90,14 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 
 ### Via Keyboard Shortcut
 
-- Use `Option+Shift+O` (macOS) or `Alt+Shift+O` (Windows) to open the current project in the default editor
+| Usage Scenario | Alt+Shift+O / Option+Shift+O | Alt+Shift+P / Option+Shift+P          |
+|-----------------|------------------------------|---------------------------------------|
+| **On Project Folder** | Ultra-fast project opening | Ultra-fast project opening |
+| **On Specific File** | Automatically opens project + file | Faster on Mac (requires project opened first, otherwise opens single file), no difference on Windows |
+
+**Recommendations:**
+- **Windows users**: Use Alt+Shift+O (sufficient for all needs)
+- **Mac users**: Use Option+Shift+O, experienced users can use Option+Shift+P for faster experience
 
 ### Via Context Menu
 
@@ -98,16 +109,16 @@ Editor Jumper is a JetBrains IDE plugin that allows you to seamlessly jump betwe
 1. Click on Tools in the top menu bar
 2. Select "Open in External Editor"
 
-### Via Status Bar
+### Switch Target via Status Bar
 
-1. Click on the editor icon in the IDE's bottom status bar
+1. Click on the jump icon in the IDE's bottom status bar
 2. Select the editor you want to jump to from the dropdown menu
    ![Select Target Editor](image/SelectTargetEditor.png)
 3. Use any of the trigger methods above (keyboard shortcut, right-click, or Tools menu) to perform the jump
 
 ## 🔄 Complementary Use
 
-> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf, Kiro
+> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf, Void, Kiro, Qoder
 
 ## 🤝 Contribution
 

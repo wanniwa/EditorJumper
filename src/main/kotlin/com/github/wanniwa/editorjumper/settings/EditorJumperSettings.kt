@@ -19,6 +19,7 @@ class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
     var kiroPath: String = ""
     var qoderPath: String = ""
     var selectedEditorType: String = "Cursor"
+    var traeCN: Boolean = false
 
     companion object {
         fun getInstance(): EditorJumperSettings {

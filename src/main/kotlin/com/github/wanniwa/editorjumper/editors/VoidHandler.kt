@@ -13,4 +13,8 @@ class VoidHandler(customPath: String, project: Project?) : BaseVscodeEditorHandl
             else -> "void" // 其他平台不支持
         }
     }
+
+    override fun getMacOpenName(): String? {
+        return "void"
+    }
 } 

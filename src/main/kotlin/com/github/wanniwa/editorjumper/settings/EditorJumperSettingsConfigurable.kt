@@ -4,6 +4,7 @@ import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.Configurable.WithEpDependencies
 import com.intellij.openapi.extensions.BaseExtensionPointName
 import com.intellij.openapi.project.ProjectManager
+import com.intellij.openapi.util.SystemInfo
 import com.github.wanniwa.editorjumper.utils.I18nUtils
 import javax.swing.JComponent
 import java.util.ArrayList
@@ -26,7 +27,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
 
     override fun isModified(): Boolean {
         val settings = EditorJumperSettings.getInstance()
-        return mySettingsComponent!!.getVSCodePath() != settings.vsCodePath ||
+        val baseModified = mySettingsComponent!!.getVSCodePath() != settings.vsCodePath ||
                mySettingsComponent!!.getCursorPath() != settings.cursorPath ||
                mySettingsComponent!!.getTraePath() != settings.traePath ||
                mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath ||
@@ -34,6 +35,15 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
                mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
+        
+        // 只在 Mac 平台上检查 Trae CN 设置
+        val traeCNModified = if (SystemInfo.isMac) {
+            mySettingsComponent!!.getTraeCN() != settings.traeCN
+        } else {
+            false
+        }
+        
+        return baseModified || traeCNModified
     }
 
     override fun apply() {
@@ -49,6 +59,11 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.kiroPath = mySettingsComponent!!.getKiroPath()
         settings.qoderPath = mySettingsComponent!!.getQoderPath()
         settings.selectedEditorType = newEditorType
+        
+        // 只在 Mac 平台上设置 Trae CN
+        if (SystemInfo.isMac) {
+            settings.traeCN = mySettingsComponent!!.getTraeCN()
+        }
         
         // 如果默认编辑器类型改变了，询问是否同时更新当前项目的编辑器类型设置
         if (oldEditorType != newEditorType) {
@@ -94,6 +109,11 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setKiroPath(settings.kiroPath)
         mySettingsComponent!!.setQoderPath(settings.qoderPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
+        
+        // 只在 Mac 平台上设置 Trae CN
+        if (SystemInfo.isMac) {
+            mySettingsComponent!!.setTraeCN(settings.traeCN)
+        }
     }
 
     override fun disposeUIResources() {
