@@ -64,6 +64,7 @@ abstract class BaseAction : AnAction() {
             "Void" -> settings.voidPath
             "Kiro" -> settings.kiroPath
             "Qoder" -> settings.qoderPath
+            "catPawAI" -> settings.catPawAIPath
             else -> ""
         }
 
@@ -143,4 +144,4 @@ abstract class BaseAction : AnAction() {
             )
         }
     }
-} 
+}
