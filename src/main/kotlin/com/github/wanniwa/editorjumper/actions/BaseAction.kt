@@ -65,6 +65,7 @@ abstract class BaseAction : AnAction() {
             "Kiro" -> settings.kiroPath
             "Qoder" -> settings.qoderPath
             "catPawAI" -> settings.catPawAIPath
+            "Antigravity" -> settings.antigravityPath
             else -> ""
         }
 
@@ -74,7 +75,8 @@ abstract class BaseAction : AnAction() {
         }
 
         // Windows: 只检查非 Cursor 编辑器的路径
-        if (SystemInfo.isWindows && (editorType == "Cursor" || editorType == "Qoder")) {
+        // Antigravity支持这种方式
+        if (SystemInfo.isWindows && listOf("Cursor", "Qoder", "Antigravity").contains(editorType)) {
             return true
         }
 

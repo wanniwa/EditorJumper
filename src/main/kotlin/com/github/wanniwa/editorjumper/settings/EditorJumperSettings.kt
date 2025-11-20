@@ -19,6 +19,7 @@ class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
     var kiroPath: String = ""
     var qoderPath: String = ""
     var catPawAIPath: String = ""
+    var antigravityPath: String = ""
     var selectedEditorType: String = "Cursor"
     var traeCN: Boolean = false
 

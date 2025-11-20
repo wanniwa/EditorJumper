@@ -35,6 +35,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
                mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
                mySettingsComponent!!.getcatPawAIPath() != settings.catPawAIPath ||
+               mySettingsComponent!!.getAntigravityPath() != settings.antigravityPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
 
         // 只在 Mac 平台上检查 Trae CN 设置
@@ -60,6 +61,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.kiroPath = mySettingsComponent!!.getKiroPath()
         settings.qoderPath = mySettingsComponent!!.getQoderPath()
         settings.catPawAIPath = mySettingsComponent!!.getcatPawAIPath()
+        settings.antigravityPath = mySettingsComponent!!.getAntigravityPath()
         settings.selectedEditorType = newEditorType
 
         // 只在 Mac 平台上设置 Trae CN
@@ -111,6 +113,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setKiroPath(settings.kiroPath)
         mySettingsComponent!!.setQoderPath(settings.qoderPath)
         mySettingsComponent!!.setcatPawAIPath(settings.catPawAIPath)
+        mySettingsComponent!!.setAntigravityPath(settings.antigravityPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
 
         // 只在 Mac 平台上设置 Trae CN

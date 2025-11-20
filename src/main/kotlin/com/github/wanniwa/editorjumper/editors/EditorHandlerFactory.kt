@@ -24,6 +24,7 @@ class EditorHandlerFactory {
                 "Kiro" -> KiroHandler(customPath, project)
                 "Qoder" -> QoderHandler(customPath, project)
                 "catPawAI" -> CatPawAIHandler(customPath, project)
+                "Antigravity" -> AntigravityHandler(customPath, project)
                 else -> CursorHandler(customPath, project)
             }
         }
@@ -42,6 +43,7 @@ class EditorHandlerFactory {
                 "Kiro" -> settings.kiroPath
                 "Qoder" -> settings.qoderPath
                 "catPawAI" -> settings.catPawAIPath
+                "Antigravity" -> settings.antigravityPath
                 else -> ""
             }
             return getHandler(editorType, customPath, project)

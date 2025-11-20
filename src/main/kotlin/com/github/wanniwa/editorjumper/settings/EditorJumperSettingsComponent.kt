@@ -25,6 +25,7 @@ class EditorJumperSettingsComponent {
     private val kiroPathField = TextFieldWithBrowseButton()
     private val qoderPathField = TextFieldWithBrowseButton()
     private val catPawAIPathField = TextFieldWithBrowseButton()
+    private val antigravityPathField = TextFieldWithBrowseButton()
 
     init {
         // 为每个编辑器创建单独的描述符
@@ -52,6 +53,9 @@ class EditorJumperSettingsComponent {
         val catPawAIDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         catPawAIDescriptor.title = I18nUtils.getFileChooserTitle("catPawAI")
 
+        val antigravityDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        antigravityDescriptor.title = I18nUtils.getFileChooserTitle("Antigravity")
+
         vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
         traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
@@ -60,9 +64,10 @@ class EditorJumperSettingsComponent {
         kiroPathField.addBrowseFolderListener(TextBrowseFolderListener(kiroDescriptor))
         qoderPathField.addBrowseFolderListener(TextBrowseFolderListener(qoderDescriptor))
         catPawAIPathField.addBrowseFolderListener(TextBrowseFolderListener(catPawAIDescriptor))
+        antigravityPathField.addBrowseFolderListener(TextBrowseFolderListener(antigravityDescriptor))
 
         // 添加编辑器类型选项
-        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "catPawAI")
+        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "catPawAI", "Antigravity")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
         val macHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.macOS")}</em></html>")
@@ -93,6 +98,7 @@ class EditorJumperSettingsComponent {
                 .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Kiro")), kiroPathField, 1, false)
                 .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Qoder")), qoderPathField, 1, false)
                 .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("catPawAI")), catPawAIPathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Antigravity")), antigravityPathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
@@ -167,6 +173,14 @@ class EditorJumperSettingsComponent {
 
     fun setcatPawAIPath(path: String) {
         catPawAIPathField.text = path
+    }
+
+    fun getAntigravityPath(): String {
+        return antigravityPathField.text
+    }
+
+    fun setAntigravityPath(path: String) {
+        antigravityPathField.text = path
     }
 
     fun getSelectedEditorType(): String {
