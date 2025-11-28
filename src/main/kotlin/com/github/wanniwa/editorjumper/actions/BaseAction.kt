@@ -64,7 +64,7 @@ abstract class BaseAction : AnAction() {
             "Void" -> settings.voidPath
             "Kiro" -> settings.kiroPath
             "Qoder" -> settings.qoderPath
-            "catPawAI" -> settings.catPawAIPath
+            "CatPawAI" -> settings.catPawAIPath
             "Antigravity" -> settings.antigravityPath
             else -> ""
         }

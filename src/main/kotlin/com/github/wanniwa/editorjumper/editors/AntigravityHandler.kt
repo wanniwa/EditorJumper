@@ -8,13 +8,13 @@ class AntigravityHandler(customPath: String?, private val project: Project?) : B
 
     override fun getDefaultPath(): String {
         return when {
-            SystemInfo.isMac -> "TODO" // TODO: MAC 实现
+            SystemInfo.isMac -> "/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity"
             SystemInfo.isWindows -> "antigravity"
             else -> "antigravity"
         }
     }
 
     override fun getMacOpenName(): String? {
-        return null // TODO: MAC实现
+        return "Antigravity"
     }
 }

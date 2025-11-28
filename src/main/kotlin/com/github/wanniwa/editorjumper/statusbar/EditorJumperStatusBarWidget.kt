@@ -34,7 +34,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         "Void",
         "Kiro",
         "Qoder",
-        "catPawAI",
+        "CatPawAI",
         "Antigravity",
         I18nUtils.message("editor.settings")
     )

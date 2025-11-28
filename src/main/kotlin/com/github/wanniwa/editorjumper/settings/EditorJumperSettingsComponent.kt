@@ -51,7 +51,7 @@ class EditorJumperSettingsComponent {
         qoderDescriptor.title = I18nUtils.getFileChooserTitle("Qoder")
 
         val catPawAIDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        catPawAIDescriptor.title = I18nUtils.getFileChooserTitle("catPawAI")
+        catPawAIDescriptor.title = I18nUtils.getFileChooserTitle("CatPawAI")
 
         val antigravityDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         antigravityDescriptor.title = I18nUtils.getFileChooserTitle("Antigravity")
@@ -67,7 +67,7 @@ class EditorJumperSettingsComponent {
         antigravityPathField.addBrowseFolderListener(TextBrowseFolderListener(antigravityDescriptor))
 
         // 添加编辑器类型选项
-        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "catPawAI", "Antigravity")
+        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "CatPawAI", "Antigravity")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
         val macHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.macOS")}</em></html>")
@@ -83,9 +83,9 @@ class EditorJumperSettingsComponent {
                 .addComponent(defaultEditorHintLabel)
                 .addLabeledComponent(JBLabel(I18nUtils.message("settings.defaultEditor.label")), editorTypeComboBox, 1, false)
                 .addSeparator()
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Visual Studio Code")), vsCodePathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Cursor")), cursorPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Trae")), traePathField, 1, false)
+                .addLabeledComponent(JBLabel("Visual Studio Code"), vsCodePathField, 1, false)
+                .addLabeledComponent(JBLabel("Cursor"), cursorPathField, 1, false)
+                .addLabeledComponent(JBLabel("Trae"), traePathField, 1, false)
 
         // 只在 Mac 平台上显示 Trae CN 选项
         if (SystemInfo.isMac) {
@@ -93,12 +93,12 @@ class EditorJumperSettingsComponent {
         }
 
         myMainPanel = formBuilder
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Windsurf")), windsurfPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Void")), voidPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Kiro")), kiroPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Qoder")), qoderPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("catPawAI")), catPawAIPathField, 1, false)
-                .addLabeledComponent(JBLabel(I18nUtils.getPathLabel("Antigravity")), antigravityPathField, 1, false)
+                .addLabeledComponent(JBLabel("Windsurf"), windsurfPathField, 1, false)
+                .addLabeledComponent(JBLabel("Void"), voidPathField, 1, false)
+                .addLabeledComponent(JBLabel("Kiro"), kiroPathField, 1, false)
+                .addLabeledComponent(JBLabel("Qoder"), qoderPathField, 1, false)
+                .addLabeledComponent(JBLabel("CatPawAI"), catPawAIPathField, 1, false)
+                .addLabeledComponent(JBLabel("Antigravity"), antigravityPathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }

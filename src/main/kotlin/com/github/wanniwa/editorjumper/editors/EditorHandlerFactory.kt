@@ -23,7 +23,7 @@ class EditorHandlerFactory {
                 "Void" -> VoidHandler(customPath, project)
                 "Kiro" -> KiroHandler(customPath, project)
                 "Qoder" -> QoderHandler(customPath, project)
-                "catPawAI" -> CatPawAIHandler(customPath, project)
+                "CatPawAI" -> CatPawAIHandler(customPath, project)
                 "Antigravity" -> AntigravityHandler(customPath, project)
                 else -> CursorHandler(customPath, project)
             }
@@ -42,7 +42,7 @@ class EditorHandlerFactory {
                 "Void" -> settings.voidPath
                 "Kiro" -> settings.kiroPath
                 "Qoder" -> settings.qoderPath
-                "catPawAI" -> settings.catPawAIPath
+                "CatPawAI" -> settings.catPawAIPath
                 "Antigravity" -> settings.antigravityPath
                 else -> ""
             }
