@@ -34,15 +34,17 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getVoidPath() != settings.voidPath ||
                mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
                mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
+               mySettingsComponent!!.getcatPawAIPath() != settings.catPawAIPath ||
+               mySettingsComponent!!.getAntigravityPath() != settings.antigravityPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
-        
+
         // 只在 Mac 平台上检查 Trae CN 设置
         val traeCNModified = if (SystemInfo.isMac) {
             mySettingsComponent!!.getTraeCN() != settings.traeCN
         } else {
             false
         }
-        
+
         return baseModified || traeCNModified
     }
 
@@ -50,7 +52,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         val settings = EditorJumperSettings.getInstance()
         val oldEditorType = settings.selectedEditorType
         val newEditorType = mySettingsComponent!!.getSelectedEditorType()
-        
+
         settings.vsCodePath = mySettingsComponent!!.getVSCodePath()
         settings.cursorPath = mySettingsComponent!!.getCursorPath()
         settings.traePath = mySettingsComponent!!.getTraePath()
@@ -58,19 +60,21 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.voidPath = mySettingsComponent!!.getVoidPath()
         settings.kiroPath = mySettingsComponent!!.getKiroPath()
         settings.qoderPath = mySettingsComponent!!.getQoderPath()
+        settings.catPawAIPath = mySettingsComponent!!.getcatPawAIPath()
+        settings.antigravityPath = mySettingsComponent!!.getAntigravityPath()
         settings.selectedEditorType = newEditorType
-        
+
         // 只在 Mac 平台上设置 Trae CN
         if (SystemInfo.isMac) {
             settings.traeCN = mySettingsComponent!!.getTraeCN()
         }
-        
+
         // 如果默认编辑器类型改变了，询问是否同时更新当前项目的编辑器类型设置
         if (oldEditorType != newEditorType) {
             askToUpdateCurrentProject(newEditorType)
         }
     }
-    
+
         /**
      * 询问是否更新当前项目的编辑器类型设置
      */
@@ -78,7 +82,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         // 获取当前打开的项目（非默认项目）
         val openProjects = com.intellij.openapi.project.ProjectManager.getInstance().openProjects
         val currentProject = openProjects.firstOrNull { !it.isDefault }
-        
+
         currentProject?.let { project ->
             val result = com.intellij.openapi.ui.Messages.showYesNoDialog(
                 project,
@@ -88,11 +92,11 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                 I18nUtils.message("dialog.updateCurrentProject.no"),
                 com.intellij.openapi.ui.Messages.getQuestionIcon()
             )
-            
+
             if (result == com.intellij.openapi.ui.Messages.YES) {
                 val projectSettings = EditorJumperProjectSettings.getInstance(project)
                 projectSettings.projectEditorType = newEditorType
-                
+
                 // 更新状态栏显示
                 com.intellij.openapi.wm.WindowManager.getInstance().getStatusBar(project)?.updateWidget("EditorJumperWidget")
             }
@@ -108,8 +112,10 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setVoidPath(settings.voidPath)
         mySettingsComponent!!.setKiroPath(settings.kiroPath)
         mySettingsComponent!!.setQoderPath(settings.qoderPath)
+        mySettingsComponent!!.setcatPawAIPath(settings.catPawAIPath)
+        mySettingsComponent!!.setAntigravityPath(settings.antigravityPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
-        
+
         // 只在 Mac 平台上设置 Trae CN
         if (SystemInfo.isMac) {
             mySettingsComponent!!.setTraeCN(settings.traeCN)
@@ -123,4 +129,4 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
     override fun getDependencies(): Collection<BaseExtensionPointName<*>> {
         return ArrayList()
     }
-} 
+}

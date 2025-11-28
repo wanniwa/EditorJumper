@@ -34,6 +34,8 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         "Void",
         "Kiro",
         "Qoder",
+        "catPawAI",
+        "Antigravity",
         I18nUtils.message("editor.settings")
     )
 
@@ -108,4 +110,4 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     override fun dispose() {
         statusBar = null
     }
-} 
+}

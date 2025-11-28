@@ -18,6 +18,8 @@ class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
     var voidPath: String = ""
     var kiroPath: String = ""
     var qoderPath: String = ""
+    var catPawAIPath: String = ""
+    var antigravityPath: String = ""
     var selectedEditorType: String = "Cursor"
     var traeCN: Boolean = false
 
@@ -34,4 +36,4 @@ class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
     override fun loadState(state: EditorJumperSettings) {
         XmlSerializerUtil.copyBean(state, this)
     }
-} 
+}
