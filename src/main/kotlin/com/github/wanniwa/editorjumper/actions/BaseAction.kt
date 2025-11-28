@@ -57,7 +57,7 @@ abstract class BaseAction : AnAction() {
         val targetEditor = EditorTargetUtils.getTargetEditor(project)
         val editorType = targetEditor.ifBlank { settings.selectedEditorType }
         val customPath = when (editorType) {
-            "Visual Studio Code" -> settings.vsCodePath
+            "Visual Studio Code" -> settings.vscodePath
             "Cursor" -> settings.cursorPath
             "Trae" -> settings.traePath
             "Windsurf" -> settings.windsurfPath

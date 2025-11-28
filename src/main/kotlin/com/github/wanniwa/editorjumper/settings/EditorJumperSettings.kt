@@ -11,7 +11,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
     storages = [Storage("EditorJumperSettings.xml")]
 )
 class EditorJumperSettings : PersistentStateComponent<EditorJumperSettings> {
-    var vsCodePath: String = ""
+    var vscodePath: String = ""
     var cursorPath: String = ""
     var traePath: String = ""
     var windsurfPath: String = ""

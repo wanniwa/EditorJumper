@@ -31,17 +31,17 @@ class EditorJumperProjectSettingsConfigurable(private val project: Project) : Co
 
     override fun isModified(): Boolean {
         val settings = EditorJumperProjectSettings.getInstance(project)
-        return mySettingsComponent!!.getVSCodeWorkspacePath() != settings.vsCodeWorkspacePath
+        return mySettingsComponent!!.getWorkspacePath() != settings.vsCodeWorkspacePath
     }
 
     override fun apply() {
         val settings = EditorJumperProjectSettings.getInstance(project)
-        settings.vsCodeWorkspacePath = mySettingsComponent!!.getVSCodeWorkspacePath()
+        settings.vsCodeWorkspacePath = mySettingsComponent!!.getWorkspacePath()
     }
 
     override fun reset() {
         val settings = EditorJumperProjectSettings.getInstance(project)
-        mySettingsComponent!!.setVSCodeWorkspacePath(settings.vsCodeWorkspacePath)
+        mySettingsComponent!!.setWorkspacePath(settings.vsCodeWorkspacePath)
     }
 
     override fun disposeUIResources() {
@@ -55,17 +55,17 @@ class EditorJumperProjectSettingsConfigurable(private val project: Project) : Co
 
 class EditorJumperProjectSettingsComponent {
     private val myMainPanel: JPanel
-    private val vsCodeWorkspacePathField = TextFieldWithBrowseButton()
+    private val workspacePathField = TextFieldWithBrowseButton()
 
     init {
         val workspaceDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         workspaceDescriptor.title = "Select Workspace File"
         workspaceDescriptor.withFileFilter { file -> file.name.endsWith(".code-workspace") }
         
-        vsCodeWorkspacePathField.addBrowseFolderListener(TextBrowseFolderListener(workspaceDescriptor))
+        workspacePathField.addBrowseFolderListener(TextBrowseFolderListener(workspaceDescriptor))
 
         myMainPanel = FormBuilder.createFormBuilder()
-                .addLabeledComponent(JBLabel(I18nUtils.message("settings.projectSettings.workspacePath")), vsCodeWorkspacePathField, 1, false)
+                .addLabeledComponent(JBLabel(I18nUtils.message("settings.projectSettings.workspacePath")), workspacePathField, 1, false)
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
@@ -75,14 +75,14 @@ class EditorJumperProjectSettingsComponent {
     }
 
     fun getPreferredFocusedComponent(): JComponent {
-        return vsCodeWorkspacePathField
+        return workspacePathField
     }
 
-    fun getVSCodeWorkspacePath(): String {
-        return vsCodeWorkspacePathField.text
+    fun getWorkspacePath(): String {
+        return workspacePathField.text
     }
 
-    fun setVSCodeWorkspacePath(path: String) {
-        vsCodeWorkspacePathField.text = path
+    fun setWorkspacePath(path: String) {
+        workspacePathField.text = path
     }
 } 

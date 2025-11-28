@@ -14,7 +14,7 @@ class CatPawAIHandler(customPath: String, project: Project?) : BaseEditorHandler
         }
     }
 
-    override fun getMacOpenName(): String? {
-        return "CatPawAI"
+    override fun getMacOpenName(): String {
+        return "catpaw"
     }
 }

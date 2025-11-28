@@ -14,7 +14,7 @@ class AntigravityHandler(customPath: String?, private val project: Project?) : B
         }
     }
 
-    override fun getMacOpenName(): String? {
-        return "Antigravity"
+    override fun getMacOpenName(): String {
+        return "antigravity"
     }
 }

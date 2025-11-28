@@ -27,7 +27,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
 
     override fun isModified(): Boolean {
         val settings = EditorJumperSettings.getInstance()
-        val baseModified = mySettingsComponent!!.getVSCodePath() != settings.vsCodePath ||
+        val baseModified = mySettingsComponent!!.getVscodePath() != settings.vscodePath ||
                mySettingsComponent!!.getCursorPath() != settings.cursorPath ||
                mySettingsComponent!!.getTraePath() != settings.traePath ||
                mySettingsComponent!!.getWindsurfPath() != settings.windsurfPath ||
@@ -53,7 +53,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         val oldEditorType = settings.selectedEditorType
         val newEditorType = mySettingsComponent!!.getSelectedEditorType()
 
-        settings.vsCodePath = mySettingsComponent!!.getVSCodePath()
+        settings.vscodePath = mySettingsComponent!!.getVscodePath()
         settings.cursorPath = mySettingsComponent!!.getCursorPath()
         settings.traePath = mySettingsComponent!!.getTraePath()
         settings.windsurfPath = mySettingsComponent!!.getWindsurfPath()
@@ -105,7 +105,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
 
     override fun reset() {
         val settings = EditorJumperSettings.getInstance()
-        mySettingsComponent!!.setVSCodePath(settings.vsCodePath)
+        mySettingsComponent!!.setVscodePath(settings.vscodePath)
         mySettingsComponent!!.setCursorPath(settings.cursorPath)
         mySettingsComponent!!.setTraePath(settings.traePath)
         mySettingsComponent!!.setWindsurfPath(settings.windsurfPath)

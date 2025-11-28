@@ -16,7 +16,7 @@ import javax.swing.DefaultComboBoxModel
 class EditorJumperSettingsComponent {
     private val myMainPanel: JPanel
     private val editorTypeComboBox = ComboBox<String>()
-    private val vsCodePathField = TextFieldWithBrowseButton()
+    private val vscodePathField = TextFieldWithBrowseButton()
     private val cursorPathField = TextFieldWithBrowseButton()
     private val traePathField = TextFieldWithBrowseButton()
     private val traeCNCheckBox = JBCheckBox()
@@ -29,8 +29,8 @@ class EditorJumperSettingsComponent {
 
     init {
         // 为每个编辑器创建单独的描述符
-        val vsCodeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
-        vsCodeDescriptor.title = I18nUtils.getFileChooserTitle("Visual Studio Code")
+        val vscodeDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        vscodeDescriptor.title = I18nUtils.getFileChooserTitle("Visual Studio Code")
 
         val cursorDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         cursorDescriptor.title = I18nUtils.getFileChooserTitle("Cursor")
@@ -56,7 +56,7 @@ class EditorJumperSettingsComponent {
         val antigravityDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         antigravityDescriptor.title = I18nUtils.getFileChooserTitle("Antigravity")
 
-        vsCodePathField.addBrowseFolderListener(TextBrowseFolderListener(vsCodeDescriptor))
+        vscodePathField.addBrowseFolderListener(TextBrowseFolderListener(vscodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
         traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
         windsurfPathField.addBrowseFolderListener(TextBrowseFolderListener(windsurfDescriptor))
@@ -83,7 +83,7 @@ class EditorJumperSettingsComponent {
                 .addComponent(defaultEditorHintLabel)
                 .addLabeledComponent(JBLabel(I18nUtils.message("settings.defaultEditor.label")), editorTypeComboBox, 1, false)
                 .addSeparator()
-                .addLabeledComponent(JBLabel("Visual Studio Code"), vsCodePathField, 1, false)
+                .addLabeledComponent(JBLabel("Visual Studio Code"), vscodePathField, 1, false)
                 .addLabeledComponent(JBLabel("Cursor"), cursorPathField, 1, false)
                 .addLabeledComponent(JBLabel("Trae"), traePathField, 1, false)
 
@@ -111,12 +111,12 @@ class EditorJumperSettingsComponent {
         return editorTypeComboBox
     }
 
-    fun getVSCodePath(): String {
-        return vsCodePathField.text
+    fun getVscodePath(): String {
+        return vscodePathField.text
     }
 
-    fun setVSCodePath(path: String) {
-        vsCodePathField.text = path
+    fun setVscodePath(path: String) {
+        vscodePathField.text = path
     }
 
     fun getCursorPath(): String {

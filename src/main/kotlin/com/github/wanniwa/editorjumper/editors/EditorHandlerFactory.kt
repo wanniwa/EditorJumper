@@ -8,7 +8,7 @@ class EditorHandlerFactory {
     companion object {
         fun getHandler(editorType: String, customPath: String, project: Project?): EditorHandler {
             return when (editorType) {
-                "Visual Studio Code" -> VSCodeHandler(customPath, project)
+                "Visual Studio Code" -> VscodeHandler(customPath, project)
                 "Cursor" -> CursorHandler(customPath, project)
                 "Trae" -> {
                     val settings = EditorJumperSettings.getInstance()
@@ -35,7 +35,7 @@ class EditorHandlerFactory {
         fun getHandler(editorType: String, project: Project?): EditorHandler {
             val settings = EditorJumperSettings.getInstance()
             val customPath = when (editorType) {
-                "Visual Studio Code" -> settings.vsCodePath
+                "Visual Studio Code" -> settings.vscodePath
                 "Cursor" -> settings.cursorPath
                 "Trae" -> settings.traePath
                 "Windsurf" -> settings.windsurfPath

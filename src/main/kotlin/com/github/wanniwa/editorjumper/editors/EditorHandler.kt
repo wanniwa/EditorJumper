@@ -50,7 +50,6 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         lineNumber: Int?,
         columnNumber: Int?
     ): Array<String> {
-        val macOpenName = getMacOpenName()
         val macAppName = getName()
         return when {
             filePath != null -> {

@@ -15,6 +15,6 @@ class QoderHandler(customPath: String, project: Project?) : BaseVscodeEditorHand
     }
 
     override fun getMacOpenName(): String? {
-        return "Qoder"
+        return "qoder"
     }
 }

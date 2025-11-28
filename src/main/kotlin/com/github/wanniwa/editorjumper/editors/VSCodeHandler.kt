@@ -2,9 +2,8 @@ package com.github.wanniwa.editorjumper.editors
 
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
-import java.io.File
 
-class VSCodeHandler(customPath: String, project: Project?) : BaseVscodeEditorHandler(customPath, project) {
+class VscodeHandler(customPath: String, project: Project?) : BaseVscodeEditorHandler(customPath, project) {
     override fun getName(): String = "Visual Studio Code"
 
     override fun getDefaultPath(): String {
@@ -15,7 +14,7 @@ class VSCodeHandler(customPath: String, project: Project?) : BaseVscodeEditorHan
         }
     }
 
-    override fun getMacOpenName(): String? {
+    override fun getMacOpenName(): String {
         return "vscode"
     }
 } 
