@@ -4,6 +4,7 @@ import com.github.wanniwa.editorjumper.editors.EditorHandler
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.util.SystemInfo
@@ -14,6 +15,8 @@ import com.intellij.openapi.vfs.VirtualFile
  * Triggered by Option+Shift+P shortcut on Mac systems
  */
 class FastOpenInExternalEditorAction : BaseAction() {
+
+    private val logger = Logger.getInstance(FastOpenInExternalEditorAction::class.java)
 
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
@@ -63,6 +66,9 @@ class FastOpenInExternalEditorAction : BaseAction() {
         
         try {
             val command = handler.getFastOpenCommand(projectPath, filePath, lineNumber, columnNumber)
+
+            // 打印完整命令到日志
+            logger.info("EditorJumper执行Fast命令: ${command.joinToString(" ")}")
 
             ProcessBuilder(command.toList())
                 .redirectOutput(ProcessBuilder.Redirect.DISCARD)

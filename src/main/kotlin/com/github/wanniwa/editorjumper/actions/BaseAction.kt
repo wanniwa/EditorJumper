@@ -9,6 +9,7 @@ import com.github.wanniwa.editorjumper.utils.I18nUtils
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
@@ -19,6 +20,8 @@ import com.intellij.openapi.vfs.VirtualFile
  * 基础动作类，提供通用方法
  */
 abstract class BaseAction : AnAction() {
+
+    private val logger = Logger.getInstance(BaseAction::class.java)
 
     override fun getActionUpdateThread() = ActionUpdateThread.BGT
 
@@ -131,6 +134,9 @@ abstract class BaseAction : AnAction() {
             lineNumber,
             columnNumber
         )
+
+        // 打印完整命令到日志
+        logger.info("EditorJumper执行命令: ${command.joinToString(" ")}")
 
         try {
             ProcessBuilder(command.toList())
