@@ -44,6 +44,13 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         return if (customPath.isNullOrEmpty()) getDefaultPath() else customPath
     }
 
+    /**
+     * 为包含空格的路径添加引号保护
+     */
+    protected fun quotePath(path: String): String {
+        return "\"$path\""
+    }
+
     override fun getOpenCommand(
         projectPath: String,
         filePath: String?,
@@ -51,27 +58,28 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         columnNumber: Int?
     ): Array<String> {
         val macAppName = getName()
+        val quotedEditorPath = quotePath(getPath())
+        val quotedProjectPath = quotePath(projectPath)
         return when {
             filePath != null -> {
                 val actualLineNumber = lineNumber ?: 1
                 val actualColumnNumber = columnNumber ?: 1
-                // 如果有文件路径和光标位置，则打开项目并定位到文件的具体行列
-                val fileWithPosition = "$filePath:$actualLineNumber:$actualColumnNumber"
+                val fileWithPosition = quotePath(filePath) + ":$actualLineNumber:$actualColumnNumber"
                 if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath, "--goto", fileWithPosition)
+                    arrayOf("cmd", "/c", quotedEditorPath, quotedProjectPath, "--goto", fileWithPosition)
                 } else {
-                    arrayOf(getPath(), projectPath, "--goto", fileWithPosition)
+                    arrayOf(quotedEditorPath, quotedProjectPath, "--goto", fileWithPosition)
                 }
             }
 
             else -> {
                 // 只打开项目
                 if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), projectPath)
+                    arrayOf("cmd", "/c", quotedEditorPath, quotedProjectPath)
                 } else if (SystemInfo.isMac) {
-                    arrayOf("open", "-a", "$macAppName", projectPath)
+                    arrayOf("open", "-a", macAppName, quotedProjectPath)
                 } else {
-                    arrayOf(getPath(), projectPath)
+                    arrayOf(quotedEditorPath, quotedProjectPath)
                 }
             }
         }
@@ -90,10 +98,10 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         }
         return when {
             filePath.isNullOrBlank() -> {
-                arrayOf("open", "-a", "$macAppName", projectPath)
+                arrayOf("open", "-a", "$macAppName", quotePath(projectPath))
             }
             else -> {
-                arrayOf("open", "-a", "$macAppName", "$macOpenName://file$filePath:$lineNumber:$columnNumber")
+                arrayOf("open", "-a", "$macAppName", "$macOpenName://file" + quotePath(filePath) + ":$lineNumber:$columnNumber")
             }
         }
     }
