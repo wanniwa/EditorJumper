@@ -9,7 +9,7 @@ class TraeCNHandler(customPath: String, project: Project?) : BaseVscodeEditorHan
 
     override fun getDefaultPath(): String {
         return when {
-            SystemInfo.isMac -> "/Applications/Trae CN.app/Contents/MacOS/Electron"
+            SystemInfo.isMac -> "/Applications/Trae CN.app/Contents/Resources/app/bin/trae"
             SystemInfo.isWindows -> "Trae"
             else -> "" // 其他平台不支持
         }
