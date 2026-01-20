@@ -56,8 +56,17 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
                 val actualLineNumber = lineNumber ?: 1
                 val actualColumnNumber = columnNumber ?: 1
                 // 项目路径和文件路径加引号，防止空格被分词
-                val quotedProjectPath = "\"$projectPath\""
-                val fileWithPosition = "\"$filePath\":$actualLineNumber:$actualColumnNumber"
+                val quotedProjectPath = if(macAppName.equals("Cursor")){
+                    "\"$projectPath\""
+                } else {
+                    projectPath
+                }
+                val quotedFilePath = if(macAppName.equals("Cursor")){
+                    "\"$filePath\""
+                } else {
+                    filePath
+                }
+                val fileWithPosition = "$quotedFilePath:$actualLineNumber:$actualColumnNumber"
                 if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
                     arrayOf("cmd", "/c", getPath(), quotedProjectPath, "--goto", fileWithPosition)
                 } else {
@@ -67,13 +76,12 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
 
             else -> {
                 // 只打开项目
-                val quotedProjectPath = "\"$projectPath\""
                 if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
-                    arrayOf("cmd", "/c", getPath(), quotedProjectPath)
+                    arrayOf("cmd", "/c", getPath(), projectPath)
                 } else if (SystemInfo.isMac) {
-                    arrayOf("open", "-a", macAppName, quotedProjectPath)
+                    arrayOf("open", "-a", macAppName, projectPath)
                 } else {
-                    arrayOf(getPath(), quotedProjectPath)
+                    arrayOf(getPath(), projectPath)
                 }
             }
         }
@@ -92,16 +100,15 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         }
         return when {
             filePath.isNullOrBlank() -> {
-                val quotedProjectPath = "\"$projectPath\""
-                arrayOf("open", "-a", "$macAppName", quotedProjectPath)
+                arrayOf("open", "-a", macAppName, projectPath)
             }
 
             else -> {
                 arrayOf(
                     "open",
                     "-a",
-                    "$macAppName",
-                    "$macOpenName://file" + "\"$filePath\"" + ":$lineNumber:$columnNumber"
+                    macAppName,
+                    "$macOpenName://file$filePath:$lineNumber:$columnNumber"
                 )
             }
         }
