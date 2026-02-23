@@ -69,6 +69,7 @@ abstract class BaseAction : AnAction() {
             "Qoder" -> settings.qoderPath
             "CatPawAI" -> settings.catPawAIPath
             "Antigravity" -> settings.antigravityPath
+            "CodeBuddy" -> settings.codebuddyPath
             else -> ""
         }
 

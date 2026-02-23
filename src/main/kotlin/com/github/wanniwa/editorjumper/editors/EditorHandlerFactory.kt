@@ -25,6 +25,15 @@ class EditorHandlerFactory {
                 "Qoder" -> QoderHandler(customPath, project)
                 "CatPawAI" -> CatPawAIHandler(customPath, project)
                 "Antigravity" -> AntigravityHandler(customPath, project)
+                "CodeBuddy" -> {
+                    val settings = EditorJumperSettings.getInstance()
+                    // 只在 Mac 平台上检查 CodeBuddy CN 设置
+                    if (SystemInfo.isMac && settings.codebuddyCN) {
+                        CodebuddyCNHandler(customPath, project)
+                    } else {
+                        CodebuddyHandler(customPath, project)
+                    }
+                }
                 else -> CursorHandler(customPath, project)
             }
         }
@@ -44,6 +53,7 @@ class EditorHandlerFactory {
                 "Qoder" -> settings.qoderPath
                 "CatPawAI" -> settings.catPawAIPath
                 "Antigravity" -> settings.antigravityPath
+                "CodeBuddy" -> settings.codebuddyPath
                 else -> ""
             }
             return getHandler(editorType, customPath, project)

@@ -36,9 +36,6 @@ tasks {
     // Configure processResources to handle UTF-8 encoding for properties files
     processResources {
         filteringCharset = "UTF-8"
-        filesMatching("**/*.properties") {
-            filteringCharset = "UTF-8"
-        }
     }
 
     patchPluginXml {
