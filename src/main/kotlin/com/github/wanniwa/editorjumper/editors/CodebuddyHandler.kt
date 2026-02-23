@@ -9,7 +9,7 @@ class CodebuddyHandler(customPath: String, project: Project?) : BaseVscodeEditor
 
     override fun getDefaultPath(): String {
         return when {
-            SystemInfo.isMac -> "/Applications/CodeBuddy.app/Contents/Resources/app/bin/codebuddy"
+            SystemInfo.isMac -> "/Applications/CodeBuddy.app/Contents/Resources/app/bin/code"
             else -> ""
         }
     }
