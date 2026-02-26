@@ -26,6 +26,8 @@ class EditorJumperSettingsComponent {
     private val qoderPathField = TextFieldWithBrowseButton()
     private val catPawAIPathField = TextFieldWithBrowseButton()
     private val antigravityPathField = TextFieldWithBrowseButton()
+    private val codebuddyPathField = TextFieldWithBrowseButton()
+    private val codebuddyCNCheckBox = JBCheckBox()
 
     init {
         // 为每个编辑器创建单独的描述符
@@ -56,6 +58,9 @@ class EditorJumperSettingsComponent {
         val antigravityDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
         antigravityDescriptor.title = I18nUtils.getFileChooserTitle("Antigravity")
 
+        val codebuddyDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+        codebuddyDescriptor.title = I18nUtils.getFileChooserTitle("CodeBuddy")
+
         vscodePathField.addBrowseFolderListener(TextBrowseFolderListener(vscodeDescriptor))
         cursorPathField.addBrowseFolderListener(TextBrowseFolderListener(cursorDescriptor))
         traePathField.addBrowseFolderListener(TextBrowseFolderListener(traeDescriptor))
@@ -65,9 +70,10 @@ class EditorJumperSettingsComponent {
         qoderPathField.addBrowseFolderListener(TextBrowseFolderListener(qoderDescriptor))
         catPawAIPathField.addBrowseFolderListener(TextBrowseFolderListener(catPawAIDescriptor))
         antigravityPathField.addBrowseFolderListener(TextBrowseFolderListener(antigravityDescriptor))
+        codebuddyPathField.addBrowseFolderListener(TextBrowseFolderListener(codebuddyDescriptor))
 
         // 添加编辑器类型选项
-        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "CatPawAI", "Antigravity")
+        val editorTypes = arrayOf("Visual Studio Code", "Cursor", "Trae", "Windsurf", "Void", "Kiro", "Qoder", "CatPawAI", "Antigravity", "CodeBuddy")
         editorTypeComboBox.model = DefaultComboBoxModel(editorTypes)
 
         val macHintLabel = JBLabel("<html><em>${I18nUtils.message("settings.hint.macOS")}</em></html>")
@@ -92,13 +98,21 @@ class EditorJumperSettingsComponent {
             formBuilder.addLabeledComponent(JBLabel(I18nUtils.message("settings.traeCN.label")), traeCNCheckBox, 1, false)
         }
 
-        myMainPanel = formBuilder
+        formBuilder
                 .addLabeledComponent(JBLabel("Windsurf"), windsurfPathField, 1, false)
                 .addLabeledComponent(JBLabel("Void"), voidPathField, 1, false)
                 .addLabeledComponent(JBLabel("Kiro"), kiroPathField, 1, false)
                 .addLabeledComponent(JBLabel("Qoder"), qoderPathField, 1, false)
                 .addLabeledComponent(JBLabel("CatPawAI"), catPawAIPathField, 1, false)
                 .addLabeledComponent(JBLabel("Antigravity"), antigravityPathField, 1, false)
+                .addLabeledComponent(JBLabel("CodeBuddy"), codebuddyPathField, 1, false)
+
+        // 只在 Mac 平台上显示 CodeBuddy CN 选项
+        if (SystemInfo.isMac) {
+            formBuilder.addLabeledComponent(JBLabel(I18nUtils.message("settings.codebuddyCN.label")), codebuddyCNCheckBox, 1, false)
+        }
+
+        myMainPanel = formBuilder
                 .addComponentFillVertically(JPanel(), 0)
                 .panel
     }
@@ -183,6 +197,14 @@ class EditorJumperSettingsComponent {
         antigravityPathField.text = path
     }
 
+    fun getCodebuddyPath(): String {
+        return codebuddyPathField.text
+    }
+
+    fun setCodebuddyPath(path: String) {
+        codebuddyPathField.text = path
+    }
+
     fun getSelectedEditorType(): String {
         return editorTypeComboBox.selectedItem as String
     }
@@ -198,6 +220,16 @@ class EditorJumperSettingsComponent {
     fun setTraeCN(selected: Boolean) {
         if (SystemInfo.isMac) {
             traeCNCheckBox.isSelected = selected
+        }
+    }
+
+    fun getCodebuddyCN(): Boolean {
+        return if (SystemInfo.isMac) codebuddyCNCheckBox.isSelected else false
+    }
+
+    fun setCodebuddyCN(selected: Boolean) {
+        if (SystemInfo.isMac) {
+            codebuddyCNCheckBox.isSelected = selected
         }
     }
 

@@ -36,6 +36,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
                mySettingsComponent!!.getcatPawAIPath() != settings.catPawAIPath ||
                mySettingsComponent!!.getAntigravityPath() != settings.antigravityPath ||
+               mySettingsComponent!!.getCodebuddyPath() != settings.codebuddyPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
 
         // 只在 Mac 平台上检查 Trae CN 设置
@@ -45,7 +46,14 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
             false
         }
 
-        return baseModified || traeCNModified
+        // 只在 Mac 平台上检查 CodeBuddy CN 设置
+        val codebuddyCNModified = if (SystemInfo.isMac) {
+            mySettingsComponent!!.getCodebuddyCN() != settings.codebuddyCN
+        } else {
+            false
+        }
+
+        return baseModified || traeCNModified || codebuddyCNModified
     }
 
     override fun apply() {
@@ -62,11 +70,17 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.qoderPath = mySettingsComponent!!.getQoderPath()
         settings.catPawAIPath = mySettingsComponent!!.getcatPawAIPath()
         settings.antigravityPath = mySettingsComponent!!.getAntigravityPath()
+        settings.codebuddyPath = mySettingsComponent!!.getCodebuddyPath()
         settings.selectedEditorType = newEditorType
 
         // 只在 Mac 平台上设置 Trae CN
         if (SystemInfo.isMac) {
             settings.traeCN = mySettingsComponent!!.getTraeCN()
+        }
+
+        // 只在 Mac 平台上设置 CodeBuddy CN
+        if (SystemInfo.isMac) {
+            settings.codebuddyCN = mySettingsComponent!!.getCodebuddyCN()
         }
 
         // 如果默认编辑器类型改变了，询问是否同时更新当前项目的编辑器类型设置
@@ -114,11 +128,17 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setQoderPath(settings.qoderPath)
         mySettingsComponent!!.setcatPawAIPath(settings.catPawAIPath)
         mySettingsComponent!!.setAntigravityPath(settings.antigravityPath)
+        mySettingsComponent!!.setCodebuddyPath(settings.codebuddyPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
 
         // 只在 Mac 平台上设置 Trae CN
         if (SystemInfo.isMac) {
             mySettingsComponent!!.setTraeCN(settings.traeCN)
+        }
+
+        // 只在 Mac 平台上设置 CodeBuddy CN
+        if (SystemInfo.isMac) {
+            mySettingsComponent!!.setCodebuddyCN(settings.codebuddyCN)
         }
     }
 

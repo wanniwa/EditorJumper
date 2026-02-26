@@ -36,6 +36,7 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
         "Qoder",
         "CatPawAI",
         "Antigravity",
+        "CodeBuddy",
         I18nUtils.message("editor.settings")
     )
 
