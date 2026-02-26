@@ -181,11 +181,11 @@ class EditorJumperSettingsComponent {
         qoderPathField.text = path
     }
 
-    fun getcatPawAIPath(): String {
+    fun getCatPawAIPath(): String {
         return catPawAIPathField.text
     }
 
-    fun setcatPawAIPath(path: String) {
+    fun setCatPawAIPath(path: String) {
         catPawAIPathField.text = path
     }
 

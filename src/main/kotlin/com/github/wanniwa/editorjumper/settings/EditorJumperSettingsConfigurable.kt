@@ -3,7 +3,6 @@ package com.github.wanniwa.editorjumper.settings
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.Configurable.WithEpDependencies
 import com.intellij.openapi.extensions.BaseExtensionPointName
-import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.util.SystemInfo
 import com.github.wanniwa.editorjumper.utils.I18nUtils
 import javax.swing.JComponent
@@ -34,7 +33,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
                mySettingsComponent!!.getVoidPath() != settings.voidPath ||
                mySettingsComponent!!.getKiroPath() != settings.kiroPath ||
                mySettingsComponent!!.getQoderPath() != settings.qoderPath ||
-               mySettingsComponent!!.getcatPawAIPath() != settings.catPawAIPath ||
+               mySettingsComponent!!.getCatPawAIPath() != settings.catPawAIPath ||
                mySettingsComponent!!.getAntigravityPath() != settings.antigravityPath ||
                mySettingsComponent!!.getCodebuddyPath() != settings.codebuddyPath ||
                mySettingsComponent!!.getSelectedEditorType() != settings.selectedEditorType
@@ -68,7 +67,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         settings.voidPath = mySettingsComponent!!.getVoidPath()
         settings.kiroPath = mySettingsComponent!!.getKiroPath()
         settings.qoderPath = mySettingsComponent!!.getQoderPath()
-        settings.catPawAIPath = mySettingsComponent!!.getcatPawAIPath()
+        settings.catPawAIPath = mySettingsComponent!!.getCatPawAIPath()
         settings.antigravityPath = mySettingsComponent!!.getAntigravityPath()
         settings.codebuddyPath = mySettingsComponent!!.getCodebuddyPath()
         settings.selectedEditorType = newEditorType
@@ -126,7 +125,7 @@ class EditorJumperSettingsConfigurable : Configurable, WithEpDependencies {
         mySettingsComponent!!.setVoidPath(settings.voidPath)
         mySettingsComponent!!.setKiroPath(settings.kiroPath)
         mySettingsComponent!!.setQoderPath(settings.qoderPath)
-        mySettingsComponent!!.setcatPawAIPath(settings.catPawAIPath)
+        mySettingsComponent!!.setCatPawAIPath(settings.catPawAIPath)
         mySettingsComponent!!.setAntigravityPath(settings.antigravityPath)
         mySettingsComponent!!.setCodebuddyPath(settings.codebuddyPath)
         mySettingsComponent!!.setSelectedEditorType(settings.selectedEditorType)
