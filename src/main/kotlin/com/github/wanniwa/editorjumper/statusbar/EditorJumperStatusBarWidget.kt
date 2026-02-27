@@ -1,5 +1,6 @@
 package com.github.wanniwa.editorjumper.statusbar
 
+import com.github.wanniwa.editorjumper.editors.EditorRegistry
 import com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettings
 import com.github.wanniwa.editorjumper.settings.EditorJumperSettingsConfigurable
@@ -26,19 +27,17 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     }
 
     private var statusBar: StatusBar? = null
-    private val supportedEditors = arrayOf(
-        "Visual Studio Code",
-        "Cursor",
-        "Trae",
-        "Windsurf",
-        "Void",
-        "Kiro",
-        "Qoder",
-        "CatPawAI",
-        "Antigravity",
-        "CodeBuddy",
-        I18nUtils.message("editor.settings")
-    )
+    private val supportedEditors: List<String>
+        get() {
+            val settings = EditorJumperSettings.getInstance()
+            val hidden = settings.hiddenEditors
+            val editors = if (hidden.isEmpty()) {
+                EditorRegistry.editorNames
+            } else {
+                EditorRegistry.editorNames.filterNot { hidden.contains(it) }
+            }
+            return editors + listOf(I18nUtils.message("editor.settings"))
+        }
 
     override fun ID(): String = ID
 

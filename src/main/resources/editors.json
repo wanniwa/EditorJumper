@@ -1,0 +1,99 @@
+[
+  {
+    "name": "Visual Studio Code",
+    "macPath": "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code",
+    "winPath": "Code",
+    "linuxPath": "Code",
+    "macOpenName": "vscode",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Cursor",
+    "macPath": "/Applications/Cursor.app/Contents/Resources/app/bin/code",
+    "winPath": "Cursor",
+    "linuxPath": "Cursor",
+    "macOpenName": "cursor",
+    "supportsWorkspace": true,
+    "quotePaths": true
+  },
+  {
+    "name": "Trae",
+    "macPath": "/Applications/Trae.app/Contents/Resources/app/bin/trae",
+    "winPath": "Trae",
+    "linuxPath": "Trae",
+    "macOpenName": "trae",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Trae CN",
+    "macPath": "/Applications/Trae CN.app/Contents/Resources/app/bin/trae",
+    "winPath": "Trae",
+    "linuxPath": "Trae",
+    "macOpenName": "trae-cn",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Windsurf",
+    "macPath": "/Applications/Windsurf.app/Contents/Resources/app/bin/windsurf",
+    "winPath": "Windsurf",
+    "linuxPath": "Windsurf",
+    "macOpenName": "windsurf",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Void",
+    "macPath": "/Applications/Void.app/Contents/Resources/app/bin/void",
+    "winPath": "void",
+    "linuxPath": "void",
+    "macOpenName": "void",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Kiro",
+    "macPath": "/Applications/Kiro.app/Contents/Resources/app/bin/code",
+    "winPath": "kiro",
+    "linuxPath": "kiro",
+    "macOpenName": "kiro",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Qoder",
+    "macPath": "/Applications/Qoder.app/Contents/Resources/app/bin/code",
+    "winPath": "qoder",
+    "linuxPath": "qoder",
+    "macOpenName": "qoder",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "CatPawAI",
+    "macPath": "/Applications/CatPawAI.app/Contents/Resources/app/bin/code",
+    "winPath": "CatPawAI",
+    "linuxPath": "CatPawAI",
+    "macOpenName": "catpaw",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "Antigravity",
+    "macPath": "/Applications/Antigravity.app/Contents/Resources/app/bin/antigravity",
+    "winPath": "antigravity",
+    "linuxPath": "antigravity",
+    "macOpenName": "antigravity",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "CodeBuddy",
+    "macPath": "/Applications/CodeBuddy.app/Contents/Resources/app/bin/code",
+    "winPath": "",
+    "linuxPath": "",
+    "macOpenName": "codebuddy",
+    "supportsWorkspace": true
+  },
+  {
+    "name": "CodeBuddy CN",
+    "macPath": "/Applications/CodeBuddy CN.app/Contents/Resources/app/bin/code",
+    "winPath": "",
+    "linuxPath": "",
+    "macOpenName": "codebuddy-cn",
+    "supportsWorkspace": true
+  }
+]

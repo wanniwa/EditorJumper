@@ -56,22 +56,10 @@ abstract class BaseAction : AnAction() {
      */
     protected fun checkEditorPathExists(project: Project, handler: EditorHandler): Boolean {
         val settings = EditorJumperSettings.getInstance()
-        // 获取目标编辑器类型，如果为空则使用默认设置s
+        // 获取目标编辑器类型，如果为空则使用默认设置
         val targetEditor = EditorTargetUtils.getTargetEditor(project)
         val editorType = targetEditor.ifBlank { settings.selectedEditorType }
-        val customPath = when (editorType) {
-            "Visual Studio Code" -> settings.vscodePath
-            "Cursor" -> settings.cursorPath
-            "Trae" -> settings.traePath
-            "Windsurf" -> settings.windsurfPath
-            "Void" -> settings.voidPath
-            "Kiro" -> settings.kiroPath
-            "Qoder" -> settings.qoderPath
-            "CatPawAI" -> settings.catPawAIPath
-            "Antigravity" -> settings.antigravityPath
-            "CodeBuddy" -> settings.codebuddyPath
-            else -> ""
-        }
+        val customPath = settings.getPath(editorType)
 
         // macOS: 不需要检查路径，所有编辑器都自动检测
         if (SystemInfo.isMac) {

@@ -14,17 +14,20 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>1.6.4</h3>
+        <h3>2.0.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
             <li>Jump from JetBrains IDE to VSCode</li>
-            <li>Jump from JetBrains IDE to Trae</li>
+            <li>Jump from JetBrains IDE to Trae|Trae CN</li>
             <li>Jump from JetBrains IDE to Cursor</li>
             <li>Jump from JetBrains IDE to Windsurf</li>
             <li>Jump from JetBrains IDE to Void</li>
             <li>Jump from JetBrains IDE to Kiro</li>
             <li>Jump from JetBrains IDE to Qoder</li>
+            <li>Jump from JetBrains IDE to CatPaw</li>
+            <li>Jump from JetBrains IDE to Antigravity</li>
+            <li>Jump from JetBrains IDE to CodeBuddy|CodeBuddy CN</li>
         </ul>
         <p>Smart Jump Behavior:</p>
         <ul>
@@ -114,12 +117,15 @@
         <p>EditorJumper 是一个能够在不同编辑器之间无缝切换的插件，自动打开相同的项目和文件，同时保持光标位置。这使得在编辑器之间的上下文感知转换变得即时且高效：</p>
         <ul>
             <li>从 JetBrains IDE 跳转到 VSCode</li>
-            <li>从 JetBrains IDE 跳转到 Trae</li>
+            <li>从 JetBrains IDE 跳转到 Trae|Trae CN</li>
             <li>从 JetBrains IDE 跳转到 Cursor</li>
             <li>从 JetBrains IDE 跳转到 Windsurf</li>
             <li>从 JetBrains IDE 跳转到 Void</li>
             <li>从 JetBrains IDE 跳转到 AWS Kiro</li>
             <li>从 JetBrains IDE 跳转到 Qoder</li>
+            <li>从 JetBrains IDE 跳转到 CatPaw</li>
+            <li>从 JetBrains IDE 跳转到 Antigravity</li>
+            <li>从 JetBrains IDE 跳转到 CodeBuddy|CodeBuddy CN</li>
         </ul>
         <p>智能跳转行为：</p>
         <ul>
@@ -203,6 +209,7 @@
         <statusBarWidgetFactory
                 implementation="com.github.wanniwa.editorjumper.statusbar.EditorJumperStatusBarWidgetFactory"
                 id="EditorJumper.StatusBarWidgetFactory"/>
+        <notificationGroup id="EditorJumper Notifications" displayType="BALLOON" isLogByDefault="true"/>
         <postStartupActivity implementation="com.github.wanniwa.editorjumper.startup.EditorJumperStartupActivity"/>
     </extensions>
     <actions>
@@ -220,6 +227,22 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>2.0.0</h3>
+    <ul>
+        <li>Refactored editor integration with JSON-driven architecture, easier to extend and maintain.</li>
+        <li>Optimized settings UI interactions.</li>
+        <li>Add first-time setup guidance.</li>
+        <li>Support hiding editors in the status bar.</li>
+        <li>Add support for CodeBuddy editor (PR by jiaohanying)</li>
+    </ul>
+    <ul>
+        <li>编辑器集成重构，使用 JSON 驱动，便于扩展和维护。</li>
+        <li>优化设置页交互体验。</li>
+        <li>新增首次使用引导。</li>
+        <li>支持隐藏IDE在状态栏的切换列表的显示</li>
+        <li>新增对 CodeBuddy 编辑器的支持 (PR by jiaohanying)</li>
+     </ul>
+   
     <h3>1.6.4</h3>
     <ul>
         <li>Removed the build upper limit for future IDEA compatibility.</li>

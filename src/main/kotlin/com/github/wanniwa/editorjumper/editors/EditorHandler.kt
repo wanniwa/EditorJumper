@@ -5,6 +5,35 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 import java.io.File
 
+/**
+ * Static metadata for one editor entry.
+ * All fields come from editors.json; no handler instance is needed to read them.
+ */
+data class EditorConfig(
+    val name: String,
+    val macPath: String = "",
+    val winPath: String = "",
+    val linuxPath: String = "",
+    val macOpenName: String? = null,
+    /** If true, getOpenCommand respects the per-project VSCode workspace path setting. */
+    val supportsWorkspace: Boolean = false,
+    /** If true, project/file paths are quoted to avoid spaces being split (e.g. Cursor). */
+    val quotePaths: Boolean = false,
+)
+
+/**
+ * Thin wrapper that pairs a display name with a factory function.
+ * EditorRegistry holds a list of these; everything else is driven from it.
+ *
+ * To add a new editor: add one entry to editors.json — no Kotlin code needed.
+ */
+data class EditorRegistration(
+    val name: String,
+    private val factory: (String, Project?) -> EditorHandler,
+) {
+    fun create(path: String, project: Project?): EditorHandler = factory(path, project)
+}
+
 interface EditorHandler {
     fun getName(): String
     fun getPath(): String
@@ -37,6 +66,12 @@ interface EditorHandler {
      * @return URL方案名称，如果不支持则返回null
      */
     fun getMacOpenName(): String? = null
+
+    /**
+     * 是否在命令行中对 projectPath/filePath 加引号。
+     * 默认为 false，由具体实现（现在是配置）决定。
+     */
+    fun shouldQuotePaths(): Boolean = false
 }
 
 abstract class BaseEditorHandler(private val customPath: String?) : EditorHandler {
@@ -51,21 +86,14 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         columnNumber: Int?
     ): Array<String> {
         val macAppName = getName()
+        val quote = shouldQuotePaths()
         return when {
             filePath != null -> {
                 val actualLineNumber = lineNumber ?: 1
                 val actualColumnNumber = columnNumber ?: 1
                 // 项目路径和文件路径加引号，防止空格被分词
-                val quotedProjectPath = if(macAppName.equals("Cursor")){
-                    "\"$projectPath\""
-                } else {
-                    projectPath
-                }
-                val quotedFilePath = if(macAppName.equals("Cursor")){
-                    "\"$filePath\""
-                } else {
-                    filePath
-                }
+                val quotedProjectPath = if (quote) "\"$projectPath\"" else projectPath
+                val quotedFilePath = if (quote) "\"$filePath\"" else filePath
                 val fileWithPosition = "$quotedFilePath:$actualLineNumber:$actualColumnNumber"
                 if (SystemInfo.isWindows && getPath() == getDefaultPath()) {
                     arrayOf("cmd", "/c", getPath(), quotedProjectPath, "--goto", fileWithPosition)
@@ -115,42 +143,48 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
     }
 }
 
-abstract class BaseVscodeEditorHandler(customPath: String?, val project: Project?) :
-    BaseEditorHandler(customPath) {
+/**
+ * A single generic handler driven entirely by [EditorConfig].
+ * Replaces all the per-editor Handler subclasses that only differed in name / path / URL scheme.
+ */
+class ConfigBasedEditorHandler(
+    private val cfg: EditorConfig,
+    customPath: String?,
+    private val project: Project?,
+) : BaseEditorHandler(customPath) {
+
+    override fun getName(): String = cfg.name
+
+    override fun getDefaultPath(): String = when {
+        SystemInfo.isMac -> cfg.macPath
+        SystemInfo.isWindows -> cfg.winPath
+        else -> cfg.linuxPath
+    }
+
+    override fun getMacOpenName(): String? = cfg.macOpenName
+
     override fun getOpenCommand(
         projectPath: String,
         filePath: String?,
         lineNumber: Int?,
-        columnNumber: Int?
-    ): Array<String> {
-
-        // 如果配置了工作空间文件，优先使用工作空间文件
-        val projectSettings = project?.let { EditorJumperProjectSettings.getInstance(it) }
-        val workspacePath = projectSettings?.vsCodeWorkspacePath
-
-        // 如果配置了工作空间文件且文件存在，使用工作空间文件
-        if (!workspacePath.isNullOrBlank() && File(workspacePath).exists()) {
-            return super.getOpenCommand(workspacePath, filePath, lineNumber, columnNumber)
-        } else {
-            return super.getOpenCommand(projectPath, filePath, lineNumber, columnNumber)
-        }
-    }
+        columnNumber: Int?,
+    ): Array<String> = super.getOpenCommand(resolveProjectPath(projectPath), filePath, lineNumber, columnNumber)
 
     override fun getFastOpenCommand(
         projectPath: String,
         filePath: String?,
         lineNumber: Int?,
-        columnNumber: Int?
-    ): Array<String> {
-        // 如果配置了工作空间文件，优先使用工作空间文件
-        val projectSettings = project?.let { EditorJumperProjectSettings.getInstance(it) }
-        val workspacePath = projectSettings?.vsCodeWorkspacePath
+        columnNumber: Int?,
+    ): Array<String> = super.getFastOpenCommand(resolveProjectPath(projectPath), filePath, lineNumber, columnNumber)
 
-        // 如果配置了工作空间文件且文件存在，使用工作空间文件
-        if (!workspacePath.isNullOrBlank() && File(workspacePath).exists()) {
-            return super.getFastOpenCommand(workspacePath, filePath, lineNumber, columnNumber)
-        } else {
-            return super.getFastOpenCommand(projectPath, filePath, lineNumber, columnNumber)
-        }
+    private fun resolveProjectPath(projectPath: String): String {
+        if (!cfg.supportsWorkspace) return projectPath
+        val workspacePath = project
+            ?.let { EditorJumperProjectSettings.getInstance(it) }
+            ?.vsCodeWorkspacePath
+        return if (!workspacePath.isNullOrBlank() && File(workspacePath).exists()) workspacePath
+        else projectPath
     }
+
+    override fun shouldQuotePaths(): Boolean = cfg.quotePaths
 }

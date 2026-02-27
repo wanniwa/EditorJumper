@@ -5,10 +5,15 @@ plugins {
 }
 
 group = "github.wanniwa"
-version = "1.6.4"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    // Gson is bundled inside IntelliJ Platform; compileOnly avoids packaging a duplicate jar.
+    compileOnly("com.google.code.gson:gson:2.10.1")
 }
 
 // Configure Gradle IntelliJ Plugin
