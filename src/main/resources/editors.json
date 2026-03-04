@@ -13,8 +13,7 @@
     "winPath": "Cursor",
     "linuxPath": "Cursor",
     "macOpenName": "cursor",
-    "supportsWorkspace": true,
-    "quotePaths": true
+    "supportsWorkspace": true
   },
   {
     "name": "Trae",

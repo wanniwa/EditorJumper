@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>2.0.0</h3>
+        <h3>2.0.1</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -227,6 +227,10 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>2.0.1</h3>
+    <ul>
+        <li>Added support for Cursor 2.6.11. Plugin 2.0.1 requires Cursor 2.6.11+.</li>
+    </ul>
     <h3>2.0.0</h3>
     <ul>
         <li>Refactored editor integration with JSON-driven architecture, easier to extend and maintain.</li>
