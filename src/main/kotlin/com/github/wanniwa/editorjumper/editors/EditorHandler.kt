@@ -91,9 +91,12 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         val macAppName = getName()
         val quote = shouldQuotePaths()
 
-        // WSL remote development support (Windows only)
+        // WSL remote development: only when distro is resolvable
         if (SystemInfo.isWindows && supportsWsl() && WslUtils.isWslPath(projectPath)) {
-            return buildWslCommand(projectPath, filePath, lineNumber, columnNumber)
+            val distro = WslUtils.extractDistro(projectPath)
+            if (distro != null) {
+                return buildWslCommand(distro, projectPath, filePath, lineNumber, columnNumber)
+            }
         }
 
         return when {
@@ -127,30 +130,43 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
     /**
      * Build command for opening a file/project in a WSL remote session.
      * Uses --folder-uri to open the project in WSL mode.
+     *
+     * @param distro the pre-validated WSL distribution name (never empty).
      */
     private fun buildWslCommand(
+        distro: String,
         projectPath: String,
         filePath: String?,
         lineNumber: Int?,
         columnNumber: Int?
     ): Array<String> {
-        val distro = WslUtils.extractDistro(projectPath)
         val linuxProjectPath = WslUtils.toLinuxPath(projectPath)
         val folderUri = "vscode-remote://wsl+$distro$linuxProjectPath"
         val editorPath = getPath()
         val quote = shouldQuotePaths()
+        val useCmd = SystemInfo.isWindows && editorPath == getDefaultPath()
 
         val quotedFolderUri = if (quote) "\"$folderUri\"" else folderUri
 
+        val base = if (useCmd) {
+            arrayOf("cmd", "/c", editorPath)
+        } else {
+            arrayOf(editorPath)
+        }
+
         return if (filePath != null) {
-            val linuxFilePath = WslUtils.toLinuxPath(filePath)
+            val linuxFilePath = if (WslUtils.isWslPath(filePath)) {
+                WslUtils.toLinuxPath(filePath)
+            } else {
+                filePath
+            }
             val actualLineNumber = lineNumber ?: 1
             val actualColumnNumber = columnNumber ?: 1
             val quotedLinuxFilePath = if (quote) "\"$linuxFilePath\"" else linuxFilePath
             val gotoArg = "$quotedLinuxFilePath:$actualLineNumber:$actualColumnNumber"
-            arrayOf("cmd", "/c", editorPath, "--folder-uri", quotedFolderUri, "--goto", gotoArg)
+            base + arrayOf("--folder-uri", quotedFolderUri, "--goto", gotoArg)
         } else {
-            arrayOf("cmd", "/c", editorPath, "--folder-uri", quotedFolderUri)
+            base + arrayOf("--folder-uri", quotedFolderUri)
         }
     }
 

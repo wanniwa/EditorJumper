@@ -41,8 +41,7 @@
     "winPath": "Windsurf",
     "linuxPath": "Windsurf",
     "macOpenName": "windsurf",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Void",
@@ -50,8 +49,7 @@
     "winPath": "void",
     "linuxPath": "void",
     "macOpenName": "void",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Kiro",
@@ -59,8 +57,7 @@
     "winPath": "kiro",
     "linuxPath": "kiro",
     "macOpenName": "kiro",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Qoder",
@@ -68,8 +65,7 @@
     "winPath": "qoder",
     "linuxPath": "qoder",
     "macOpenName": "qoder",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "CatPawAI",
@@ -77,8 +73,7 @@
     "winPath": "CatPawAI",
     "linuxPath": "CatPawAI",
     "macOpenName": "catpaw",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Antigravity",
@@ -86,8 +81,7 @@
     "winPath": "antigravity",
     "linuxPath": "antigravity",
     "macOpenName": "antigravity",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "CodeBuddy",
