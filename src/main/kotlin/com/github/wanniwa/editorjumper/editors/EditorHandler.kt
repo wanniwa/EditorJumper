@@ -1,6 +1,7 @@
 package com.github.wanniwa.editorjumper.editors
 
 import com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings
+import com.github.wanniwa.editorjumper.utils.WslUtils
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 import java.io.File
@@ -19,6 +20,8 @@ data class EditorConfig(
     val supportsWorkspace: Boolean = false,
     /** If true, project/file paths are quoted to avoid spaces being split (e.g. Cursor). */
     val quotePaths: Boolean = false,
+    /** If true, the editor supports --folder-uri / --remote for WSL remote development. */
+    val supportsWsl: Boolean = false,
 )
 
 /**
@@ -87,6 +90,12 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
     ): Array<String> {
         val macAppName = getName()
         val quote = shouldQuotePaths()
+
+        // WSL remote development support (Windows only)
+        if (SystemInfo.isWindows && supportsWsl() && WslUtils.isWslPath(projectPath)) {
+            return buildWslCommand(projectPath, filePath, lineNumber, columnNumber)
+        }
+
         return when {
             filePath != null -> {
                 val actualLineNumber = lineNumber ?: 1
@@ -114,6 +123,38 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
             }
         }
     }
+
+    /**
+     * Build command for opening a file/project in a WSL remote session.
+     * Uses --folder-uri to open the project in WSL mode.
+     */
+    private fun buildWslCommand(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Array<String> {
+        val distro = WslUtils.extractDistro(projectPath)
+        val linuxProjectPath = WslUtils.toLinuxPath(projectPath)
+        val folderUri = "vscode-remote://wsl+$distro$linuxProjectPath"
+        val editorPath = getPath()
+
+        return if (filePath != null) {
+            val linuxFilePath = WslUtils.toLinuxPath(filePath)
+            val actualLineNumber = lineNumber ?: 1
+            val actualColumnNumber = columnNumber ?: 1
+            val gotoArg = "$linuxFilePath:$actualLineNumber:$actualColumnNumber"
+            arrayOf("cmd", "/c", editorPath, "--folder-uri", folderUri, "--goto", gotoArg)
+        } else {
+            arrayOf("cmd", "/c", editorPath, "--folder-uri", folderUri)
+        }
+    }
+
+    /**
+     * Whether this handler supports WSL remote development.
+     * Override in subclasses that have access to EditorConfig.
+     */
+    protected open fun supportsWsl(): Boolean = false
 
     override fun getFastOpenCommand(
         projectPath: String,
@@ -187,4 +228,6 @@ class ConfigBasedEditorHandler(
     }
 
     override fun shouldQuotePaths(): Boolean = cfg.quotePaths
+
+    override fun supportsWsl(): Boolean = cfg.supportsWsl
 }

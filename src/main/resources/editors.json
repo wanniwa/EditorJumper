@@ -5,7 +5,8 @@
     "winPath": "Code",
     "linuxPath": "Code",
     "macOpenName": "vscode",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Cursor",
@@ -13,7 +14,8 @@
     "winPath": "Cursor",
     "linuxPath": "Cursor",
     "macOpenName": "cursor",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Trae",
@@ -21,7 +23,8 @@
     "winPath": "Trae",
     "linuxPath": "Trae",
     "macOpenName": "trae",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Trae CN",
@@ -29,7 +32,8 @@
     "winPath": "Trae",
     "linuxPath": "Trae",
     "macOpenName": "trae-cn",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Windsurf",
@@ -37,7 +41,8 @@
     "winPath": "Windsurf",
     "linuxPath": "Windsurf",
     "macOpenName": "windsurf",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Void",
@@ -45,7 +50,8 @@
     "winPath": "void",
     "linuxPath": "void",
     "macOpenName": "void",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Kiro",
@@ -53,7 +59,8 @@
     "winPath": "kiro",
     "linuxPath": "kiro",
     "macOpenName": "kiro",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Qoder",
@@ -61,7 +68,8 @@
     "winPath": "qoder",
     "linuxPath": "qoder",
     "macOpenName": "qoder",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "CatPawAI",
@@ -69,7 +77,8 @@
     "winPath": "CatPawAI",
     "linuxPath": "CatPawAI",
     "macOpenName": "catpaw",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "Antigravity",
@@ -77,7 +86,8 @@
     "winPath": "antigravity",
     "linuxPath": "antigravity",
     "macOpenName": "antigravity",
-    "supportsWorkspace": true
+    "supportsWorkspace": true,
+    "supportsWsl": true
   },
   {
     "name": "CodeBuddy",
