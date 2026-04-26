@@ -138,15 +138,19 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         val linuxProjectPath = WslUtils.toLinuxPath(projectPath)
         val folderUri = "vscode-remote://wsl+$distro$linuxProjectPath"
         val editorPath = getPath()
+        val quote = shouldQuotePaths()
+
+        val quotedFolderUri = if (quote) "\"$folderUri\"" else folderUri
 
         return if (filePath != null) {
             val linuxFilePath = WslUtils.toLinuxPath(filePath)
             val actualLineNumber = lineNumber ?: 1
             val actualColumnNumber = columnNumber ?: 1
-            val gotoArg = "$linuxFilePath:$actualLineNumber:$actualColumnNumber"
-            arrayOf("cmd", "/c", editorPath, "--folder-uri", folderUri, "--goto", gotoArg)
+            val quotedLinuxFilePath = if (quote) "\"$linuxFilePath\"" else linuxFilePath
+            val gotoArg = "$quotedLinuxFilePath:$actualLineNumber:$actualColumnNumber"
+            arrayOf("cmd", "/c", editorPath, "--folder-uri", quotedFolderUri, "--goto", gotoArg)
         } else {
-            arrayOf("cmd", "/c", editorPath, "--folder-uri", folderUri)
+            arrayOf("cmd", "/c", editorPath, "--folder-uri", quotedFolderUri)
         }
     }
 

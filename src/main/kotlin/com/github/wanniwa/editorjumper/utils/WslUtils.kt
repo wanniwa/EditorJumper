@@ -44,7 +44,7 @@ object WslUtils {
         val prefix = WSL_PREFIXES.firstOrNull { normalized.startsWith(it, ignoreCase = true) } ?: return wslPath
         val afterPrefix = normalized.substring(prefix.length)
         val firstSlash = afterPrefix.indexOf('\\')
-        val linuxPart = if (firstSlash >= 0) afterPrefix.substring(firstSlash) else ""
+        val linuxPart = if (firstSlash >= 0) afterPrefix.substring(firstSlash) else "/"
         return linuxPart.replace('\\', '/')
     }
 }
