@@ -162,8 +162,9 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
             }
             val actualLineNumber = lineNumber ?: 1
             val actualColumnNumber = columnNumber ?: 1
-            val quotedLinuxFilePath = if (quote) "\"$linuxFilePath\"" else linuxFilePath
-            val gotoArg = "$quotedLinuxFilePath:$actualLineNumber:$actualColumnNumber"
+            val gotoArg = "$linuxFilePath:$actualLineNumber:$actualColumnNumber"
+            val finalGotoArg = if (quote) "\"$gotoArg\"" else gotoArg
+            base + arrayOf("--folder-uri", quotedFolderUri, "--goto", finalGotoArg)
             base + arrayOf("--folder-uri", quotedFolderUri, "--goto", gotoArg)
         } else {
             base + arrayOf("--folder-uri", quotedFolderUri)
