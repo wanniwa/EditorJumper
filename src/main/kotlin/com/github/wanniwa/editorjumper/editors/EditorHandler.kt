@@ -146,7 +146,7 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
         val quote = shouldQuotePaths()
         val useCmd = SystemInfo.isWindows && editorPath == getDefaultPath()
 
-        val quotedFolderUri = if (quote) "\"$folderUri\"" else folderUri
+        val quotedFolderUri = if (useCmd || quote) "\"$folderUri\"" else folderUri
 
         val base = if (useCmd) {
             arrayOf("cmd", "/c", editorPath)
@@ -165,7 +165,6 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
             val gotoArg = "$linuxFilePath:$actualLineNumber:$actualColumnNumber"
             val finalGotoArg = if (quote) "\"$gotoArg\"" else gotoArg
             base + arrayOf("--folder-uri", quotedFolderUri, "--goto", finalGotoArg)
-            base + arrayOf("--folder-uri", quotedFolderUri, "--goto", gotoArg)
         } else {
             base + arrayOf("--folder-uri", quotedFolderUri)
         }
