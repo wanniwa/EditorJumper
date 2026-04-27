@@ -14,9 +14,6 @@ repositories {
 dependencies {
     // Gson is bundled inside IntelliJ Platform; compileOnly avoids packaging a duplicate jar.
     compileOnly("com.google.code.gson:gson:2.10.1")
-
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 // Configure Gradle IntelliJ Plugin
@@ -31,10 +28,6 @@ intellij {
 }
 
 tasks {
-    test {
-        useJUnitPlatform()
-    }
-
     // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "17"

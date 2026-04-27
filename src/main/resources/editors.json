@@ -5,8 +5,7 @@
     "winPath": "Code",
     "linuxPath": "Code",
     "macOpenName": "vscode",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Cursor",
@@ -14,8 +13,7 @@
     "winPath": "Cursor",
     "linuxPath": "Cursor",
     "macOpenName": "cursor",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Trae",
@@ -23,8 +21,7 @@
     "winPath": "Trae",
     "linuxPath": "Trae",
     "macOpenName": "trae",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Trae CN",
@@ -32,8 +29,7 @@
     "winPath": "Trae",
     "linuxPath": "Trae",
     "macOpenName": "trae-cn",
-    "supportsWorkspace": true,
-    "supportsWsl": true
+    "supportsWorkspace": true
   },
   {
     "name": "Windsurf",
