@@ -116,7 +116,38 @@ abstract class BaseAction : AnAction() {
         val projectPath = getProjectPath(project) ?: return
         val filePath = getFilePath(file)
 
-        // 使用 getOpenCommand 方法
+        // WSL 两步命令：先打开项目窗口，再定位文件
+        val wslCommands = handler.buildWslCommands(projectPath, filePath, lineNumber, columnNumber)
+        if (wslCommands != null) {
+            val (openCmd, gotoCmd) = wslCommands
+            try {
+                logger.info("EditorJumper WSL step1: ${openCmd.joinToString(" ")}")
+                ProcessBuilder(openCmd.toList())
+                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                    .redirectError(ProcessBuilder.Redirect.DISCARD)
+                    .start()
+                    .outputStream.close()
+
+                if (gotoCmd != null) {
+                    Thread.sleep(2000)
+                    logger.info("EditorJumper WSL step2: ${gotoCmd.joinToString(" ")}")
+                    ProcessBuilder(gotoCmd.toList())
+                        .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                        .redirectError(ProcessBuilder.Redirect.DISCARD)
+                        .start()
+                        .outputStream.close()
+                }
+            } catch (e: Exception) {
+                Messages.showErrorDialog(
+                    project,
+                    "Failed to open editor in WSL mode. Error: ${e.message}",
+                    "Editor Launch Failed"
+                )
+            }
+            return
+        }
+
+        // 非 WSL：使用 getOpenCommand 方法
         val command = handler.getOpenCommand(
             projectPath,
             filePath,
@@ -129,10 +160,10 @@ abstract class BaseAction : AnAction() {
 
         try {
             ProcessBuilder(command.toList())
-                .redirectOutput(ProcessBuilder.Redirect.DISCARD) // 丢弃 stdout
-                .redirectError(ProcessBuilder.Redirect.DISCARD)  // 丢弃 stderr
+                .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                .redirectError(ProcessBuilder.Redirect.DISCARD)
                 .start()
-                .outputStream.close() // 明确告诉子进程我不会输入任何数据
+                .outputStream.close()
         } catch (e: Exception) {
             Messages.showErrorDialog(
                 project,

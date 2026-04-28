@@ -1,6 +1,7 @@
 package com.github.wanniwa.editorjumper.editors
 
 import com.github.wanniwa.editorjumper.settings.EditorJumperProjectSettings
+import com.github.wanniwa.editorjumper.utils.WslUtils
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.SystemInfo
 import java.io.File
@@ -19,6 +20,8 @@ data class EditorConfig(
     val supportsWorkspace: Boolean = false,
     /** If true, project/file paths are quoted to avoid spaces being split (e.g. Cursor). */
     val quotePaths: Boolean = false,
+    /** If true, the editor supports --folder-uri / --remote for WSL remote development. */
+    val supportsWsl: Boolean = false,
 )
 
 /**
@@ -72,6 +75,27 @@ interface EditorHandler {
      * 默认为 false，由具体实现（现在是配置）决定。
      */
     fun shouldQuotePaths(): Boolean = false
+
+    /**
+     * 是否支持 WSL 远程开发。
+     * 默认为 false，由具体实现（现在是配置）决定。
+     */
+    fun supportsWsl(): Boolean = false
+
+    /**
+     * 构建 WSL 两步命令。
+     * 参考 MingSpace 的方案，分两步绕过 Electron 对 :// 参数的过滤：
+     * 第一步用 --folder-uri 打开 WSL 项目窗口，第二步用 --reuse-window --remote --goto 定位文件。
+     *
+     * @return Pair(打开项目命令, 定位文件命令)，定位文件命令在无文件时为 null；
+     *         如果不是 WSL 场景则返回 null。
+     */
+    fun buildWslCommands(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Pair<Array<String>, Array<String>?>? = null
 }
 
 abstract class BaseEditorHandler(private val customPath: String?) : EditorHandler {
@@ -113,6 +137,38 @@ abstract class BaseEditorHandler(private val customPath: String?) : EditorHandle
                 }
             }
         }
+    }
+
+    override fun buildWslCommands(
+        projectPath: String,
+        filePath: String?,
+        lineNumber: Int?,
+        columnNumber: Int?
+    ): Pair<Array<String>, Array<String>?>? {
+        if (!SystemInfo.isWindows || !supportsWsl() || !WslUtils.isWslPath(projectPath)) return null
+        val distro = WslUtils.extractDistro(projectPath) ?: return null
+
+        val linuxProjectPath = WslUtils.toLinuxPath(projectPath)
+        val folderUri = "vscode-remote://wsl+$distro$linuxProjectPath"
+        val editorPath = getPath()
+        val useCmd = editorPath == getDefaultPath()
+
+        val base = if (useCmd) arrayOf("cmd", "/c", editorPath) else arrayOf(editorPath)
+
+        // 第一步：用 --folder-uri 打开 WSL 项目窗口
+        val openCmd = base + arrayOf("--folder-uri", folderUri)
+
+        // 第二步：用 --reuse-window --remote --goto 定位文件（仅有文件时）
+        val gotoCmd = if (filePath != null) {
+            val linuxFilePath = if (WslUtils.isWslPath(filePath)) WslUtils.toLinuxPath(filePath) else filePath
+            val actualLine = lineNumber ?: 1
+            val actualColumn = columnNumber ?: 1
+            base + arrayOf("--reuse-window", "--remote", "wsl+$distro", "--goto", "$linuxFilePath:$actualLine:$actualColumn")
+        } else {
+            null
+        }
+
+        return Pair(openCmd, gotoCmd)
     }
 
     override fun getFastOpenCommand(
@@ -187,4 +243,6 @@ class ConfigBasedEditorHandler(
     }
 
     override fun shouldQuotePaths(): Boolean = cfg.quotePaths
+
+    override fun supportsWsl(): Boolean = cfg.supportsWsl
 }
