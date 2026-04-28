@@ -44,8 +44,8 @@ class EditorJumperStatusBarWidget(private val project: Project) : StatusBarWidge
     override fun getTooltipText(): String = I18nUtils.message("statusbar.tooltip")
 
     override fun getSelectedValue(): String {
-        val projectSettings = EditorJumperProjectSettings.getInstance(project)
-        val editorType = if (projectSettings.projectEditorType.isBlank()) {
+        val projectSettings = project.getServiceIfCreated(EditorJumperProjectSettings::class.java)
+        val editorType = if (projectSettings == null || projectSettings.projectEditorType.isBlank()) {
             EditorJumperSettings.getInstance().selectedEditorType
         } else {
             projectSettings.projectEditorType
