@@ -14,7 +14,7 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-        <h3>2.0.1</h3>
+        <h3>2.1.0</h3>
         <p>EditorJumper</p>
         <p>EditorJumper is a plugin that enables seamless switching between different editors, automatically opening the same project and file while preserving cursor position. This allows for instant context-aware transitions between editors:</p>
         <ul>
@@ -227,6 +227,15 @@
     </actions>
 
     <change-notes><![CDATA[
+    <h3>2.1.0</h3>
+    <ul>
+        <li>Added WSL remote development support (PR #47 by @Jerry-2705, idea and script by @MingSpace)</li>
+        <li>Fixed EDT-blocking service initialization in status bar widget — prevent triggering project-level service initialization on the Event Dispatch Thread during status bar setup. (PR #49 by @Jerry-2705)</li>
+    </ul>
+    <ul>
+        <li>新增 WSL 远程开发环境支持（PR #47 by @Jerry-2705，感谢 @MingSpace 提供思路及脚本实现）</li>
+        <li>修复状态栏小部件 EDT 阻塞问题 — 避免在状态栏初始化期间在 EDT 线程上触发项目级服务初始化。（PR #49 by @Jerry-2705）</li>
+    </ul>
     <h3>2.0.1</h3>
     <ul>
         <li>Added support for Cursor 2.6.11. Plugin 2.0.1 requires Cursor 2.6.11+.</li>
