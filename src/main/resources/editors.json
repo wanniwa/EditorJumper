@@ -98,5 +98,14 @@
     "linuxPath": "",
     "macOpenName": "codebuddy-cn",
     "supportsWorkspace": true
+  },
+  {
+    "name": "JoyCode",
+    "macPath": "/Applications/JoyCode.app/Contents/Resources/app/bin/joycode",
+    "winPath": "joycode",
+    "linuxPath": "joycode",
+    "macOpenName": "joycode",
+    "supportsWorkspace": true,
+    "supportsWsl": true
   }
 ]
