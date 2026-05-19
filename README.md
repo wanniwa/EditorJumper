@@ -12,7 +12,7 @@
 
 ## 🔍 Introduction
 
-EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, Windsurf, Void, Kiro, and Qoder). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
+EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump between JetBrains IDE and other popular code editors (such as VS Code, Cursor, Trae, Windsurf, Void, Kiro, Qoder, and JoyCode). It maintains your cursor position and editing context, greatly improving development efficiency in multi-editor environments.
 
 <div align="center">
   <img src="image/JumpAndBack.gif" alt="Jump and Back Demo" width="800"/>
@@ -23,7 +23,7 @@ EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump betwee
 ## 🌟 Features
 
 - 🚀 **Seamless Editor Switching**
-  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf, Void, Kiro, Qoder
+  - Quickly jump between JetBrains IDE and VS Code, Cursor, Trae, Windsurf, Void, Kiro, Qoder, JoyCode
   - Automatically positions to the same cursor location (line and column)
   - Perfectly maintains editing context without interrupting workflow
   - Workspace file support - all editors now support workspace files (.code-workspace) for multi-root projects
@@ -67,6 +67,7 @@ EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump betwee
    - Void path
    - Kiro path
    - Qoder path
+   - JoyCode path
 4. Select the default editor
 5. Click Apply to save settings
 
@@ -118,7 +119,7 @@ EditorJumper is a JetBrains IDE plugin that allows you to seamlessly jump betwee
 
 ## 🔄 Complementary Use
 
-> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf, Void, Kiro, Qoder
+> Recommended to use with [EditorJumper-V](https://github.com/wanniwa/EditorJumper-V) to quickly return to JetBrains IDE from Cursor, VS Code, Trae, Windsurf, Void, Kiro, Qoder, JoyCode
 
 ## 🤝 Contribution
 
